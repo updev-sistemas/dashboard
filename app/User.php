@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','enterprise_id','id_type','last_access_date'
     ];
 
     /**
@@ -29,11 +29,27 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $casts = [
+        "created_at" => "datetime",
+        "updated_at" => "datetime",
+        "last_access_date" => "datetime",
+    ];
+
+    protected $dates = [
+        "created_at",
+        "updated_at",
+        "last_access_date"
+    ];
+
     public function isAdministratorUser() {
         return $this->id_type = UserTypeEnum::ADMIN;
     }
 
     public function isCustomerUser() {
         return $this->id_type = UserTypeEnum::CUSTOMER;
+    }
+
+    public function enterprise() {
+        return $this->belongsTo(Enterprise::class, 'enterprise_id');
     }
 }

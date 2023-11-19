@@ -4,18 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use Illuminate\Support\Facades\Hash;
+use Ramsey\Uuid\Uuid;
 
 class Enterprise extends Model
 {
     protected $table = "enterprises";
 
-    protected $id = "id";
-
     protected $fillable = [
-        'cnpj', 
-        'razao_social', 
-        'fanstasia', 
-        'email'
+        'cnpj',
+        'razao_social',
+        'fantasia',
+        'email',
+        'credential',
+        'secret'
     ];
 
     protected $casts = [
@@ -39,5 +41,13 @@ class Enterprise extends Model
 
     public function demonstratives() {
         return $this->hasMany(Demostrative::class, "enterprise_id");
+    }
+
+    public function regenerateCredential()
+    {
+        $this->secret = Uuid::uuid4()->toString();
+        $this->credential = Hash::make($this->secret);
+
+        $this->save();
     }
 }

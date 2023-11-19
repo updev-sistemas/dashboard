@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::post('/loja/update/{id}', function($id, Request $request){
+    dd($id, $request->all());
+});

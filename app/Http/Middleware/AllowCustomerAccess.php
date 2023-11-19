@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AllowCustomerAccess
 {
@@ -15,21 +16,14 @@ class AllowCustomerAccess
      */
     public function handle($request, Closure $next)
     {
-        try 
-        {
-            $user = auth()->user();
+        $user = Auth::user();
 
-            if ($user->isCustomerUser()) {
-                return $next($request);
-            }
-            else {
-                auth()->logout();
-                return redirect()->to('login');
-            }
-        } 
-        catch (Exception $ex) 
-        {
-            logger($ex);
+        if ($user->isCustomerUser()) {
+            return $next($request);
+        }
+        else {
+            Auth::logout();
+            return redirect()->to('login');
         }
     }
 }
