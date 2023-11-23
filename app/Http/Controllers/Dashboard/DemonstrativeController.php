@@ -48,7 +48,7 @@ class DemonstrativeController extends Controller
 
         $sanitize = json_decode($demonstrative->sanitize());
 
-        return view('dashboard.demonstrative.dashboard_page')
+        return view('dashboard.demonstrative.contas_a_pagar_page')
             ->with('show', true)
             ->with('enterprise', $demonstrative->enterprise)
             ->with('demonstrative', $demonstrative)
