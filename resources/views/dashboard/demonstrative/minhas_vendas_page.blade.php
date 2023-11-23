@@ -1,12 +1,25 @@
 @extends('layouts.app')
 @section('head')
+    <link rel="stylesheet" href="{{ url('vendors/dataTable/datatables.min.css') }}" type="text/css">
 @endsection
 
 @section('pageTitle')
-    Relatório de {{ $enterprise->fantasia }}
+    Minhas Vendas de {{ $enterprise->fantasia }}
 @endsection
 
 @section('content')
+
+    <div class="page-header">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('env_ctm') }}">Inicio</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Minhas Vendas</li>
+            </ol>
+        </nav>
+    </div>
+
 
     <div class="row">
         <div class="col-md-12">
@@ -17,7 +30,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Vendas Hoje</p>
-                                    <h2  id="totalVendas2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->valorVendas ?? 0) }}</h2>
+                                    <h2 id="totalVendas" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->valorVendas ?? 0) }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -27,19 +40,19 @@
                             </div>
                             <div class="d-inline-flex align-items-center">
                                 <span class="text-success d-inline-flex align-items-center mr-2">
-                                <p  id="mesAno" class="text-muted">Mês atual</p>
-                                </span>
+                                <p id="mesAno" class="text-muted"></p>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Qtd de vendas Hoje</p>
-                                    <h2 id="quantidadeVendas2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->quantidadeVendas ?? 0) }}</h2>
+                                    <h2 id="quantidadeVendas" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->quantidadeVendas ?? 0 }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -49,162 +62,190 @@
                             </div>
                             <div class="d-inline-flex align-items-center">
                                 <span class="text-danger d-inline-flex align-items-center mr-2">
-                                <p  id="mesAnoQuantidadeVendas" class="text-muted">Mês atual</p>
-                                </span>
+                                <p id="mesAnoQuantidadeVendas" class="text-muted"></p>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
-                                    <p class="text-muted">lucros Hoje</p>
-                                    <h2 id="meusLucros2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->totalLucros ?? 0) }}</h2>
+                                    <p class="text-muted">Tempo Medio de Atendimento</p>
+                                    <h2 id="medioAtendimentos" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->TempoMedioAtendimento ?? 0 }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
-                                        <img src="{{ url('assets/media/image/user/lucros.png') }}">
+                                        <img src="{{ url('assets/media/image/user/tempo.png') }}">
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex align-items-center">
+                                <span class="text-danger d-inline-flex align-items-center mr-2">
+                                <p id="updateFormasPagamento" class="text-muted"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <p class="text-muted">Total Venda Mês</p>
+                                    <h2 id="quantidadeProdutosCancelados"  class="font-weight-bold">{{App\Utils\Commons\FormatDataUtil::FormatMoney( $payload->lucrosPresumidos->relatorioVendas->canceladas->QuantidadeProdutosPerdidos ?? 0 ) }}</h2>
+                                </div>
+                                <div>
+                                    <figure class="avatar">
+                                        <img src="{{ url('assets/media/image/user/produtosCancelados.png') }}">
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex align-items-center">
+                                <span class="text-danger d-inline-flex align-items-center mr-2">
+                                <p id="updateTopProdutos2" class="text-muted"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <p class="text-muted">Ticket médio Mês</p>
+                                    <h2 id="ticketmedio" class="font-weight-bold">{{App\Utils\Commons\FormatDataUtil::FormatMoney( $payload->lucrosPresumidos->relatorioVendas->concluidas->TicketMedio ?? 0 )}}</h2>
+                                </div>
+                                <div>
+                                    <figure class="avatar">
+                                        <img src="{{ url('assets/media/image/user/ticket.png') }}">
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex align-items-center">
+                                <span class="text-danger d-inline-flex align-items-center mr-2">
+                                <p id="saldosUpdate" class="text-muted"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <p class="text-muted">Total em descontos Mês</p>
+                                    <h2  id="totalDescontos" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->totalDescontos ?? 0) }}</h2>
+                                </div>
+                                <div>
+                                    <figure class="avatar">
+                                        <img src="{{ url('assets/media/image/user/descontos.png') }}">
                                     </figure>
                                 </div>
                             </div>
                             <div class="d-inline-flex align-items-center">
                                 <span class="text-success d-inline-flex align-items-center mr-2">
-                                <p id="lucrosUpdate"  class="text-muted"></p>
-                                </span>
+                                <p id="lucrosUpdate" class="text-muted"></p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <p class="text-muted">Quantidade de produtos vendidos Mês</p>
+                                    <h2 id="produtosVendidos" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->QuantidadeProdutosVendidos ?? 0 }}</h2>
+                                </div>
+                                <div>
+                                    <figure class="avatar">
+                                        <img src="{{ url('assets/media/image/user/produtosVendidos.png') }}">
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex align-items-center">
+                                <span class="text-danger d-inline-flex align-items-center mr-2">
+                                <p  id="updateTopProdutos" class="text-muted"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <p class="text-muted">Valor total vendas de vendas canceladas Mês</p>
+                                    <h2 id="totalVendasCanceladas" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->canceladas->valorVendas ?? 0) }}</h2>
+                                </div>
+                                <div>
+                                    <figure class="avatar">
+                                        <img src="{{ url('assets/media/image/user/vendasCanceladas.png') }}">
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex align-items-center">
+                                <span class="text-danger d-inline-flex align-items-center mr-2">
+                                <p id="saldosUpdate2" class="text-muted"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <p class="text-muted">Quantidade de vendas canceladas Mês</p>
+                                    <h2  id="quantidadeVendasCanceladas" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->canceladas->QuantidadeVendasPerdidas ?? 0 }}</h2>
+                                </div>
+                                <div>
+                                    <figure class="avatar">
+                                        <img src="{{ url('assets/media/image/user/quantidadeCanceladas.png') }}">
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex align-items-center">
+                                <span class="text-danger d-inline-flex align-items-center mr-2">
+                                <p id="updateFormasPagamento2" class="text-muted"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
         </div>
     </div>
 
 
     <div class="row">
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title">Formas de pagamento Hoje</h6>
-                        <div>
-                        </div>
-                    </div>
-                    <div id="graficoFormasPagamento"></div>
-                    <div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item pl-0 pr-0">
-                                <i class="fa fa-circle mr-1 text-warning"></i>Pix
-                            </li>
-                            <li class="list-group-item pl-0 pr-0">
-                                <i class="fa fa-circle mr-1 text-info"></i>Dinheiro
-                            </li>
-                            <li class="list-group-item pl-0 pr-0">
-                                <i class="fa fa-circle mr-1 text-secondary"></i>Crédito
-                            </li>
-                            <li class="list-group-item pl-0 pr-0">
-                                <i class="fa fa-circle mr-1 text-success"></i>Débito
-                            </li>
-                            <li class="list-group-item pl-0 pr-0">
-                                <i class="fa fa-circle mr-1 text-danger"></i>á Prazo
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-8 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title">Fluxo do caixa Anual</h6>
-                    </div>
-                    <p  id="saldosUpdate" class="text-muted"></p>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="fa fa-circle text-primary mr-2"></i>
-                                <div>
-                                    <h4 id="entradacaixaAtual" class="font-weight-bold line-height-18">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->caixa->EntradaAtual ?? 0) }}</h4>
-                                    <div class="text-muted">Entradas</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="fa fa-circle text-secondary mr-2"></i>
-                                <div>
-                                    <h4 id="saidacaixaAtual"  class="font-weight-bold line-height-18">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->caixa->SaidaAtual ?? 0) }}</h4>
-                                    <div class="text-muted">Saídas</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="fa fa-circle text-success mr-2"></i>
-                                <div>
-                                    <h4 id="saldocaixaAtual" class="font-weight-bold line-height-18">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->caixa->saldoAtual ?? 0) }}</h4>
-                                    <div class="text-muted">Saldo</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="graficoCaixa"></div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
                     <div class="d-md-flex mb-2 mb-sm-0 justify-content-between">
-                        <h6 class="card-title">Notas Fiscais Emitidas</h6>
+                        <h6 class="card-title">Meu histórico de lucros</h6>
                     </div>
-                    <div id="graficoNotasFiscais"></div>
+                    <div id="graficoLucros"></div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 col-md-12">
-            <div class="card">
-                <div class="card-body pb-0">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h6 class="card-title mb-0">Top Produtos mais vendidos Hoje</h6>
-                    </div>
-                </div>
-                <div class="table-responsive">
-                    <table id="tabelaTopProdutos" class="table table-striped mb-0">
 
-                        <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Total vendidos</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($payload->topProdutos as $key=>$value)
-                        <tr>
-                            <td>
-                                <a><?= $value->produto; ?></a>
-                            </td>
-                            <td><?= $value->quantidade; ?></td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+
             </div>
         </div>
     </div>
-
 
 @endsection
 
@@ -227,232 +268,11 @@
         <div class="bg-warning-bright"></div>
     </div>
 
+    <script src="{{ url('assets/js/defines.js') }}"></script>
     <script>
         $(function() {
-            var colors = {
-                primary: $('.colors .bg-primary').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                primaryLight: $('.colors .bg-primary-bright').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                secondary: $('.colors .bg-secondary').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                secondaryLight: $('.colors .bg-secondary-bright').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                info: $('.colors .bg-info').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                infoLight: $('.colors .bg-info-bright').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                success: $('.colors .bg-success').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                successLight: $('.colors .bg-success-bright').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                danger: $('.colors .bg-danger').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                dangerLight: $('.colors .bg-danger-bright').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                warning: $('.colors .bg-warning').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(','),
-                warningLight: $('.colors .bg-warning-bright').css('background-color').replace('rgb', '').replace(')', '').replace('(', '').split(',')
-            };
 
-            var rgbToHex = function (rgb) {
-                var hex = Number(rgb).toString(16);
-                if (hex.length < 2) {
-                    hex = "0" + hex;
-                }
-                return hex;
-            };
-
-            var fullColorHex = function (r, g, b) {
-                var red = rgbToHex(r);
-                var green = rgbToHex(g);
-                var blue = rgbToHex(b);
-                return red + green + blue;
-            };
-
-            colors.primary = '#' + fullColorHex(colors.primary[0], colors.primary[1], colors.primary[2]);
-            colors.secondary = '#' + fullColorHex(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
-            colors.info = '#' + fullColorHex(colors.info[0], colors.info[1], colors.info[2]);
-            colors.success = '#' + fullColorHex(colors.success[0], colors.success[1], colors.success[2]);
-            colors.danger = '#' + fullColorHex(colors.danger[0], colors.danger[1], colors.danger[2]);
-            colors.warning = '#' + fullColorHex(colors.warning[0], colors.warning[1], colors.warning[2]);
-
-            var chartColors = {
-                primary: {
-                    base: '#3f51b5',
-                    light: '#c0c5e4'
-                },
-                danger: {
-                    base: '#f2125e',
-                    light: '#fcd0df'
-                },
-                success: {
-                    base: '#0acf97',
-                    light: '#cef5ea'
-                },
-                warning: {
-                    base: '#ff8300',
-                    light: '#ffe6cc'
-                },
-                info: {
-                    base: '#00bcd4',
-                    light: '#e1efff'
-                },
-                dark: '#37474f',
-                facebook: '#3b5998',
-                twitter: '#55acee',
-                linkedin: '#0077b5',
-                instagram: '#517fa4',
-                whatsapp: '#25D366',
-                dribbble: '#ea4c89',
-                google: '#DB4437',
-                borderColor: '#e8e8e8',
-                fontColor: '#999'
-            };
-
-            function graficoFormasPagamentoMountGraph()
-            {
-                var options = {
-                    series: [
-                        {{ $payload->f_pagamentos->dinheiro ?? 0 }},
-                        {{ $payload->f_pagamentos->credito ?? 0 }},
-                        {{ $payload->f_pagamentos->debito ?? 0 }},
-                        {{ $payload->f_pagamentos->pix ?? 0 }},
-                        {{ $payload->f_pagamentos->prazo ?? 0 }}
-                    ],
-                    chart: {
-                        type: 'donut',
-                        fontFamily: "Inter",
-                        offsetY: 30,
-                        height: 250,
-                    },
-                    colors: [colors.primary, colors.secondary, colors.success, colors.warning, colors.danger],
-                    labels: ['Dinheiro R$', 'Credito R$', 'Debito R$', 'Pix R$', 'A prazo R$'],
-                    dataLabels: {
-                        enabled: false,
-
-                    },
-                    stroke: {
-                        colors: $('body').hasClass('dark') ? "#313852" : "#ffffff",
-                    },
-                    legend: {
-                        show: false
-                    }
-                };
-
-                var chart = new ApexCharts(document.querySelector("#graficoFormasPagamento"), options);
-                chart.render();
-            }
-
-            function graficoCaixaMountGraph()
-            {
-                var data = [
-                    {
-                        name: "Entradas R$",
-                        data: [
-                            {{ $payload->caixa->entradas->janeiro ?? 0 }},
-                            {{ $payload->caixa->entradas->feveiro ?? 0 }},
-                            {{ $payload->caixa->entradas->marco ?? 0 }},
-                            {{ $payload->caixa->entradas->abril ?? 0 }},
-                            {{ $payload->caixa->entradas->maio ?? 0 }},
-                            {{ $payload->caixa->entradas->junho ?? 0 }},
-                            {{ $payload->caixa->entradas->julho ?? 0 }},
-                            {{ $payload->caixa->entradas->agosto ?? 0 }},
-                            {{ $payload->caixa->entradas->setembro ?? 0 }},
-                            {{ $payload->caixa->entradas->outubro ?? 0 }},
-                            {{ $payload->caixa->entradas->novembro ?? 0 }},
-                            {{ $payload->caixa->entradas->dezembro ?? 0 }}
-                        ]
-                    },
-                    {
-                        name: "Saidas R$",
-                        data:  [
-                            {{ $payload->caixa->saidas->janeiro ?? 0 }},
-                            {{ $payload->caixa->saidas->feveiro ?? 0 }},
-                            {{ $payload->caixa->saidas->marco ?? 0 }},
-                            {{ $payload->caixa->saidas->abril ?? 0 }},
-                            {{ $payload->caixa->saidas->maio ?? 0 }},
-                            {{ $payload->caixa->saidas->junho ?? 0 }},
-                            {{ $payload->caixa->saidas->julho ?? 0 }},
-                            {{ $payload->caixa->saidas->agosto ?? 0 }},
-                            {{ $payload->caixa->saidas->setembro ?? 0 }},
-                            {{ $payload->caixa->saidas->outubro ?? 0 }},
-                            {{ $payload->caixa->saidas->novembro ?? 0 }},
-                            {{ $payload->caixa->saidas->dezembro ?? 0 }}
-                        ]
-                    },
-                    {
-                        name: "Saldo R$",
-                        data: [
-                            {{ $payload->caixa->saldo->janeiro ?? 0 }},
-                            {{ $payload->caixa->saldo->feveiro ?? 0 }},
-                            {{ $payload->caixa->saldo->marco ?? 0 }},
-                            {{ $payload->caixa->saldo->abril ?? 0 }},
-                            {{ $payload->caixa->saldo->maio ?? 0 }},
-                            {{ $payload->caixa->saldo->junho ?? 0 }},
-                            {{ $payload->caixa->saldo->julho ?? 0 }},
-                            {{ $payload->caixa->saldo->agosto ?? 0 }},
-                            {{ $payload->caixa->saldo->setembro ?? 0 }},
-                            {{ $payload->caixa->saldo->outubro ?? 0 }},
-                            {{ $payload->caixa->saldo->novembro ?? 0 }},
-                            {{ $payload->caixa->saldo->dezembro ?? 0 }}
-                        ]
-                    }
-                ];
-
-                var options = {
-                    chart: {
-                        type: 'area',
-                        fontFamily: 'Inter',
-                        height: 300,
-                        offsetX: -18,
-                        width: '103%',
-                        stacked: true,
-                        events: {
-                            selection: function (chart, e) {
-
-                            }
-                        },
-                        toolbar: {
-                            show: false,
-                        }
-
-                    },
-                    colors: [colors.primary, colors.secondary, colors.success],
-                    dataLabels: {
-                        enabled: false
-                    },
-                    stroke: {
-                        curve: 'smooth',
-                        width: 1
-                    },
-                    series: data,
-                    fill: {
-                        type: 'gradient',
-                        gradient: {
-                            opacityFrom: .6,
-                            opacityTo: 0,
-                        }
-                    },
-                    legend: {
-                        show: false
-                    },
-                    xaxis: {
-                        categories: [
-                            "Jan",
-                            "Fev",
-                            "Mar",
-                            "Abr",
-                            "Mai",
-                            "Jun",
-                            "Jul",
-                            "Ago",
-                            "Set",
-                            "Out",
-                            "Nov",
-                            "Dez"
-                        ]
-                    }
-                };
-
-                var chart = new ApexCharts(
-                    document.querySelector("#graficoCaixa"),
-                    options
-                );
-
-                chart.render();
-            }
-
-            function graficoNotasFiscaisMountGraph()
+            function graficoLucrosMountGraph()
             {
                 var options = {
                     chart: {
@@ -466,57 +286,39 @@
                         }
                     },
                     series: [{
-                        name: 'Enviadas',
+                        name: 'Ganhos',
                         data: [
-                            {{ $payload->notasFiscais->TotalEnviadas->janeiro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->feveiro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->marco ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->abril ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->maio ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->junho ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->julho ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->agosto ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->setembro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->outubro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->novembro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->dezembro ?? 0 }}
+                            {{ $payload->lucrosPresumidos->ganhos->janeiro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->feveiro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->marco ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->abril ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->maio ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->junho ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->julho ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->agosto ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->setembro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->outubro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->novembro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->ganhos->dezembro ?? 0 }}
                         ]
-                        }, {
-                        name: 'Canceladas',
+                    }, {
+                        name: 'Perdidos',
                         data: [
-                            {{ $payload->notasFiscais->TotalCanceladas->janeiro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->feveiro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->marco ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->abril ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->maio ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->junho ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->julho ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->agosto ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->setembro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->outubro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->novembro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->dezembro ?? 0 }}
+                            {{ $payload->lucrosPresumidos->perdidos->janeiro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->feveiro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->marco ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->abril ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->maio ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->junho ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->julho ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->agosto ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->setembro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->outubro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->novembro ?? 0 }},
+                            {{ $payload->lucrosPresumidos->perdidos->dezembro ?? 0 }}
                         ]
-                    },
-                        {
-                            name: 'Contigencia',
-                            data: [
-                                {{ $payload->notasFiscais->TotalContigencia->janeiro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->feveiro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->marco ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->abril ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->maio ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->junho ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->julho ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->agosto ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->setembro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->outubro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->novembro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->dezembro ?? 0 }}
-                            ]
-                        }]
-                    ,
-                    colors: [colors.secondary, colors.info, colors.warning],
+                    }],
+                    colors: [colors.secondary, colors.info],
                     plotOptions: {
                         bar: {
                             horizontal: false,
@@ -544,17 +346,15 @@
                 };
 
                 var chart = new ApexCharts(
-                    document.querySelector("#graficoNotasFiscais"),
+                    document.querySelector("#graficoLucros"),
                     options
                 );
 
                 chart.render();
             }
 
+            graficoLucrosMountGraph()
 
-            graficoFormasPagamentoMountGraph();
-            graficoCaixaMountGraph();
-            graficoNotasFiscaisMountGraph();
         });
     </script>
 @endsection
