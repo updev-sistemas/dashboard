@@ -8,6 +8,18 @@
 @endsection
 
 @section('content')
+
+    <div class="page-header">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('env_ctm') }}">Inicio</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Contas a Pagar</li>
+            </ol>
+        </nav>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <meta name="_token" content="{{ csrf_token() }}">
