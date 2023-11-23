@@ -58,7 +58,6 @@ class DemonstrativeController extends Controller
     public function showContasReceberView($id, Request $request)
     {
         $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
-
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
@@ -66,7 +65,7 @@ class DemonstrativeController extends Controller
 
         $sanitize = json_decode($demonstrative->sanitize());
 
-        return view('dashboard.demonstrative.dashboard_page')
+        return view('dashboard.demonstrative.contas_a_receber_page')
             ->with('show', true)
             ->with('enterprise', $demonstrative->enterprise)
             ->with('demonstrative', $demonstrative)
