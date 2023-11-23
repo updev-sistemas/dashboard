@@ -1,5 +1,7 @@
 <?php
 
+setlocale(LC_ALL, 'pt_BR');
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

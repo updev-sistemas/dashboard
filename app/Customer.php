@@ -16,7 +16,7 @@ class Customer extends User
         $this->id_type = UserTypeEnum::CUSTOMER;
     }
 
-    public function enterprise() {
-        return parent::enterprise();
+    public function enterprises() {
+        return parent::enterprises();
     }
 }

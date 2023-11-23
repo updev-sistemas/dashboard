@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','enterprise_id','id_type','last_access_date'
+        'name', 'email', 'password','id_type','last_access_date'
     ];
 
     /**
@@ -42,14 +42,14 @@ class User extends Authenticatable
     ];
 
     public function isAdministratorUser() {
-        return $this->id_type = UserTypeEnum::ADMIN;
+        return $this->id_type == UserTypeEnum::ADMIN;
     }
 
     public function isCustomerUser() {
-        return $this->id_type = UserTypeEnum::CUSTOMER;
+        return $this->id_type == UserTypeEnum::CUSTOMER;
     }
 
-    public function enterprise() {
-        return $this->belongsTo(Enterprise::class, 'enterprise_id');
+    public function enterprises() {
+        return $this->hasMany(Enterprise::class, 'user_id');
     }
 }

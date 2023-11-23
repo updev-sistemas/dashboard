@@ -17,7 +17,8 @@ class Enterprise extends Model
         'fantasia',
         'email',
         'credential',
-        'secret'
+        'secret',
+        'user_id'
     ];
 
     protected $casts = [
@@ -35,8 +36,8 @@ class Enterprise extends Model
         parent::__construct($attributes);
     }
 
-    public function users() {
-        return $this->hasMany(User::class, "enterprise_id");
+    public function user() {
+        return $this->belongsTo(User::class, "user_id");
     }
 
     public function demonstratives() {

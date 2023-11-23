@@ -34,7 +34,7 @@
             <figure class="avatar avatar-lg mb-3 border-0">
                 <img src="{{ url('assets/media/image/user/women_avatar1.jpg') }}" class="rounded-circle" alt="image">
             </figure>
-            <h5 class="d-flex align-items-center justify-content-center">{{ auth()->user()->enterprise->fantasia }}</h5>
+            <h5 class="d-flex align-items-center justify-content-center">{{ auth()->user()->name }}</h5>
             <div>
                 <strong> </strong>
             </div>
@@ -54,7 +54,6 @@
                     @endif
 
                     <a href="#" class="list-group-item p-l-r-0 d-flex">Alterar senha</a>
-
 
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
@@ -131,10 +130,9 @@
 
                 <ul class="navbar-nav">
 
-
-                    <!-- li class="nav-item">
+                    <li class="nav-item">
                         <button type="button" id="updater" class="btn btn-outline-success">Atualizar informações</button>
-                    </li -->
+                    </li>
 
                     <!-- begin::header fullscreen -->
                     <li  class="nav-item dropdown">
@@ -150,7 +148,7 @@
                     <!-- begin::user menu -->
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" title="User menu" data-sidebar-target="#user-menu">
-                            <span class="mr-2 d-sm-inline d-none">{{ auth()->user()->enterprise->fantasia }}</span>
+                            <span class="mr-2 d-sm-inline d-none">{{ auth()->user()->name }}</span>
                             <figure class="avatar avatar-sm">
                                 <img src="{{ url('assets/media/image/user/women_avatar1.jpg') }}" class="rounded-circle"
                                      alt="avatar">
@@ -188,8 +186,13 @@
                         @endif
 
                         @if (auth()->user()->isCustomerUser())
-                            @component('components.menu_ctm')
-                            @endcomponent
+                            @if ($show ?? false)
+                                @component('components.menu_enterprise_ctm', ['payload' => $payload, 'demonstrative' => $demonstrative, 'enterprise' => $enterprise])
+                                @endcomponent
+                            @else
+                                @component('components.menu_ctm')
+                                @endcomponent
+                            @endif
                         @endif
                     </div>
 

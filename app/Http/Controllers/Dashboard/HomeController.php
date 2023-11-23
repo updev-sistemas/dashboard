@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -24,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.home');
+        $user = Auth::user();
+        $enterprises = Auth::user()->enterprises;
+
+        return view('dashboard.home')
+            ->with('user', $user)
+            ->with('collection', $enterprises);
     }
 }

@@ -8,8 +8,6 @@ class Demostrative extends Model
 {
     protected $table = "demostratives";
 
-    protected $id = "id";
-
     protected $fillable = [
         'payload',
         'enterprise_id'
@@ -31,6 +29,19 @@ class Demostrative extends Model
     }
 
     public function enterprise() {
-        return $this->belongTo(Enterprise::class, "enterprise_id");
+        return $this->belongsTo(Enterprise::class, "enterprise_id");
+    }
+
+    public function sanitize()
+    {
+        if ((substr($this->payload, 1) == '\'') ||
+            (substr($this->payload, 1) == '"') ||
+            (substr($this->payload, -1) == '\'') ||
+            (substr($this->payload, -1) == '"')) {
+            $payload = substr($this->payload, 1);
+            return substr($payload, 0, -1);
+        }
+
+        return $this->payload;
     }
 }

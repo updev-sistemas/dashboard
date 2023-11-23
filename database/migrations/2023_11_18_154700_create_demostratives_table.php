@@ -14,7 +14,7 @@ class CreateDemostrativesTable extends Migration
     public function up()
     {
         Schema::create('demostratives', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('enterprise_id');
             $table->string('payload');
             $table->timestamps();

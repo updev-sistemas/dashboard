@@ -16,7 +16,7 @@ class Administrator extends User
         $this->id_type = UserTypeEnum::ADMIN;
     }
 
-    public function enterprise() {
-        return parent::enterprise();
+    public function enterprises() {
+        return parent::enterprises();
     }
 }

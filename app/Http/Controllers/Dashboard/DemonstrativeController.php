@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Demostrative;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DemonstrativeController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -17,79 +19,111 @@ class DemonstrativeController extends Controller
         parent::__construct();
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function showDashboardView($id, Request $request)
     {
-        //
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+
+        if ($demonstrative == null) {
+            session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $sanitize = json_decode($demonstrative->sanitize());
+
+        return view('dashboard.demonstrative.dashboard_page')
+            ->with('show', true)
+            ->with('enterprise', $demonstrative->enterprise)
+            ->with('demonstrative', $demonstrative)
+            ->with('payload', $sanitize);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function showContasPagarView($id, Request $request)
     {
-        //
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+
+        if ($demonstrative == null) {
+            session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $sanitize = json_decode($demonstrative->sanitize());
+
+        return view('dashboard.demonstrative.dashboard_page')
+            ->with('show', true)
+            ->with('enterprise', $demonstrative->enterprise)
+            ->with('demonstrative', $demonstrative)
+            ->with('payload', $sanitize);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function showContasReceberView($id, Request $request)
     {
-        //
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+
+        if ($demonstrative == null) {
+            session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $sanitize = json_decode($demonstrative->sanitize());
+
+        return view('dashboard.demonstrative.dashboard_page')
+            ->with('show', true)
+            ->with('enterprise', $demonstrative->enterprise)
+            ->with('demonstrative', $demonstrative)
+            ->with('payload', $sanitize);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function showCaixasAbertosView($id, Request $request)
     {
-        //
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+
+        if ($demonstrative == null) {
+            session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $sanitize = json_decode($demonstrative->sanitize());
+
+        return view('dashboard.demonstrative.dashboard_page')
+            ->with('show', true)
+            ->with('enterprise', $demonstrative->enterprise)
+            ->with('demonstrative', $demonstrative)
+            ->with('payload', $sanitize);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function showMinhasVendasView($id, Request $request)
     {
-        //
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+
+        if ($demonstrative == null) {
+            session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $sanitize = json_decode($demonstrative->sanitize());
+
+        return view('dashboard.demonstrative.dashboard_page')
+            ->with('show', true)
+            ->with('enterprise', $demonstrative->enterprise)
+            ->with('demonstrative', $demonstrative)
+            ->with('payload', $sanitize);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function showVendedoresView($id, Request $request)
     {
-        //
-    }
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        if ($demonstrative == null) {
+            session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $sanitize = json_decode($demonstrative->sanitize());
+
+        return view('dashboard.demonstrative.dashboard_page')
+            ->with('show', true)
+            ->with('enterprise', $demonstrative->enterprise)
+            ->with('demonstrative', $demonstrative)
+            ->with('payload', $sanitize);
     }
 }
