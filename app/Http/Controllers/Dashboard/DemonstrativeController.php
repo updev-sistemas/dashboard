@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Demostrative;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DemonstrativeController extends Controller
 {
@@ -19,6 +20,17 @@ class DemonstrativeController extends Controller
         parent::__construct();
     }
 
+    private function securityApi(Demostrative $demonstrative)
+    {
+        if (!Auth()->user()->isAdministratorUser() || $demonstrative->enterprise->user->id != Auth::id())
+        {
+            Auth::logout();
+
+            // Disparar email avisando administrador
+            return redirect()->to('login');
+        }
+    }
+
     public function showDashboardView($id, Request $request)
     {
         $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
@@ -27,6 +39,8 @@ class DemonstrativeController extends Controller
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
         }
+
+        $this->securityApi($demonstrative);
 
         $sanitize = json_decode($demonstrative->sanitize());
 
@@ -46,6 +60,8 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
+        $this->securityApi($demonstrative);
+
         $sanitize = json_decode($demonstrative->sanitize());
 
         return view('dashboard.demonstrative.contas_a_pagar_page')
@@ -62,6 +78,8 @@ class DemonstrativeController extends Controller
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
         }
+
+        $this->securityApi($demonstrative);
 
         $sanitize = json_decode($demonstrative->sanitize());
 
@@ -81,6 +99,8 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
+        $this->securityApi($demonstrative);
+
         $sanitize = json_decode($demonstrative->sanitize());
 
         return view('dashboard.demonstrative.caixas_abertos_page')
@@ -99,6 +119,8 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
+        $this->securityApi($demonstrative);
+
         $sanitize = json_decode($demonstrative->sanitize());
 
         return view('dashboard.demonstrative.minhas_vendas_page')
@@ -116,6 +138,8 @@ class DemonstrativeController extends Controller
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
         }
+
+        $this->securityApi($demonstrative);
 
         $sanitize = json_decode($demonstrative->sanitize());
 

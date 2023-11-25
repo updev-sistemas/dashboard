@@ -181,8 +181,13 @@
                 <div class="navigation-menu-group">
                     <div id="ecommerce" style="padding-top:20px;">
                         @if (auth()->user()->isAdministratorUser())
-                            @component('components.menu_adm')
-                            @endcomponent
+                            @if ($show ?? false)
+                                @component('components.menu_customer_adm', ['payload' => $payload, 'demonstrative' => $demonstrative, 'enterprise' => $enterprise])
+                                @endcomponent
+                            @else
+                                @component('components.menu_adm')
+                                @endcomponent
+                            @endif
                         @endif
 
                         @if (auth()->user()->isCustomerUser())

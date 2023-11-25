@@ -23,8 +23,9 @@ class EnterpriseEditRequest extends FormRequest
      */
     public function rules()
     {
+        $user_id = request()->segment(2);
         return [
-            'cnpj' => 'required|min:11|max:14|unique:enterprises,cnpj,' . $this->get('cnpj'),
+            'cnpj' => 'required|min:11|max:14|unique:enterprises,cnpj,' . $user_id,
             'razao_social' => 'required|min:2|max:200',
             'fantasia' => 'required|min:2|max:200',
             'email' => 'required|email'

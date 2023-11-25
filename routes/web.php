@@ -16,13 +16,21 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'auth_customer']
 
 Route::group(['prefix' => 'administrativo', 'middleware' => ['auth', 'auth_admin' ]], function() {
 
+    Route::resource('clientes', Administrator\UserController::class);
+
     Route::resource('empresas', Administrator\EnterpriseController::class);
+    Route::get('/empresas/{id}/visao_geral','Dashboard\DemonstrativeController@showDashboardView')->name('view_enterprise');
+    Route::get('/empresas/{id}/contas_a_pagar','Dashboard\DemonstrativeController@showContasPagarView')->name('view_enterprise_cpv');
+    Route::get('/empresas/{id}/contas_a_receber','Dashboard\DemonstrativeController@showContasReceberView')->name('view_enterprise_arv');
+    Route::get('/empresas/{id}/caixas_abertos','Dashboard\DemonstrativeController@showCaixasAbertosView')->name('view_enterprise_cxa');
+    Route::get('/empresas/{id}/minhas_vendas','Dashboard\DemonstrativeController@showMinhasVendasView')->name('view_enterprise_vds');
+    Route::get('/empresas/{id}/vendedores','Dashboard\DemonstrativeController@showVendedoresView')->name('view_enterprise_vdd');
 
-    Route::get('empresas/{id}/usuarios', 'Administrator\EnterpriseController@userList')->name('empresas.lista_usuarios');
-    Route::get('empresas/{id}/usuarios/adicionar', 'Administrator\EnterpriseController@createNewUser')->name('empresas.criar_usuario');
-    Route::post('empresas/{id}/usuarios/adicionar', 'Administrator\EnterpriseController@registerNewUser')->name('empresas.registrar_usuario');
+    # Route::get('empresas/{id}/usuarios', 'Administrator\EnterpriseController@userList')->name('empresas.lista_usuarios');
+    # Route::get('empresas/{id}/usuarios/adicionar', 'Administrator\EnterpriseController@createNewUser')->name('empresas.criar_usuario');
+    # Route::post('empresas/{id}/usuarios/adicionar', 'Administrator\EnterpriseController@registerNewUser')->name('empresas.registrar_usuario');
 
-    Route::get('empresas/{id}/demonstrativos', 'Administrator\EnterpriseController@getDemonstrative')->name('empresas.demonstrativo');
+    # Route::get('empresas/{id}/demonstrativos', 'Administrator\EnterpriseController@getDemonstrative')->name('empresas.demonstrativo');
 
     Route::get('/', 'Administrator\HomeController@index')->name('env_adm');
 });
