@@ -28,11 +28,11 @@
                     <div class="media">
                         <img src="{{ url('assets/media/image/user/women_avatar1.jpg') }}" class="mr-3" alt="...">
                         <div class="media-body">
-                            <h5 class="mt-0">Fantasia</h5>
+                            <h5 class="mt-0">{{ $enterprise->fantasia }}</h5>
                             <p>
-                                Razao Social / Documento
+                                {{ $enterprise->razao_social }} / {{ $enterprise->cnpj }}
                                 <br />
-                                <a class="btn btn-sm btn-link" href="{{ route('view_enterprise',['id' => $enterprise->id]) }}"><i class="fa fa-link"></i> &nbsp;Financeiro</a>
+                                <a class="btn btn-sm btn-link" href="{{ route('view_enterprise',['id' => $enterprise->id]) }}"><i class="fa fa-link"></i> &nbsp; Acessar Financeiro</a>
                             </p>
                         </div>
                     </div>

@@ -4,12 +4,12 @@
         <i  id="ultimoUpdate1" title="Ultima atualizacao em {{ $demonstrative->updated_at->format('d/m/Y H:i') }}" class="mr-2">{{ $demonstrative->updated_at->format('d/m/Y H:i') }}</i>
     </li>
     <li><a href="{{ route('env_adm') }}">Dashboard</a></li>
-    <li><a @if(!request()->segment(4) || request()->segment(4) == 'visao_geral') class="active" @endif href="{{ route('view_enterprise', ['id' => $enterprise->id]) }}">Visao Geral</a></li>
-    <li><a @if(!request()->segment(4) || request()->segment(4) == 'contas_a_pagar') class="active" @endif  href="{{ route('view_enterprise_cpv', ['id' => $enterprise->id]) }}">Contas á pagar</a></li>
-    <li><a @if(!request()->segment(4) || request()->segment(4) == 'contas_a_receber') class="active" @endif  href="{{ route('view_enterprise_arv', ['id' => $enterprise->id]) }}">Contas á receber</a></li>
-    <li><a @if(!request()->segment(4) || request()->segment(4) == 'caixas_abertos') class="active" @endif  href="{{ route('view_enterprise_cxa', ['id' => $enterprise->id]) }}">Caixas Abertos</a></li>
-    <li><a @if(!request()->segment(4) || request()->segment(4) == 'minhas_vendas') class="active" @endif href="{{ route('view_enterprise_vds', ['id' => $enterprise->id]) }}">Minhas vendas</a></li>
-    <li><a @if(!request()->segment(4) || request()->segment(4) == 'vendedores') class="active" @endif href="{{ route('view_enterprise_vdd', ['id' => $enterprise->id]) }}">Vendedores</a></li>
+    <li><a @if(!request()->segment(4) || request()->segment(4) == 'visao_geral') class="active" @endif href="{{ route('adm_view_enterprise', ['id' => $enterprise->id]) }}">Visao Geral</a></li>
+    <li><a @if(!request()->segment(4) || request()->segment(4) == 'contas_a_pagar') class="active" @endif  href="{{ route('adm_view_enterprise_cpv', ['id' => $enterprise->id]) }}">Contas á pagar</a></li>
+    <li><a @if(!request()->segment(4) || request()->segment(4) == 'contas_a_receber') class="active" @endif  href="{{ route('adm_view_enterprise_arv', ['id' => $enterprise->id]) }}">Contas á receber</a></li>
+    <li><a @if(!request()->segment(4) || request()->segment(4) == 'caixas_abertos') class="active" @endif  href="{{ route('adm_view_enterprise_cxa', ['id' => $enterprise->id]) }}">Caixas Abertos</a></li>
+    <li><a @if(!request()->segment(4) || request()->segment(4) == 'minhas_vendas') class="active" @endif href="{{ route('adm_view_enterprise_vds', ['id' => $enterprise->id]) }}">Minhas vendas</a></li>
+    <li><a @if(!request()->segment(4) || request()->segment(4) == 'vendedores') class="active" @endif href="{{ route('adm_view_enterprise_vdd', ['id' => $enterprise->id]) }}">Vendedores</a></li>
 
 
     <li><a  style="display: none;" class="active"  href="#"></a></li>

@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <div class="page-header">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -26,11 +27,11 @@
             </ol>
         </nav>
     </div>
+
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-8"><h5 class="card-title">Empresas Atendidas</h5></div>
-                <div class="col-lg-4 text-right"><a class="btn btn-primary" href="{{ route('empresas.create') }}">Nova empresa</a></div>
             </div>
             <hr />
             <div class="row">
@@ -54,7 +55,7 @@
                             <td>{{ $obj->fantasia }}</td>
                             <td>{{ $obj->razao_social }}</td>
                             <td>{{ $obj->email }}</td>
-                            <td><a class="btn btn-sm btn-block btn-success" href="{{ route('view_enterprise', ['id' => $obj->id]) }}"><i class="fa fa-money"></i></a></td>
+                            <td><a class="btn btn-sm btn-block btn-success" href="{{ route('adm_view_enterprise', ['id' => $obj->id]) }}"><i class="fa fa-money"></i></a></td>
                             <td><a class="btn btn-sm btn-block btn-warning" href="{{ route('empresas.edit',['id' => $obj->id]) }}">Editar</a></td>
                         </tr>
                         @endforeach
