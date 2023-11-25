@@ -7,7 +7,22 @@
 @endsection
 
 @section('content')
-
+    <div class="page-header">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    @if(!request()->segment(0) || strtolower(request()->segment(0)) == 'administrativo')
+                        <a href="{{ route('env_adm') }}">Inicio</a>
+                    @elseif(!request()->segment(0) || strtolower(request()->segment(0)) == 'dashboard')
+                        <a href="{{ route('env_ctm') }}">Inicio</a>
+                    @else
+                        <a href="#">Inicio</a>
+                    @endif
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+            </ol>
+        </nav>
+    </div>
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -20,7 +35,8 @@
                     <thead>
                         <tr>
                             <th class="col-lg-4 text-center" scope="col">Nome</th>
-                            <th class="col-lg-4 text-center" scope="col">Email</th>
+                            <th class="col-lg-1 text-center" scope="col">Lojas</th>
+                            <th class="col-lg-3 text-center" scope="col">Email</th>
                             <th class="col-lg-2 text-center" scope="col">Ultimo Acesso</th>
                             <th class="col-lg-2 text-center" scope="col">Ação</th>
                         </tr>
@@ -29,6 +45,7 @@
                         @foreach ($collection as $key => $obj)
                         <tr>
                             <td>{{ $obj->name }}</td>
+                            <td class="text-center">{{ $obj->enterprises()->count() }}</td>
                             <td>{{ $obj->email }}</td>
                             <td>
                                 @if (is_null( $obj->last_access_date))
@@ -38,7 +55,7 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-sm btn btn-success" href="{{ route('clientes.edit',['id' => $obj->id]) }}">Visualizar Lojas</a>
+                                <a class="btn btn-sm btn btn-success" href="{{ route('view_list_enterprise',['id' => $obj->id]) }}">Visualizar Lojas</a>
                                 <a class="btn btn-sm btn btn-warning" href="{{ route('clientes.edit',['id' => $obj->id]) }}">Editar</a>
                             </td>
                         </tr>
@@ -46,7 +63,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="7">{!! $collection->links() !!}</td>
+                            <td colspan="5">{!! $collection->links() !!}</td>
                         </tr>
                     </tfoot>
                 </table>

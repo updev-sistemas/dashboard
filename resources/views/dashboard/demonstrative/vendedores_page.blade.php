@@ -21,7 +21,7 @@
                         <a href="#">Inicio</a>
                     @endif
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Caixas Abertos</li>
+                <li class="breadcrumb-item active" aria-current="page">Vendores</li>
             </ol>
         </nav>
     </div>

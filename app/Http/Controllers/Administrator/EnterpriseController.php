@@ -6,10 +6,12 @@ use App\Customer;
 use App\Enterprise;
 use App\Http\Requests\EnterpriseCreateRequest;
 use App\Http\Requests\UserCreateRequest;
+use App\Utils\Enumerables\UserStatusEnum;
 use App\Utils\Enumerables\UserTypeEnum;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Ramsey\Uuid\Uuid;
 
 class EnterpriseController extends Controller
 {
@@ -32,7 +34,7 @@ class EnterpriseController extends Controller
     {
         $enterprises = Enterprise::query()->orderBy('fantasia')->paginate(10, ['*'] );
 
-        return view('administrator.enterprise.index')->with('collection', $enterprises);
+        return view('administrator.enterprise.index_adm')->with('collection', $enterprises);
     }
 
     /**
@@ -45,6 +47,27 @@ class EnterpriseController extends Controller
         return view('administrator.enterprise.create');
     }
 
+
+    public function createNew($id)
+    {
+        $user = Customer::find($id);
+
+        if ($user == null) {
+            session()->flash('WARN',"Cliente {$id} não foi localizada.");
+            return redirect()->back();
+        }
+
+        if ($user->id_status != UserStatusEnum::ACTIVE) {
+            session()->flash('WARN',"Cliente {$id} não está ativo.");
+            return redirect()->back();
+        }
+
+
+        return view('administrator.enterprise.create_new_enterprise')
+                ->with('customer', $user);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -55,8 +78,18 @@ class EnterpriseController extends Controller
     {
         try
         {
-            $enterprise = new Enterprise();
-            $enterprise->fill($request->all());
+            $uuid = Uuid::uuid4()->toString();
+            $hash = Hash::make($uuid);
+            $data = [
+                'user_id' => $request->get('user_id'),
+                'cnpj' => $request->get('cnpj'),
+                'razao_social' => $request->get('razao_social'),
+                'fantasia' => $request->get('fantasia'),
+                'email' => $request->get('email'),
+                'credential' => $uuid,
+                'secret' => $hash,
+            ];
+            $enterprise = new Enterprise($data);
             $enterprise->save();
 
             session()->flash('SUCCESS', 'Empresa criada com sucesso.');
