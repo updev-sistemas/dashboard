@@ -13,7 +13,13 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
+                @if(!request()->segment(0) || strtolower(request()->segment(0)) == 'administrativo')
+                    <a href="{{ route('env_adm') }}">Inicio</a>
+                @elseif(!request()->segment(0) || strtolower(request()->segment(0)) == 'dashboard')
                     <a href="{{ route('env_ctm') }}">Inicio</a>
+                @else
+                    <a href="#">Inicio</a>
+                @endif
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Caixas Abertos</li>
             </ol>

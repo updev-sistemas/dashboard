@@ -24,15 +24,15 @@
                 </figure>
             </div>
             <div>
-                <h4 class="mb-0 font-weight-bold">Empresas</h4>
+                <h4 class="mb-0 font-weight-bold">Clientes</h4>
             </div>
         </a>
         <ul>
             <li>
-                <a href="{{ route('empresas.index') }}">Lista de empresas atendidas</a>
+                <a href="{{ route('clientes.index') }}">Lista de Clientes</a>
             </li>
             <li>
-                <a href="{{ route('empresas.create') }}">Nova Empresa</a>
+                <a href="{{ route('clientes.create') }}">Novo Cliente</a>
             </li>
         </ul>
     </li>
@@ -40,28 +40,16 @@
         <a class="d-flex align-items-start">
             <div>
                 <figure  class="avatar mr-3">
-                    <img src="{{ url('assets/media/image/user/descontos.png') }}">
+                    <img src="{{ url('assets/media/image/user/fornecedor.png') }}">
                 </figure>
             </div>
             <div>
-                <h4 class="mb-0 font-weight-bold">Finanças</h4>
+                <h4 class="mb-0 font-weight-bold">Lojas</h4>
             </div>
         </a>
         <ul>
             <li>
-                <a href="#">Contas á pagar</a>
-            </li>
-            <li>
-                <a href="#">Contas á receber</a>
-            </li>
-            <li>
-                <a href="#">Caixas Abertos</a>
-            </li>
-            <li>
-                <a href="#">Minhas vendas</a>
-            </li>
-            <li>
-                <a href="#">Vendedores</a>
+                <a href="{{ route('empresas.index') }}">Lista de Lojas</a>
             </li>
         </ul>
     </li>

@@ -2,9 +2,9 @@
 
 namespace App;
 
+use App\Scopes\AdministratorScope;
+use App\Scopes\CustomerScope;
 use App\Utils\Enumerables\UserTypeEnum;
-
-use Illuminate\Database\Eloquent\Model;
 
 class Administrator extends User
 {
@@ -18,5 +18,11 @@ class Administrator extends User
 
     public function enterprises() {
         return parent::enterprises();
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new AdministratorScope());
     }
 }
