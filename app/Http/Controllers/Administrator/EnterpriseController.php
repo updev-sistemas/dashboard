@@ -78,16 +78,13 @@ class EnterpriseController extends Controller
     {
         try
         {
-            $uuid = Uuid::uuid4()->toString();
-            $hash = Hash::make($uuid);
             $data = [
                 'user_id' => $request->get('user_id'),
                 'cnpj' => $request->get('cnpj'),
                 'razao_social' => $request->get('razao_social'),
                 'fantasia' => $request->get('fantasia'),
                 'email' => $request->get('email'),
-                'credential' => $uuid,
-                'secret' => $hash,
+                'uuid' => Uuid::uuid4()->toString()
             ];
             $enterprise = new Enterprise($data);
             $enterprise->save();

@@ -16,8 +16,7 @@ class Enterprise extends Model
         'razao_social',
         'fantasia',
         'email',
-        'credential',
-        'secret',
+        'uuid',
         'user_id'
     ];
 
@@ -47,8 +46,25 @@ class Enterprise extends Model
     public function regenerateCredential()
     {
         $this->secret = Uuid::uuid4()->toString();
-        $this->credential = Hash::make($this->secret);
 
         $this->save();
+    }
+
+    public function generate_token()
+    {
+        return encrypt($this->uuid);
+    }
+
+    public function is_token_valid($token)
+    {
+        try
+        {
+            $tryDecrypt = decrypt($token);
+
+            return $tryDecrypt == $this->uuid;
+        }
+        catch (\Exception $e) {
+            return false;
+        }
     }
 }

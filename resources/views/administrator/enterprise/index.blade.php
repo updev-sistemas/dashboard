@@ -70,7 +70,55 @@
     </div>
 
 
+
+
 @endsection
 
 @section('script')
+
+    <script type="text/javascript">
+        $(function(){
+
+            function copyToClipboard(text) {
+                navigator.clipboard.writeText(text)
+                    .then(function () {
+                        alert('Copiado para área de transferência.')
+                    }, function () {
+                        alert('Falha ao copiar, faça manualmente!')
+                    });
+            }
+
+            $('#modal_enterprise_copy_key').click(function(){
+                var value = $('#modal_enterprise_key').val();
+                copyToClipboard(value);
+            });
+
+            $('#modal_enterprise_copy_url').click(function(){
+                var value = $('#modal_enterprise_url').val();
+                copyToClipboard(value);
+            });
+
+            $('#btn-dismiss').click(function(){
+                $('#modal_enterprise_name').html('EMPRESA');
+                $('#modal_enterprise_key').val('...');
+                $('#modal_enterprise_url').html('...');
+            });
+
+            $('.btnCredentialShow').click(function (e) {
+
+                var name = $(this).data('enterprise');
+                $('#modal_enterprise_name').html(name);
+
+                var url = $(this).data('url');
+                $('#modal_enterprise_url').html(url);
+
+                var key = $(this).data('key');
+                $('#modal_enterprise_key').val(key);
+
+                $('#credentialShowModal').modal({
+                    show:true
+                });
+            });
+        });
+    </script>
 @endsection
