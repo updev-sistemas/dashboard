@@ -21,6 +21,7 @@ class CreateEnterprisesTable extends Migration
             $table->string('fantasia', 200);
             $table->string('credential', 64);
             $table->string('secret', 512);
+            $table->string('uuid', 512);
             $table->string('email', 120)->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

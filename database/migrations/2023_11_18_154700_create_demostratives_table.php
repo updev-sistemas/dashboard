@@ -16,7 +16,7 @@ class CreateDemostrativesTable extends Migration
         Schema::create('demostratives', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('enterprise_id');
-            $table->string('payload');
+            $table->text('payload');
             $table->timestamps();
             $table->foreign('enterprise_id')->references('id')->on('enterprises');
         });
