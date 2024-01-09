@@ -52,7 +52,7 @@
                         <tr>
                             <td>
                                 <a data-enterprise="{{ $obj->fantasia }}"
-                                   data-url="{{ url("api/loja/update/{$obj->generate_token()}")  }}"
+                                   data-url="{{ route("api.demonstrative.register", ["id" => $obj->generate_token()])  }}"
                                    data-key="{{ $obj->generate_token() }}"
                                    title="Credencial de API"
                                    href="#"
