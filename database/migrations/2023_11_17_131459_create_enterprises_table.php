@@ -19,8 +19,8 @@ class CreateEnterprisesTable extends Migration
             $table->string('cnpj', 20)->unique();
             $table->string('razao_social', 200);
             $table->string('fantasia', 200);
-            $table->string('credential', 64);
-            $table->string('secret', 512);
+            $table->string('credential', 64)->nullable();
+            $table->string('secret', 512)->nullable();
             $table->string('uuid', 512);
             $table->string('email', 120)->nullable();
             $table->timestamps();
