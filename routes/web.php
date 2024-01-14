@@ -38,6 +38,11 @@ Route::group(['prefix' => 'administrativo', 'middleware' => ['auth', 'auth_admin
     Route::get('/', 'Administrator\HomeController@index')->name('env_adm');
 });
 
+Route::get('/profile', 'ProfileController@profile')->name('profile_view')->middleware('auth');
+Route::put('/profile', 'ProfileController@profileUpdate')->name('profile_change')->middleware('auth');
+Route::get('/password', 'ProfileController@password')->name('password_view')->middleware('auth');
+Route::put('/password', 'ProfileController@changePassword')->name('password_change')->middleware('auth');
+
 
 Route::get('/', function() {
     if (auth()->check()) {

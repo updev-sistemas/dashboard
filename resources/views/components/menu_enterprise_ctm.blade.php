@@ -3,7 +3,7 @@
         <img src="{{ url('assets/media/image/user/timer.png') }}">
         <i  id="ultimoUpdate1" title="Ultima atualizacao em {{ $demonstrative->updated_at->format('d/m/Y H:i') }}" class="mr-2">{{ $demonstrative->updated_at->format('d/m/Y H:i') }}</i>
     </li>
-    <li><a href="{{ route('env_ctm') }}">Dashboard</a></li>
+    <li><a href="{{ route('env_ctm') }}">Filiais</a></li>
     <li><a @if(!request()->segment(4) || request()->segment(4) == 'visao_geral') class="active" @endif href="{{ route('view_enterprise', ['id' => $enterprise->id]) }}">Visao Geral</a></li>
     <li><a @if(!request()->segment(4) || request()->segment(4) == 'contas_a_pagar') class="active" @endif  href="{{ route('view_enterprise_cpv', ['id' => $enterprise->id]) }}">Contas á pagar</a></li>
     <li><a @if(!request()->segment(4) || request()->segment(4) == 'contas_a_receber') class="active" @endif  href="{{ route('view_enterprise_arv', ['id' => $enterprise->id]) }}">Contas á receber</a></li>

@@ -53,7 +53,9 @@
                         @endcomponent
                     @endif
 
-                    <a href="#" class="list-group-item p-l-r-0 d-flex">Alterar senha</a>
+                    <a class="list-group-item p-l-r-0 d-flex" href="{{ route('profile_view') }}">Alterar Informações</a>
+
+                    <a class="list-group-item p-l-r-0 d-flex" href="{{ route('password_view') }}">Alterar Senha</a>
 
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();"
