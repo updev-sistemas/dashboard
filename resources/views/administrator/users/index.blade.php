@@ -55,8 +55,8 @@
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-sm btn btn-success" href="{{ route('view_list_enterprise',['id' => $obj->id]) }}">Visualizar Lojas</a>
-                                <a class="btn btn-sm btn btn-warning" href="{{ route('clientes.edit',['id' => $obj->id]) }}">Editar</a>
+                                <a class="btn btn-sm btn btn-primary" href="{{ route('view_list_enterprise',['id' => $obj->id]) }}"><i class="fa fa-eye"></i>&nbsp; Visualizar Lojas</a>
+                                <a class="btn btn-sm btn btn-warning" href="{{ route('clientes.edit',['id' => $obj->id]) }}"><i class="fa fa-pencil"></i>&nbsp; Editar</a>
                             </td>
                         </tr>
                         @endforeach

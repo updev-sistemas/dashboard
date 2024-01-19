@@ -19,3 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::post('/loja/{id}', 'DemonstrativeApiController@register')->name('api.demonstrative.register');
+Route::post('/update/data', 'DemonstrativeApiController@registerAlt')->name('api.demonstrative.register_alt');
+
+Route::post('integracao/set/u/{key}','AuthApiController@registerAuth')->name('api.auth.change_password');
+Route::post('integracao/set/p/{key}','AuthApiController@changePassword')->name('api.auth.change_password');
