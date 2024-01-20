@@ -54,8 +54,8 @@
                             <td>{{ $obj->fantasia }}</td>
                             <td>{{ $obj->razao_social }}</td>
                             <td>{{ $obj->email }}</td>
-                            <td><a class="btn btn-sm btn-block btn-success" href="{{ route('view_enterprise', ['id' => $obj->id]) }}"><i class="fa fa-money"></i></a></td>
-                            <td><a class="btn btn-sm btn-block btn-warning" href="{{ route('empresas.edit',['id' => $obj->id]) }}">Editar</a></td>
+                            <td><a class="btn btn-sm btn-block btn-success" href="{{ route('view_enterprise', ['id' => $obj->id]) }}"><i class="fa fa-money"></i>&nbsp; Demonstrativo</a></td>
+                            <td><a class="btn btn-sm btn-block btn-warning" href="{{ route('empresas.edit',['id' => $obj->id]) }}"><i class="fa fa-pencil"></i> &nbsp;Editar</a></td>
                         </tr>
                         @endforeach
                     </tbody>

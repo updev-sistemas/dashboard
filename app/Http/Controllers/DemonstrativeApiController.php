@@ -20,7 +20,7 @@ class DemonstrativeApiController extends Controller
         parent::__construct();
     }
 
-    public function registerAlt(Request $request) 
+    public function registerAlt(Request $request)
     {
         try
         {
@@ -32,8 +32,7 @@ class DemonstrativeApiController extends Controller
                 throw new \Exception("Dados de envio estão inválidos.");
             }
 
-
-            $enterprise = Enterprise::query()->where('cnpj','=', $document)->firstOrFail();
+            $enterprise = Enterprise::query()->where('cnpj','=', $document)->first();
 
             if ($enterprise == null) {
                 throw new \Exception("Empresa não foi localizada.");
