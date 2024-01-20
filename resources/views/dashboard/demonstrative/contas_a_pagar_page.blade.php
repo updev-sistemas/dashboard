@@ -160,34 +160,34 @@
                     series: [{
                         name: 'Pagas',
                         data: [
-                            {{ $payload->contasPagar->pagas->janeiro ?? 0 }},
-                            {{ $payload->contasPagar->pagas->feveiro ?? 0 }},
-                            {{ $payload->contasPagar->pagas->marco ?? 0 }},
-                            {{ $payload->contasPagar->pagas->abril ?? 0 }},
-                            {{ $payload->contasPagar->pagas->maio ?? 0 }},
-                            {{ $payload->contasPagar->pagas->junho ?? 0 }},
-                            {{ $payload->contasPagar->pagas->julho ?? 0 }},
-                            {{ $payload->contasPagar->pagas->agosto ?? 0 }},
-                            {{ $payload->contasPagar->pagas->setembro ?? 0 }},
-                            {{ $payload->contasPagar->pagas->outubro ?? 0 }},
-                            {{ $payload->contasPagar->pagas->novembro ?? 0 }},
-                            {{ $payload->contasPagar->pagas->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->agosto ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->outubro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->dezembro ?? 0) }}
                         ]
                     }, {
                         name: 'Pendentes',
                         data: [
-                            {{ $payload->contasPagar->pendendentes->janeiro ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->feveiro ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->marco ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->abril ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->maio ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->junho ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->julho ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->agosto ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->setembro ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->outubro ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->novembro ?? 0 }},
-                            {{ $payload->contasPagar->pendendentes->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->agosto ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->outubro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->dezembro ?? 0) }}
                         ]
                     }],
                     colors: [colors.secondary, colors.info],

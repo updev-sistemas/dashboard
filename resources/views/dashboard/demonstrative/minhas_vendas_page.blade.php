@@ -292,34 +292,34 @@
                     series: [{
                         name: 'Ganhos',
                         data: [
-                            {{ $payload->lucrosPresumidos->ganhos->janeiro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->feveiro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->marco ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->abril ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->maio ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->junho ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->julho ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->agosto ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->setembro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->outubro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->novembro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->ganhos->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->agosto ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->outubro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->ganhos->dezembro ?? 0) }}
                         ]
                     }, {
                         name: 'Perdidos',
                         data: [
-                            {{ $payload->lucrosPresumidos->perdidos->janeiro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->feveiro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->marco ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->abril ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->maio ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->junho ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->julho ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->agosto ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->setembro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->outubro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->novembro ?? 0 }},
-                            {{ $payload->lucrosPresumidos->perdidos->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->agosto ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->outubro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber( $payload->lucrosPresumidos->perdidos->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->lucrosPresumidos->perdidos->dezembro ?? 0) }}
                         ]
                     }],
                     colors: [colors.secondary, colors.info],

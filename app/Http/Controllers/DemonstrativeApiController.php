@@ -25,9 +25,9 @@ class DemonstrativeApiController extends Controller
         try
         {
             $document = $request->get('documento', '');
-            $dataJson = \json_encode($request->get('json',''));
+            $dataJson = \json_encode($request->get('json'));
 
-            if (empty($document) || empty($dataJson)) 
+            if (empty($document) || empty($dataJson))
             {
                 throw new \Exception("Dados de envio estão inválidos.");
             }
@@ -60,7 +60,7 @@ class DemonstrativeApiController extends Controller
                 $demostrative->update();
             }
 
-            return response(['status' => 'Atualizado'], 200);
+            return response(['status' =>'Sucesso', 'Return' => 200], 200);
         }
         catch (\Exception $e)
         {
@@ -68,10 +68,9 @@ class DemonstrativeApiController extends Controller
             logger($e);
             logger($request->all());
 
-            return response(['errors' => $e->getMessage(), 'data' => $request->all()], 400);
-        }
+            return response(['status' =>'ERROR', 'return' => $e->getCode()], 400);
+       }
     }
-
 
     public function register($id, Request $request)
     {
@@ -117,7 +116,7 @@ class DemonstrativeApiController extends Controller
             logger($id);
             logger($request->all());
 
-            return response(['errors' => $e->getMessage(), 'data' => $request->all()], 400);
+            return response(['status' =>'ERROR', 'Message' => $e->getMessage() ,'return' => $e->getCode()], 400);
         }
     }
 
