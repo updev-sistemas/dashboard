@@ -27,11 +27,10 @@ class DemonstrativeApiController extends Controller
             $document = $request->get('documento', '');
             $dataJson = \json_encode($request->get('json',''));
 
-            if (empty($document) || empty($dataJson))
+            if (empty($document) || empty($dataJson)) 
             {
                 throw new \Exception("Dados de envio estão inválidos.");
             }
-
 
             $enterprise = Enterprise::query()->where('cnpj','=', $document)->first();
 
