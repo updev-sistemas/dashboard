@@ -106,7 +106,7 @@
                         <div>
                         </div>
                     </div>
-                    <div class="grhpag" style="display:none;" id="graficoFormasPagamento"></div>
+                    <div class="grhpag" id="graficoFormasPagament1o"></div>
                     <div>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             @if (isset($payload->f_pagamentosDia))
@@ -132,11 +132,11 @@
                                     @php
                                         $total1 = 0;
                                     @endphp
-                                    @foreach ($payload->f_pagamentosDia->Dados as $key => $obj)
+                                    @foreach ($payload->f_pagamentosDia as $key => $obj)
                                     <li class="list-group-item pl-0 pr-0">
-                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                        @php $total1 +=$obj->Valor;  @endphp
+                                        @php $total1 +=$obj->valor;  @endphp
                                     </li>
                                     @endforeach
                                     <li>
@@ -153,11 +153,11 @@
                                     @php
                                         $total2 = 0;
                                     @endphp
-                                    @foreach ($payload->f_pagamentosSemana->Dados as $key => $obj)
+                                    @foreach ($payload->f_pagamentosSemana as $key => $obj)
                                     <li class="list-group-item pl-0 pr-0">
-                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                        @php $total2 +=$obj->Valor;  @endphp
+                                        @php $total2 +=$obj->valor;  @endphp
                                     </li>
                                     @endforeach
                                     <li>
@@ -174,11 +174,11 @@
                                     @php
                                         $total3 = 0;
                                     @endphp
-                                    @foreach ($payload->f_pagamentosMes->Dados as $key => $obj)
+                                    @foreach ($payload->f_pagamentosMes as $key => $obj)
                                     <li class="list-group-item pl-0 pr-0">
-                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                        @php $total3 +=$obj->Valor;  @endphp
+                                        @php $total3 +=$obj->valor;  @endphp
                                     </li>
                                     @endforeach
                                     <li>
@@ -195,7 +195,6 @@
             </div>
         </div>
 
-
         <div class="col-lg-4 col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -204,7 +203,7 @@
                         <div>
                         </div>
                     </div>
-                    <div class="grhpag" style="display:none;" id="graficoVendedor"></div>
+                    <div class="grhpag"  id="graficoVendedo1r"></div>
                     <div>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             @if (isset($payload->f_vendedorDia))
@@ -230,11 +229,11 @@
                                         @php
                                             $total1 = 0;
                                         @endphp
-                                        @foreach ($payload->f_vendedorDia->Dados as $key => $obj)
+                                        @foreach ($payload->f_vendedorDia as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total1 +=$obj->Valor;  @endphp
+                                                @php $total1 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
@@ -251,11 +250,11 @@
                                         @php
                                             $total2 = 0;
                                         @endphp
-                                        @foreach ($payload->f_vendedorSemana->Dados as $key => $obj)
+                                        @foreach ($payload->f_vendedorSemana as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total2 +=$obj->Valor;  @endphp
+                                                @php $total2 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
@@ -272,11 +271,11 @@
                                         @php
                                             $total3 = 0;
                                         @endphp
-                                        @foreach ($payload->f_vendedorMes->Dados as $key => $obj)
+                                        @foreach ($payload->f_vendedorMes as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total3 +=$obj->Valor;  @endphp
+                                                @php $total3 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
@@ -293,7 +292,6 @@
             </div>
         </div>
 
-
         <div class="col-lg-4 col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -302,7 +300,7 @@
                         <div>
                         </div>
                     </div>
-                    <div class="grhpag" style="display:none;" id="graficoProdutos"></div>
+                    <div class="grhpag"  id="graficoProduto1s"></div>
                     <div>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             @if (isset($payload->f_grupoProdutosDia))
@@ -328,11 +326,11 @@
                                         @php
                                             $total1 = 0;
                                         @endphp
-                                        @foreach ($payload->f_grupoProdutosDia->Dados as $key => $obj)
+                                        @foreach ($payload->f_grupoProdutosDia as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total1 +=$obj->Valor;  @endphp
+                                                @php $total1 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
@@ -349,11 +347,11 @@
                                         @php
                                             $total2 = 0;
                                         @endphp
-                                        @foreach ($payload->f_grupoProdutosSemana->Dados as $key => $obj)
+                                        @foreach ($payload->f_grupoProdutosSemana as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total2 +=$obj->Valor;  @endphp
+                                                @php $total2 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
@@ -370,11 +368,11 @@
                                         @php
                                             $total3 = 0;
                                         @endphp
-                                        @foreach ($payload->f_grupoProdutosMes->Dados as $key => $obj)
+                                        @foreach ($payload->f_grupoProdutosMes as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->Nome }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->Valor) }})
+                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total3 +=$obj->Valor;  @endphp
+                                                @php $total3 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
@@ -512,16 +510,16 @@
         $(function() {
 
             /*  Vendas  */
-            @if (isset($payload->f_pagamentosDia->Dados))
+            @if (isset($payload->f_pagamentosDia))
                 var seriePagamentosDia = [
-                @foreach ($payload->f_pagamentosDia->Dados as $obj)
-                {{ $obj->Valor }},
+                @foreach ($payload->f_pagamentosDia as $obj)
+                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
                 ];
 
                 var labelPagamentosDia = [
-                @foreach ($payload->f_pagamentosDia->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_pagamentosDia as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
                 ];
             @else
@@ -529,16 +527,16 @@
                 var labelPagamentosDia = [];
             @endif
 
-            @if (isset($payload->f_pagamentosSemana->Dados))
+            @if (isset($payload->f_pagamentosSemana))
                 var seriePagamentosSemana = [
-                @foreach ($payload->f_pagamentosSemana->Dados as $obj)
-                    {{ $obj->Valor }},
+                @foreach ($payload->f_pagamentosSemana as $obj)
+                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
                 ];
 
                 var labelPagamentosSemana = [
-                @foreach ($payload->f_pagamentosSemana->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_pagamentosSemana as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
                 ];
             @else
@@ -546,16 +544,16 @@
                 var labelPagamentosSemana = [];
             @endif
 
-            @if (isset($payload->f_pagamentosMes->Dados))
+            @if (isset($payload->f_pagamentosMes))
                 var seriePagamentosMes = [
-                @foreach ($payload->f_pagamentosMes->Dados as $obj)
-                    {{ $obj->Valor }},
+                @foreach ($payload->f_pagamentosMes as $obj)
+                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
                 ];
 
                 var labelPagamentosMes = [
-                @foreach ($payload->f_pagamentosMes->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_pagamentosMes as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
                 ];
             @else
@@ -567,16 +565,16 @@
 
             /*  Vendedores  */
 
-            @if (isset($payload->f_vendedorDia->Dados))
+            @if (isset($payload->f_vendedorDia))
             var serieVendedorDia = [
-                @foreach ($payload->f_vendedorDia->Dados as $obj)
-                    {{ $obj->Valor }},
+                @foreach ($payload->f_vendedorDia as $obj)
+                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
             ];
 
             var labelVendedorDia = [
-                @foreach ($payload->f_vendedorDia->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_vendedorDia as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
             ];
             @else
@@ -584,16 +582,16 @@
             var labelVendedorDia = [];
             @endif
 
-            @if (isset($payload->f_vendedorSemana->Dados))
+            @if (isset($payload->f_vendedorSemana))
             var serieVendedorSemana = [
-                @foreach ($payload->f_vendedorSemana->Dados as $obj)
-                    {{ $obj->Valor }},
+                @foreach ($payload->f_vendedorSemana as $obj)
+                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
             ];
 
             var labelVendedorSemana = [
-                @foreach ($payload->f_vendedorSemana->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_vendedorSemana as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
             ];
             @else
@@ -601,16 +599,16 @@
             var labelVendedorSemana = [];
             @endif
 
-            @if (isset($payload->f_vendedorMes->Dados))
+            @if (isset($payload->f_vendedorMes))
             var serieVendedorMes = [
-                @foreach ($payload->f_vendedorMes->Dados as $obj)
-                    {{ $obj->Valor }},
+                @foreach ($payload->f_vendedorMes as $obj)
+                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
             ];
 
             var labelVendedorMes = [
-                @foreach ($payload->f_vendedorMes->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_vendedorMes as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
             ];
             @else
@@ -622,16 +620,16 @@
 
 
             /*  Produtos  */
-            @if (isset($payload->f_grupoProdutosDia->Dados))
+            @if (isset($payload->f_grupoProdutosDia))
             var serieProdutosDia = [
-                @foreach ($payload->f_grupoProdutosDia->Dados as $obj)
-                    {{ $obj->Valor }},
+                @foreach ($payload->f_grupoProdutosDia as $obj)
+                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
             ];
 
             var labelProdutosDia = [
-                @foreach ($payload->f_grupoProdutosDia->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_grupoProdutosDia as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
             ];
             @else
@@ -639,16 +637,16 @@
             var labelProdutosDia = [];
             @endif
 
-            @if (isset($payload->f_grupoProdutosSemana->Dados))
+            @if (isset($payload->f_grupoProdutosSemana))
             var serieProdutosSemana = [
-                @foreach ($payload->f_grupoProdutosSemana->Dados as $obj)
-                    {{ $obj->Valor }},
+                @foreach ($payload->f_grupoProdutosSemana as $obj)
+                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
             ];
 
             var labelProdutosSemana = [
-                @foreach ($payload->f_grupoProdutosSemana->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_grupoProdutosSemana as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
             ];
             @else
@@ -656,16 +654,16 @@
             var labelProdutosSemana = [];
             @endif
 
-            @if (isset($payload->f_grupoProdutosMes->Dados))
+            @if (isset($payload->f_grupoProdutosMes))
             var serieProdutosMes = [
-                @foreach ($payload->f_grupoProdutosMes->Dados as $obj)
-                    {{ $obj->Valor }},
+                @foreach ($payload->f_grupoProdutosMes as $obj)
+                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
                 @endforeach
             ];
 
             var labelProdutosMes = [
-                @foreach ($payload->f_grupoProdutosMes->Dados as $obj)
-                    '{{ $obj->Nome }}',
+                @foreach ($payload->f_grupoProdutosMes as $obj)
+                    '{{ $obj->descricao }}',
                 @endforeach
             ];
             @else
@@ -708,52 +706,52 @@
                     {
                         name: "Entradas R$",
                         data: [
-                            {{ $payload->caixa->entradas->janeiro ?? 0 }},
-                            {{ $payload->caixa->entradas->feveiro ?? 0 }},
-                            {{ $payload->caixa->entradas->marco ?? 0 }},
-                            {{ $payload->caixa->entradas->abril ?? 0 }},
-                            {{ $payload->caixa->entradas->maio ?? 0 }},
-                            {{ $payload->caixa->entradas->junho ?? 0 }},
-                            {{ $payload->caixa->entradas->julho ?? 0 }},
-                            {{ $payload->caixa->entradas->agosto ?? 0 }},
-                            {{ $payload->caixa->entradas->setembro ?? 0 }},
-                            {{ $payload->caixa->entradas->outubro ?? 0 }},
-                            {{ $payload->caixa->entradas->novembro ?? 0 }},
-                            {{ $payload->caixa->entradas->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->agosto ?? 0 )}},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->outubro ?? 0 )}},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->dezembro ?? 0 )}}
                         ]
                     },
                     {
                         name: "Saidas R$",
                         data:  [
-                            {{ $payload->caixa->saidas->janeiro ?? 0 }},
-                            {{ $payload->caixa->saidas->feveiro ?? 0 }},
-                            {{ $payload->caixa->saidas->marco ?? 0 }},
-                            {{ $payload->caixa->saidas->abril ?? 0 }},
-                            {{ $payload->caixa->saidas->maio ?? 0 }},
-                            {{ $payload->caixa->saidas->junho ?? 0 }},
-                            {{ $payload->caixa->saidas->julho ?? 0 }},
-                            {{ $payload->caixa->saidas->agosto ?? 0 }},
-                            {{ $payload->caixa->saidas->setembro ?? 0 }},
-                            {{ $payload->caixa->saidas->outubro ?? 0 }},
-                            {{ $payload->caixa->saidas->novembro ?? 0 }},
-                            {{ $payload->caixa->saidas->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->agosto ?? 0 )}},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->outubro ?? 0 )}},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->dezembro ?? 0 )}}
                         ]
                     },
                     {
                         name: "Saldo R$",
                         data: [
-                            {{ $payload->caixa->saldo->janeiro ?? 0 }},
-                            {{ $payload->caixa->saldo->feveiro ?? 0 }},
-                            {{ $payload->caixa->saldo->marco ?? 0 }},
-                            {{ $payload->caixa->saldo->abril ?? 0 }},
-                            {{ $payload->caixa->saldo->maio ?? 0 }},
-                            {{ $payload->caixa->saldo->junho ?? 0 }},
-                            {{ $payload->caixa->saldo->julho ?? 0 }},
-                            {{ $payload->caixa->saldo->agosto ?? 0 }},
-                            {{ $payload->caixa->saldo->setembro ?? 0 }},
-                            {{ $payload->caixa->saldo->outubro ?? 0 }},
-                            {{ $payload->caixa->saldo->novembro ?? 0 }},
-                            {{ $payload->caixa->saldo->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->agosto ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->outubro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->dezembro ?? 0) }}
                         ]
                     }
                 ];
@@ -837,51 +835,51 @@
                     series: [{
                         name: 'Enviadas',
                         data: [
-                            {{ $payload->notasFiscais->TotalEnviadas->janeiro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->feveiro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->marco ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->abril ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->maio ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->junho ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->julho ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->agosto ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->setembro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->outubro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->novembro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalEnviadas->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->agosto ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->outubro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->dezembro ?? 0) }}
                         ]
                         }, {
                         name: 'Canceladas',
                         data: [
-                            {{ $payload->notasFiscais->TotalCanceladas->janeiro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->feveiro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->marco ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->abril ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->maio ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->junho ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->julho ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->agosto ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->setembro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->outubro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->novembro ?? 0 }},
-                            {{ $payload->notasFiscais->TotalCanceladas->dezembro ?? 0 }}
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->janeiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->feveiro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->marco ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->abril ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->maio ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->junho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->julho ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->agosto ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->setembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->outubro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->novembro ?? 0) }},
+                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->dezembro ?? 0) }}
                         ]
                     },
                         {
                             name: 'Contigencia',
                             data: [
-                                {{ $payload->notasFiscais->TotalContigencia->janeiro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->feveiro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->marco ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->abril ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->maio ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->junho ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->julho ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->agosto ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->setembro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->outubro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->novembro ?? 0 }},
-                                {{ $payload->notasFiscais->TotalContigencia->dezembro ?? 0 }}
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->janeiro ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->feveiro ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->marco ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->abril ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->maio ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->junho ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->julho ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->agosto ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->setembro ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->outubro ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->novembro ?? 0) }},
+                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->dezembro ?? 0) }}
                             ]
                         }]
                     ,
@@ -972,14 +970,14 @@
             });
             // Final Produtos
 
-            graficoFormasPagamentoMountGraph('#graficoFormasPagamento', labelPagamentosDia, seriePagamentosDia);
-            $('#graficoFormasPagamento').show();
+            // graficoFormasPagamentoMountGraph('#graficoFormasPagamento', labelPagamentosDia, seriePagamentosDia);
+            // $('#graficoFormasPagamento').show();
 
-            graficoFormasPagamentoMountGraph('#graficoVendedor', labelVendedorDia, serieVendedorDia);
-            $('#graficoVendedor').show();
+            // graficoFormasPagamentoMountGraph('#graficoVendedor', labelVendedorDia, serieVendedorDia);
+            // $('#graficoVendedor').show();
 
-            graficoFormasPagamentoMountGraph('#graficoProdutos', labelProdutosDia, serieProdutosDia);
-            $('#graficoProdutos').show();
+            //  graficoFormasPagamentoMountGraph('#graficoProdutos', labelProdutosDia, serieProdutosDia);
+            // $('#graficoProdutos').show();
 
 
             graficoCaixaMountGraph();
