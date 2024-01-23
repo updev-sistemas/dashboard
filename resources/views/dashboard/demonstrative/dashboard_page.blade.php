@@ -31,7 +31,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Vendas Hoje</p>
-                                    <h2  id="totalVendas2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->valorVendas ?? 0) }}</h2>
+                                    <h2  id="totalVendas2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.$payload->lucrosPresumidos->relatorioVendas->concluidas->valorVendas ?? 0)) }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -53,7 +53,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Qtd de vendas Hoje</p>
-                                    <h2 id="quantidadeVendas2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->quantidadeVendas ?? 0) }}</h2>
+                                    <h2 id="quantidadeVendas2" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->quantidadeVendas ?? 0 }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -75,7 +75,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Ticket Médio</p>
-                                    <h2 id="meusLucros2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->totalLucros ?? 0) }}</h2>
+                                    <h2 id="meusLucros2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.$payload->lucrosPresumidos->relatorioVendas->concluidas->totalLucros ?? 0)) }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
