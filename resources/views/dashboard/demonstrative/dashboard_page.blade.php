@@ -137,19 +137,14 @@
                             @if (isset($payload->f_pagamentosDia))
                             <div class="tab-pane fade {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosDia" role="tabpanel" aria-labelledby="pills-dia-tab">
                                 <ul class="list-group list-group-flush">
-                                    @php
-                                        $total1 = 0;
-                                    @endphp
                                     @foreach ($payload->f_pagamentosDia as $key => $obj)
                                     <li class="list-group-item pl-0 pr-0">
                                         <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                        @php $total1 +=$obj->valor;  @endphp
                                     </li>
                                     @endforeach
                                     <li>
                                         <p style="margin-top:20px;" class="text-center">
-                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total1) }}
+                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_pagamentosDia)->sum('valor'))) }}
                                         </p>
                                     </li>
                                 </ul>
@@ -159,19 +154,14 @@
                             @if (isset($payload->f_pagamentosSemana))
                             <div class="tab-pane fade  {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosSemana" role="tabpanel" aria-labelledby="pills-semana-tab">
                                 <ul class="list-group list-group-flush">
-                                    @php
-                                        $total2 = 0;
-                                    @endphp
                                     @foreach ($payload->f_pagamentosSemana as $key => $obj)
                                     <li class="list-group-item pl-0 pr-0">
                                         <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                        @php $total2 +=$obj->valor;  @endphp
                                     </li>
                                     @endforeach
                                     <li>
                                         <p style="margin-top:20px;" class="text-center">
-                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total2) }}
+                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_pagamentosSemana)->sum('valor'))) }}
                                         </p>
                                     </li>
                                 </ul>
@@ -181,19 +171,14 @@
                             @if (isset($payload->f_pagamentosMes))
                             <div class="tab-pane fade  {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosMes" role="tabpanel" aria-labelledby="pills-mes-tab">
                                 <ul class="list-group list-group-flush">
-                                    @php
-                                        $total3 = 0;
-                                    @endphp
                                     @foreach ($payload->f_pagamentosMes as $key => $obj)
                                     <li class="list-group-item pl-0 pr-0">
                                         <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                        @php $total3 +=$obj->valor;  @endphp
                                     </li>
                                     @endforeach
                                     <li>
                                         <p style="margin-top:20px;" class="text-center">
-                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total3) }}
+                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_pagamentosMes)->sum('valor'))) }}
                                         </p>
                                     </li>
                                 </ul>
@@ -248,19 +233,14 @@
                             @if (isset($payload->f_vendedorDia))
                                 <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorDia" role="tabpanel" aria-labelledby="vendedor-dia-tab">
                                     <ul class="list-group list-group-flush">
-                                        @php
-                                            $total1 = 0;
-                                        @endphp
                                         @foreach ($payload->f_vendedorDia as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
                                                 <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                                @php $total1 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total1) }}
+                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_vendedorDia)->sum('valor'))) }}
                                             </p>
                                         </li>
                                     </ul>
@@ -270,19 +250,14 @@
                             @if (isset($payload->f_vendedorSemana))
                                 <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorSemana" role="tabpanel" aria-labelledby="vendedor-semana-tab">
                                     <ul class="list-group list-group-flush">
-                                        @php
-                                            $total2 = 0;
-                                        @endphp
                                         @foreach ($payload->f_vendedorSemana as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
                                                 <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                                @php $total2 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total2) }}
+                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_vendedorSemana)->sum('valor'))) }}
                                             </p>
                                         </li>
                                     </ul>
@@ -292,19 +267,14 @@
                             @if (isset($payload->f_vendedorMes))
                                 <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorMes" role="tabpanel" aria-labelledby="vendedor-mes-tab">
                                     <ul class="list-group list-group-flush">
-                                        @php
-                                            $total3 = 0;
-                                        @endphp
                                         @foreach ($payload->f_vendedorMes as $key => $obj)
                                             <li class="list-group-item pl-0 pr-0">
                                                 <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                                @php $total3 +=$obj->valor;  @endphp
                                             </li>
                                         @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total3) }}
+                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_vendedorMes)->sum('valor'))) }}
                                             </p>
                                         </li>
                                     </ul>
@@ -359,19 +329,14 @@
                             @if (isset($payload->f_grupoProdutosDia) && (count($payload->f_grupoProdutosDia) > 0))
                                 <div class="tab-pane fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosDia" role="tabpanel" aria-labelledby="produtos-dia-tab">
                                     <ul class="list-group list-group-flush">
-                                        @php
-                                            $total1 = 0;
-                                        @endphp
-                                            @foreach ($payload->f_grupoProdutosDia as $key => $obj)
-                                                <li class="list-group-item pl-0 pr-0">
-                                                    <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                                    @php $total1 +=$obj->valor;  @endphp
-                                                </li>
-                                            @endforeach
+                                        @foreach ($payload->f_grupoProdutosDia as $key => $obj)
+                                            <li class="list-group-item pl-0 pr-0">
+                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
+                                            </li>
+                                        @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total1) }}
+                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_grupoProdutosDia)->sum('valor'))) }}
                                             </p>
                                         </li>
                                     </ul>
@@ -381,19 +346,16 @@
                             @if (isset($payload->f_grupoProdutosSemana) && (count($payload->f_grupoProdutosSemana) > 0))
                                 <div class="tab-pane  fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosSemana" role="tabpanel" aria-labelledby="produtos-semana-tab">
                                     <ul class="list-group list-group-flush">
-                                        @php
-                                            $total2 = 0;
-                                        @endphp
                                             @foreach ($payload->f_grupoProdutosSemana as $key => $obj)
                                                 <li class="list-group-item pl-0 pr-0">
                                                     <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                    @php $total2 +=$obj->valor;  @endphp
+                                                    @php $total5 += App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor);  @endphp
                                                 </li>
                                             @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total2) }}
+                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_grupoProdutosSemana)->sum('valor'))) }}
                                             </p>
                                         </li>
                                     </ul>
@@ -403,19 +365,14 @@
                             @if (isset($payload->f_grupoProdutosMes) && count($payload->f_grupoProdutosMes) > 0)
                                 <div class="tab-pane  fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosMes" role="tabpanel" aria-labelledby="produtos-mes-tab">
                                     <ul class="list-group list-group-flush">
-                                        @php
-                                            $total3 = 0;
-                                        @endphp
                                             @foreach ($payload->f_grupoProdutosMes as $key => $obj)
                                                 <li class="list-group-item pl-0 pr-0">
                                                     <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                                    @php $total3 +=$obj->valor;  @endphp
                                                 </li>
                                             @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total3) }}
+                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_grupoProdutosMes)->sum('valor'))) }}
                                             </p>
                                         </li>
                                     </ul>
