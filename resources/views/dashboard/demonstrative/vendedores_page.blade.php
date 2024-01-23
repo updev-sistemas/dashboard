@@ -24,7 +24,8 @@
         </nav>
     </div>
         <div class="container-fluid">
-            @foreach(collect($payload->lucrosPresumidos->relatorioVendas->vendasUsuarios ?? array()) as $key => $user)
+            @if (isset($payload->lucrosPresumidos->relatorioVendas->vendasUsuarios))
+                @foreach(collect($payload->lucrosPresumidos->relatorioVendas->vendasUsuarios) as $key => $user)
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <div class="card">
                         <div class="card-body">
@@ -74,7 +75,10 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+              @endforeach
+            @else
+            <h3>Aguardando dados.</h3>
+            @endif
         </div>
 
 @endsection

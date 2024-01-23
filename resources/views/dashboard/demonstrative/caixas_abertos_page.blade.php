@@ -25,7 +25,8 @@
     </div>
     <div class="row">
         <div class="container-fluid">
-             @foreach($payload->caixasAbertos as $key => $caixa)
+            @if (isset($payload->caixasAbertos))
+                @foreach($payload->caixasAbertos as $key => $caixa)
 
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <div class="card">
@@ -84,6 +85,9 @@
                     </div>
 
            @endforeach
+           @else
+            <h3>Aguardando dados.</h3>
+           @endif
         </div>
     </div>
 
