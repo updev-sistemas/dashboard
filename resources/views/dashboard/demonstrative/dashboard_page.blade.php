@@ -203,7 +203,7 @@
                         </div>
                     </div>
                     @else
-                        <h4>Sem dados</h4>
+                        <h4>Aguardando <dados class=""></dados></h4>
                     @endif
                 </div>
             </div>
@@ -314,7 +314,7 @@
                         </div>
                     </div>
                     @else
-                        <h4>Sem dados</h4>
+                        <h4>Aguardando dados.</h4>
                     @endif
                 </div>
             </div>
@@ -425,7 +425,7 @@
                         </div>
                     </div>
                     @else
-                    <h4>Sem dados</h4>
+                    <h4>Aguardando dados.</h4>
                     @endif
                 </div>
             </div>
@@ -510,14 +510,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($payload->topProdutos as $key=>$value)
-                        <tr>
-                            <td>
-                                <a><?= $value->produto; ?></a>
-                            </td>
-                            <td><?= $value->quantidade; ?></td>
-                        </tr>
-                        @endforeach
+                        @if (isset($payload->topProdutos) && count($payload->topProdutos) > 0)
+                            @foreach($payload->topProdutos as $key=>$value)
+                            <tr>
+                                <td>
+                                    <a><?= $value->produto; ?></a>
+                                </td>
+                                <td><?= $value->quantidade; ?></td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="2"><h3>Aguardando dados</h3></td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>
