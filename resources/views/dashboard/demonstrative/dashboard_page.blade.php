@@ -106,28 +106,36 @@
                         <div>
                         </div>
                     </div>
+                    @if ((isset($payload->f_pagamentosDia) && count($payload->f_pagamentosDia) > 0)
+                      || (isset($payload->f_pagamentosSemana) && count($payload->f_pagamentosSemana) > 0)
+                      || (isset($payload->f_pagamentosMes) && count($payload->f_pagamentosMes) > 0))
                     <div class="grhpag" id="graficoFormasPagament1o"></div>
                     <div>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            @if (isset($payload->f_pagamentosDia))
+                            @php $isFPagamentoDia = true; @endphp
+                            @if (isset($payload->f_pagamentosDia) && count($payload->f_pagamentosDia) > 0)
                             <li class="nav-item" id="tabDia" role="presentation">
-                                <button class="nav-link active" id="pills-dia-tab" data-toggle="pill" data-target="#f_pagamentosDia" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dia</button>
+                                <button class="nav-link {{ $isFPagamentoDia ? 'active' : '' }}" id="pills-dia-tab" data-toggle="pill" data-target="#f_pagamentosDia" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dia</button>
+                                @php $isFPagamentoDia = false; @endphp
                             </li>
                             @endif
-                            @if (isset($payload->f_pagamentosSemana))
+                            @if (isset($payload->f_pagamentosSemana) && count($payload->f_pagamentosSemana) > 0)
                             <li class="nav-item" id="tabSemana" role="presentation">
-                                <button class="nav-link" id="pills-semana-tab" data-toggle="pill" data-target="#f_pagamentosSemana" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Semana</button>
+                                <button class="nav-link {{ $isFPagamentoDia ? 'active' : '' }}" id="pills-semana-tab" data-toggle="pill" data-target="#f_pagamentosSemana" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Semana</button>
+                                @php $isFPagamentoDia = false; @endphp
                             </li>
                             @endif
-                            @if (isset($payload->f_pagamentosMes))
+                            @if (isset($payload->f_pagamentosMes) && count($payload->f_pagamentosMes) > 0)
                             <li class="nav-item" id="tabMes" role="presentation">
-                                <button class="nav-link" id="pills-mes-tab" data-toggle="pill" data-target="#f_pagamentosMes" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Mês</button>
+                                <button class="nav-link {{ $isFPagamentoDia ? 'active' : '' }}" id="pills-mes-tab" data-toggle="pill" data-target="#f_pagamentosMes" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Mês</button>
+                                @php $isFPagamentoDia = false; @endphp
                             </li>
                             @endif
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
+                            @php $isFPagamentoDiaDiv = true; @endphp
                             @if (isset($payload->f_pagamentosDia))
-                            <div class="tab-pane fade show active" id="f_pagamentosDia" role="tabpanel" aria-labelledby="pills-dia-tab">
+                            <div class="tab-pane fade {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosDia" role="tabpanel" aria-labelledby="pills-dia-tab">
                                 <ul class="list-group list-group-flush">
                                     @php
                                         $total1 = 0;
@@ -146,9 +154,10 @@
                                     </li>
                                 </ul>
                             </div>
+                            @php $isFPagamentoDiaDiv = true; @endphp
                             @endif
                             @if (isset($payload->f_pagamentosSemana))
-                            <div class="tab-pane fade" id="f_pagamentosSemana" role="tabpanel" aria-labelledby="pills-semana-tab">
+                            <div class="tab-pane fade  {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosSemana" role="tabpanel" aria-labelledby="pills-semana-tab">
                                 <ul class="list-group list-group-flush">
                                     @php
                                         $total2 = 0;
@@ -167,9 +176,10 @@
                                     </li>
                                 </ul>
                             </div>
+                            @php $isFPagamentoDiaDiv = false; @endphp
                             @endif
                             @if (isset($payload->f_pagamentosMes))
-                            <div class="tab-pane fade" id="f_pagamentosMes" role="tabpanel" aria-labelledby="pills-mes-tab">
+                            <div class="tab-pane fade  {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosMes" role="tabpanel" aria-labelledby="pills-mes-tab">
                                 <ul class="list-group list-group-flush">
                                     @php
                                         $total3 = 0;
@@ -188,9 +198,13 @@
                                     </li>
                                 </ul>
                             </div>
+                            @php $isFPagamentoDiaDiv = false; @endphp
                             @endif
                         </div>
                     </div>
+                    @else
+                        <h4>Sem dados</h4>
+                    @endif
                 </div>
             </div>
         </div>
@@ -203,28 +217,36 @@
                         <div>
                         </div>
                     </div>
+                    @if ((isset($payload->f_vendedorDia) && count($payload->f_vendedorDia) > 0)
+                      || (isset($payload->f_vendedorSemana) && count($payload->f_vendedorSemana) > 0)
+                      || (isset($payload->f_vendedorMes) && count($payload->f_vendedorMes) > 0))
                     <div class="grhpag"  id="graficoVendedo1r"></div>
                     <div>
+                        @php $isFvendedorDia = true; @endphp
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             @if (isset($payload->f_vendedorDia))
                                 <li class="nav-item" id="tabVendedorDia" role="presentation">
-                                    <button class="nav-link active" id="vendedor-dia-tab" data-toggle="pill" data-target="#f_vendedorDia" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dia</button>
+                                    <button class="nav-link {{ $isFvendedorDia ? 'active' : '' }}" id="vendedor-dia-tab" data-toggle="pill" data-target="#f_vendedorDia" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dia</button>
                                 </li>
+                                @php $isFvendedorDia = false; @endphp
                             @endif
                             @if (isset($payload->f_vendedorSemana))
                                 <li class="nav-item" id="tabVendedorSemana" role="presentation">
-                                    <button class="nav-link" id="vendedor-semana-tab" data-toggle="pill" data-target="#f_vendedorSemana" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Semana</button>
+                                    <button class="nav-link {{ $isFvendedorDia ? 'active' : '' }}" id="vendedor-semana-tab" data-toggle="pill" data-target="#f_vendedorSemana" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Semana</button>
                                 </li>
+                                    @php $isFvendedorDia = false; @endphp
                             @endif
                             @if (isset($payload->f_vendedorMes))
                                 <li class="nav-item" id="tabVendedorMes" role="presentation">
-                                    <button class="nav-link" id="vendedor-mes-tab" data-toggle="pill" data-target="#f_vendedorMes" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Mês</button>
+                                    <button class="nav-link {{ $isFvendedorDia ? 'active' : '' }}" id="vendedor-mes-tab" data-toggle="pill" data-target="#f_vendedorMes" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Mês</button>
                                 </li>
+                                    @php $isFvendedorDia = false; @endphp
                             @endif
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
+                            @php $isFvendedorDiaDiv = true; @endphp
                             @if (isset($payload->f_vendedorDia))
-                                <div class="tab-pane fade show active" id="f_vendedorDia" role="tabpanel" aria-labelledby="vendedor-dia-tab">
+                                <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorDia" role="tabpanel" aria-labelledby="vendedor-dia-tab">
                                     <ul class="list-group list-group-flush">
                                         @php
                                             $total1 = 0;
@@ -243,9 +265,10 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @php $isFvendedorDiaDiv = false; @endphp
                             @endif
                             @if (isset($payload->f_vendedorSemana))
-                                <div class="tab-pane fade" id="f_vendedorSemana" role="tabpanel" aria-labelledby="vendedor-semana-tab">
+                                <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorSemana" role="tabpanel" aria-labelledby="vendedor-semana-tab">
                                     <ul class="list-group list-group-flush">
                                         @php
                                             $total2 = 0;
@@ -264,9 +287,10 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @php $isFvendedorDiaDiv = false; @endphp
                             @endif
                             @if (isset($payload->f_vendedorMes))
-                                <div class="tab-pane fade" id="f_vendedorMes" role="tabpanel" aria-labelledby="vendedor-mes-tab">
+                                <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorMes" role="tabpanel" aria-labelledby="vendedor-mes-tab">
                                     <ul class="list-group list-group-flush">
                                         @php
                                             $total3 = 0;
@@ -285,9 +309,13 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @php $isFvendedorDiaDiv = false; @endphp
                             @endif
                         </div>
                     </div>
+                    @else
+                        <h4>Sem dados</h4>
+                    @endif
                 </div>
             </div>
         </div>
@@ -300,39 +328,47 @@
                         <div>
                         </div>
                     </div>
+                    @if ((isset($payload->f_grupoProdutosDia) && count($payload->f_grupoProdutosDia) > 0)
+                      || (isset($payload->f_grupoProdutosSemana) && count($payload->f_grupoProdutosSemana) > 0)
+                      || (isset($payload->f_grupoProdutosMes) && count($payload->f_grupoProdutosMes) > 0))
                     <div class="grhpag"  id="graficoProduto1s"></div>
                     <div>
+                        @php $isFgrupoProdutosDia = true; @endphp
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            @if (isset($payload->f_grupoProdutosDia))
+                            @if (isset($payload->f_grupoProdutosDia) && (count($payload->f_grupoProdutosDia) > 0))
                                 <li class="nav-item" id="tabProdutosDia" role="presentation">
-                                    <button class="nav-link active" id="produtos-dia-tab" data-toggle="pill" data-target="#f_grupoProdutosDia" type="button" role="tab" aria-controls="produtos-dia-tab" aria-selected="true">Dia</button>
+                                    <button class="nav-link {{ $isFgrupoProdutosDia ? 'active' : '' }}" id="produtos-dia-tab" data-toggle="pill" data-target="#f_grupoProdutosDia" type="button" role="tab" aria-controls="produtos-dia-tab" aria-selected="true">Dia</button>
+                                    @php $isFgrupoProdutosDia = false; @endphp
                                 </li>
                             @endif
-                            @if (isset($payload->f_grupoProdutosSemana))
+                            @if (isset($payload->f_grupoProdutosSemana) && (count($payload->f_grupoProdutosSemana) > 0))
                                 <li class="nav-item" id="tabProdutosSemana" role="presentation">
-                                    <button class="nav-link" id="produtos-semana-tab" data-toggle="pill" data-target="#f_grupoProdutosSemana" type="button" role="tab" aria-controls="produtos-semana-tab" aria-selected="false">Semana</button>
+                                    <button class="nav-link active" id="produtos-semana-tab" data-toggle="pill" data-target="#f_grupoProdutosSemana" type="button" role="tab" aria-controls="produtos-semana-tab" aria-selected="false">Semana</button>
+                                    @php $isFgrupoProdutosDia = false; @endphp
                                 </li>
                             @endif
-                            @if (isset($payload->f_grupoProdutosMes))
+                            @if (isset($payload->f_grupoProdutosMes) && (count($payload->f_grupoProdutosMes) > 0))
                                 <li class="nav-item" id="tabProdutosMes" role="presentation">
-                                    <button class="nav-link" id="produtos-mes-tab" data-toggle="pill" data-target="#f_grupoProdutosMes" type="button" role="tab" aria-controls="produtos-mes-tab" aria-selected="false">Mês</button>
+                                    <button class="nav-link  {{ $isFgrupoProdutosDia ? 'active' : '' }}" id="produtos-mes-tab" data-toggle="pill" data-target="#f_grupoProdutosMes" type="button" role="tab" aria-controls="produtos-mes-tab" aria-selected="false">Mês</button>
+                                    @php $isFgrupoProdutosDia = false; @endphp
                                 </li>
                             @endif
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            @if (isset($payload->f_grupoProdutosDia))
-                                <div class="tab-pane fade show active" id="f_grupoProdutosDia" role="tabpanel" aria-labelledby="produtos-dia-tab">
+                            @php $isFgrupoProdutosDiv = true; @endphp
+                            @if (isset($payload->f_grupoProdutosDia) && (count($payload->f_grupoProdutosDia) > 0))
+                                <div class="tab-pane fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosDia" role="tabpanel" aria-labelledby="produtos-dia-tab">
                                     <ul class="list-group list-group-flush">
                                         @php
                                             $total1 = 0;
                                         @endphp
-                                        @foreach ($payload->f_grupoProdutosDia as $key => $obj)
-                                            <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
+                                            @foreach ($payload->f_grupoProdutosDia as $key => $obj)
+                                                <li class="list-group-item pl-0 pr-0">
+                                                    <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total1 +=$obj->valor;  @endphp
-                                            </li>
-                                        @endforeach
+                                                    @php $total1 +=$obj->valor;  @endphp
+                                                </li>
+                                            @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
                                                 <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total1) }}
@@ -340,20 +376,21 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @php $isFgrupoProdutosDiv = false; @endphp
                             @endif
-                            @if (isset($payload->f_grupoProdutosSemana))
-                                <div class="tab-pane fade" id="f_grupoProdutosSemana" role="tabpanel" aria-labelledby="produtos-semana-tab">
+                            @if (isset($payload->f_grupoProdutosSemana) && (count($payload->f_grupoProdutosSemana) > 0))
+                                <div class="tab-pane  fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosSemana" role="tabpanel" aria-labelledby="produtos-semana-tab">
                                     <ul class="list-group list-group-flush">
                                         @php
                                             $total2 = 0;
                                         @endphp
-                                        @foreach ($payload->f_grupoProdutosSemana as $key => $obj)
-                                            <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
+                                            @foreach ($payload->f_grupoProdutosSemana as $key => $obj)
+                                                <li class="list-group-item pl-0 pr-0">
+                                                    <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total2 +=$obj->valor;  @endphp
-                                            </li>
-                                        @endforeach
+                                                    @php $total2 +=$obj->valor;  @endphp
+                                                </li>
+                                            @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
                                                 <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total2) }}
@@ -361,20 +398,21 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @php $isFgrupoProdutosDiv = false; @endphp
                             @endif
-                            @if (isset($payload->f_grupoProdutosMes))
-                                <div class="tab-pane fade" id="f_grupoProdutosMes" role="tabpanel" aria-labelledby="produtos-mes-tab">
+                            @if (isset($payload->f_grupoProdutosMes) && count($payload->f_grupoProdutosMes) > 0)
+                                <div class="tab-pane  fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosMes" role="tabpanel" aria-labelledby="produtos-mes-tab">
                                     <ul class="list-group list-group-flush">
                                         @php
                                             $total3 = 0;
                                         @endphp
-                                        @foreach ($payload->f_grupoProdutosMes as $key => $obj)
-                                            <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
+                                            @foreach ($payload->f_grupoProdutosMes as $key => $obj)
+                                                <li class="list-group-item pl-0 pr-0">
+                                                    <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
 
-                                                @php $total3 +=$obj->valor;  @endphp
-                                            </li>
-                                        @endforeach
+                                                    @php $total3 +=$obj->valor;  @endphp
+                                                </li>
+                                            @endforeach
                                         <li>
                                             <p style="margin-top:20px;" class="text-center">
                                                 <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney($total3) }}
@@ -382,9 +420,13 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @php $isFgrupoProdutosDiv = false; @endphp
                             @endif
                         </div>
                     </div>
+                    @else
+                    <h4>Sem dados</h4>
+                    @endif
                 </div>
             </div>
         </div>
