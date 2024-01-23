@@ -154,7 +154,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            @php $isFPagamentoDiaDiv = true; @endphp
+                            @php $isFPagamentoDiaDiv = false; @endphp
                             @endif
                             @if (isset($payload->f_pagamentosSemana))
                             <div class="tab-pane fade  {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosSemana" role="tabpanel" aria-labelledby="pills-semana-tab">
