@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Demostrative;
+use App\Handlers\PayloadHandler;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class DemonstrativeController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
@@ -22,7 +22,7 @@ class DemonstrativeController extends Controller
 
     private function securityApi(Demostrative $demonstrative)
     {
-        if (Auth()->user()->isAdministratorUser() && $demonstrative->enterprise->user->id != Auth::id())
+        if (!Auth()->user()->isAdministratorUser() || ($demonstrative->enterprise->user->id != Auth::id()))
         {
             Auth::logout();
 
@@ -40,9 +40,7 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
-        $this->securityApi($demonstrative);
-
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.dashboard_page')
             ->with('show', true)
@@ -62,7 +60,7 @@ class DemonstrativeController extends Controller
 
         $this->securityApi($demonstrative);
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.contas_a_pagar_page')
             ->with('show', true)
@@ -81,7 +79,7 @@ class DemonstrativeController extends Controller
 
         $this->securityApi($demonstrative);
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.contas_a_receber_page')
             ->with('show', true)
@@ -101,7 +99,7 @@ class DemonstrativeController extends Controller
 
         $this->securityApi($demonstrative);
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.caixas_abertos_page')
             ->with('show', true)
@@ -121,7 +119,7 @@ class DemonstrativeController extends Controller
 
         $this->securityApi($demonstrative);
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.minhas_vendas_page')
             ->with('show', true)
@@ -141,7 +139,7 @@ class DemonstrativeController extends Controller
 
         $this->securityApi($demonstrative);
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.vendedores_page')
             ->with('show', true)

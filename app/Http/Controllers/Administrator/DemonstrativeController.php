@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Demostrative;
+use App\Handlers\PayloadHandler;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.dashboard_page')
             ->with('show', true)
@@ -46,7 +47,7 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.contas_a_pagar_page')
             ->with('show', true)
@@ -63,7 +64,7 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.contas_a_receber_page')
             ->with('show', true)
@@ -81,7 +82,7 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.caixas_abertos_page')
             ->with('show', true)
@@ -99,7 +100,7 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.minhas_vendas_page')
             ->with('show', true)
@@ -117,7 +118,7 @@ class DemonstrativeController extends Controller
             return redirect()->route("env_ctm");
         }
 
-        $sanitize = json_decode($demonstrative->sanitize());
+        $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.vendedores_page')
             ->with('show', true)

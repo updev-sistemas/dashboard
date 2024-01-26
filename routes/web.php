@@ -89,3 +89,5 @@ Route::get('/home', function() {
         return redirect()->to('login');
     }
 });
+
+Route::get('/a/b/c/d', 'HomeController@test');
