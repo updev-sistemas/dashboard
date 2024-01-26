@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Handlers\PayloadHandler;
 use Illuminate\Database\Eloquent\Model;
 
 class Demostrative extends Model
@@ -34,14 +35,7 @@ class Demostrative extends Model
 
     public function sanitize()
     {
-        if ((substr($this->payload, 1) == '\'') ||
-            (substr($this->payload, 1) == '"') ||
-            (substr($this->payload, -1) == '\'') ||
-            (substr($this->payload, -1) == '"')) {
-            $payload = substr($this->payload, 1);
-            return substr($payload, 0, -1);
-        }
-
-        return $this->payload;
+        $ph = new PayloadHandler();
+        return json_decode($this->payload);
     }
 }
