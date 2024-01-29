@@ -35,7 +35,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Hoje</p>
-                                    <h2 id="pagarPagas" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->contasPagar->pagasAtual ?? 0) }}</h2>
+                                    <h2 id="pagarPagas" class="font-weight-bold"><span id="ContasAPagarpagasAtual">0</span></h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -56,7 +56,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Próximos 7 dias</p>
-                                    <h2 id="pagarPendentes" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->contasPagar->pendentesAtual ?? 0) }}</h2>
+                                    <h2 id="pagarPendentes" class="font-weight-bold"><span id="ContasAPagarpendentesAtual">0</span></h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -77,7 +77,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Mês</p>
-                                    <h2 id="pagarVencidas" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->contasPagar->vencidasAtual ?? 0) }}</h2>
+                                    <h2 id="pagarVencidas" class="font-weight-bold"><span id="ContasAPagarvencidasAtual">0</span></h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -143,9 +143,51 @@
     <script>
         $(function() {
 
-            function graficoContaPagarMountGraph()
-            {
+            const ordemMeses = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
+            function ConvertToMoney(data) {
+                const result =  data.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+
+                return result;
+            }
+
+            function fillCadastros(data)
+            {
+                $("#CadastroNumeroClientes").html(data.clientes ?? 0);
+                $("#CadastroNumeroProdutos").html(data.produtos ?? 0);
+                $("#CadastroNumeroFornecedores").html(data.fornecedores ?? 0);
+                $("#CadastroNumeroUsuarios").html(data.usuarios ?? 0);
+            }
+
+            function fillBadges(data)  {
+                const pa = ConvertToMoney(data.pagasAtual ?? 0);
+                $("#ContasAPagarpagasAtual").html(pa);
+
+                const pda = ConvertToMoney(data.pendentesAtual ?? 0);
+                $("#ContasAPagarpendentesAtual").html(pda);
+
+                const pv = ConvertToMoney(data.vencidasAtual ?? 0);
+                $("#ContasAPagarvencidasAtual").html(pv);
+            }
+
+            function historicoContasMountGraph(data)
+            {
+                const contasPagar_Receber = [];
+                ordemMeses.forEach(mes => {
+                    if (data.receber.hasOwnProperty(mes)) {
+                        contasPagar_Receber.push(parseFloat(data.receber[mes]));
+                    }
+                });
+
+                const contasPagar_Recebidas = [];
+                ordemMeses.forEach(mes => {
+                    if (data.recebidas.hasOwnProperty(mes)) {
+                        contasPagar_Recebidas.push(parseFloat(data.recebidas[mes]));
+                    }
+                });
                 var options = {
                     chart: {
                         type: 'bar',
@@ -158,37 +200,11 @@
                         }
                     },
                     series: [{
-                        name: 'Pagas',
-                        data: [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->agosto ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->outubro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pagas->dezembro ?? 0) }}
-                        ]
+                        name: 'À Receber',
+                        data: contasPagar_Receber
                     }, {
-                        name: 'Pendentes',
-                        data: [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->agosto ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->outubro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasPagar->pendendentes->dezembro ?? 0) }}
-                        ]
+                        name: 'Recebidas',
+                        data: contasPagar_Recebidas
                     }],
                     colors: [colors.secondary, colors.info],
                     plotOptions: {
@@ -225,8 +241,18 @@
                 chart.render();
             }
 
-            graficoContaPagarMountGraph();
+            function Run()
+            {
+                let payload = JSON.parse('{!! json_encode($payload)  !!}');
+                console.log(payload);
 
+                fillCadastros(payload.cadastros);
+                fillBadges(payload.contasPagar);
+
+                historicoContasMountGraph(payload.contasPagar)
+            }
+
+            Run();
         });
     </script>
 @endsection
