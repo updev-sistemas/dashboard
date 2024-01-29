@@ -23,8 +23,8 @@
             </ol>
         </nav>
     </div>
-    <div class="row">
-        <div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
             @if (isset($payload->caixasAbertos))
                 @foreach($payload->caixasAbertos as $key => $caixa)
 
@@ -50,32 +50,67 @@
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
                                                 <span>Data abertura:</span>
-                                                <span>{{ $caixa->dataAbertura }}</span>
+                                                <span>{{ $caixa->dataabertura ?? '' }}</span>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
                                                 <span>Hora abertura:</span>
-                                                <span>{{ $caixa->horaAbertura }}</span>
+                                                <span>{{ $caixa->horaabertura ?? '' }}</span>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
                                                 <span>Saldo inicial:</span>
-                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->saldoInicial ?? 0) }}</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
-                                                <span>Total Suprimentos:</span>
-                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->Entradas ?? 0) }}</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
-                                                <span>Total Sangrias:</span>
-                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->saidas ?? 0) }}</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->saldoinicial ?? 0) }}</span>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
                                                 <span>Saldo atual:</span>
-                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->saldoAtual ?? 0) }}</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->saldoatual ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>PIX:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->pix ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>fechamento:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->fechamento ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>Dinheiro 1:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->dinheiro1 ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>Digital:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->digital ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>Crédito:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->credito ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>Cheque:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->cheque ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>Cashback:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->cashback ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>Cartão:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->cartao ?? 0) }}</span>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                                <span>Saldo atual:</span>
+                                                <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($caixa->saldoatual ?? 0) }}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -84,7 +119,7 @@
                         </div>
                     </div>
 
-           @endforeach
+               @endforeach
            @else
             <h3>Aguardando dados.</h3>
            @endif

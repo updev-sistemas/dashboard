@@ -25,6 +25,7 @@
     </div>
         <div class="container-fluid">
             @if (isset($payload->lucrosPresumidos->relatorioVendas->vendasUsuarios))
+                <div class="row">
                 @foreach(collect($payload->lucrosPresumidos->relatorioVendas->vendasUsuarios) as $key => $user)
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <div class="card">
@@ -38,7 +39,7 @@
                                     </figure>
                                 </div>
                                 <div>
-                                    <a>{{ $user->usuario }}</a>
+                                    <a>{{ $user->usuario ?? 0 }}</a>
                                     <p class="text-muted">Usuário</p>
                                 </div>
                             </div>
@@ -47,7 +48,7 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
                                             <span>Total em vendas:</span>
-                                            <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($user->totalVendas ?? 0) }}
+                                            <span>{{ App\Utils\Commons\FormatDataUtil::FormatMoney($user->totalvendas ?? 0) }}
                                                 </span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
@@ -57,25 +58,26 @@
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
                                             <span>Quantidade de vendas:</span>
-                                            <span>{{ $user->quantidadeVendas }}</span>
+                                            <span>{{ $user->quantidadevendas ?? 0 }}</span>
                                         </li>
+
+                                        <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
+                                            <span>Vendas Canceladas:</span>
+                                            <span>{{ $user->vendascanceladas  ?? 0 }}</span>
+                                        </li>
+
                                         <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
                                             <span>Produtos vendidos:</span>
-                                            <span>{{ $user->quantidadeProdutos }}</span>
+                                            <span>{{ $user->quantidadeprodutos ?? 0 }}</span>
                                         </li>
-
-                                        <li class="list-group-item d-flex justify-content-between pl-0 pr-0">
-                                            <span>Tempo médio de atendimento:</span>
-                                            <span>{{ $user->tempoAtendimento }}</span>
-                                        </li>
-
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-              @endforeach
+                @endforeach
+                </div>
             @else
             <h3>Aguardando dados.</h3>
             @endif
@@ -84,5 +86,12 @@
 @endsection
 
 @section('script')
+    <script type="text/javascript">
+        function Run() {
+            let payload = JSON.parse('{!! json_encode($payload)  !!}');
+            console.log(payload);
+        }
 
+        Run();
+    </script>
 @endsection

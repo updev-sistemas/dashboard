@@ -78,7 +78,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Tempo Medio de Atendimento</p>
-                                    <h2 id="medioAtendimentos" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->TempoMedioAtendimento ?? 0 }}</h2>
+                                    <h2 id="medioAtendimentos" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->tempoMedioAtendimento ?? 0 }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -100,7 +100,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Total Venda Mês</p>
-                                    <h2 id="quantidadeProdutosCancelados"  class="font-weight-bold">{{App\Utils\Commons\FormatDataUtil::FormatMoney( $payload->lucrosPresumidos->relatorioVendas->canceladas->QuantidadeProdutosPerdidos ?? 0 ) }}</h2>
+                                    <h2 id="quantidadeProdutosCancelados"  class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->quantidadeVendas ?? 0 }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -122,7 +122,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Ticket médio Mês</p>
-                                    <h2 id="ticketmedio" class="font-weight-bold">{{App\Utils\Commons\FormatDataUtil::FormatMoney( $payload->lucrosPresumidos->relatorioVendas->concluidas->TicketMedio ?? 0 )}}</h2>
+                                    <h2 id="ticketmedio" class="font-weight-bold">{{App\Utils\Commons\FormatDataUtil::FormatMoney( $payload->lucrosPresumidos->relatorioVendas->concluidas->ticketMedio ?? 0 )}}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -143,8 +143,8 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
-                                    <p class="text-muted">Total em descontos Mês</p>
-                                    <h2  id="totalDescontos" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->totalDescontos ?? 0) }}</h2>
+                                    <p class="text-muted">Valor Vendas Mês</p>
+                                    <h2  id="totalDescontos" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->lucrosPresumidos->relatorioVendas->concluidas->valorVendas ?? 0) }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -166,7 +166,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Quantidade de produtos vendidos Mês</p>
-                                    <h2 id="produtosVendidos" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->QuantidadeProdutosVendidos ?? 0 }}</h2>
+                                    <h2 id="produtosVendidos" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->quantidadeProdutosVendidos ?? 0 }}</h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -273,10 +273,80 @@
     </div>
 
     <script src="{{ url('assets/js/defines.js') }}"></script>
-    <script>
+    <script type="text/javascript">
+
+
         $(function() {
 
-            function graficoLucrosMountGraph()
+            function graficoLucrosMountGraph(data)
+            {
+                const lucrosPresumidos_ganhos = [];
+                ordemMeses.forEach(mes => {
+                    if (data.ganhos.hasOwnProperty(mes)) {
+                        lucrosPresumidos_ganhos.push(parseFloat(data.ganhos[mes]));
+                    }
+                });
+
+                const lucrosPresumidos_perdidos = [];
+                ordemMeses.forEach(mes => {
+                    if (data.perdidos.hasOwnProperty(mes)) {
+                        lucrosPresumidos_perdidos.push(parseFloat(data.perdidos[mes]));
+                    }
+                });
+                var options = {
+                    chart: {
+                        type: 'bar',
+                        fontFamily: "Inter",
+                        offsetX: -18,
+                        height: 312,
+                        width: '103%',
+                        toolbar: {
+                            show: false
+                        }
+                    },
+                    series: [{
+                        name: 'Ganhos',
+                        data: lucrosPresumidos_ganhos
+                    }, {
+                        name: 'Perdidos',
+                        data: lucrosPresumidos_perdidos
+                    }],
+                    colors: [colors.secondary, colors.info],
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '50%',
+                            endingShape: 'rounded'
+                        },
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        show: true,
+                        width: 8,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set','Out','Nov','Dez'],
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    legend: {
+                        position: "top",
+                    }
+                };
+
+                var chart = new ApexCharts(
+                    document.querySelector("#graficoLucros"),
+                    options
+                );
+
+                chart.render();
+            }
+
+            function graficoLucros2MountGraph()
             {
                 var options = {
                     chart: {
@@ -357,8 +427,16 @@
                 chart.render();
             }
 
-            graficoLucrosMountGraph()
+            const ordemMeses = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
+            function Run() {
+                let payload = JSON.parse('{!! json_encode($payload)  !!}');
+                console.log(payload);
+
+                graficoLucrosMountGraph(payload.lucrosPresumidos);
+            }
+
+            Run();
         });
     </script>
 @endsection
