@@ -33,7 +33,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Hoje</p>
-                                    <h2 id="receberPagas" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->contasReceber->pagasAtual ?? 0) }}</h2>
+                                    <h2 id="receberPagas" class="font-weight-bold"><span id="ContasReceberPagasAtual"></span></h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -54,7 +54,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Próximos 7 Dias</p>
-                                    <h2 id="receberPendentes" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->contasReceber->pendentesAtual ?? 0) }}</h2>
+                                    <h2 id="receberPendentes" class="font-weight-bold"><span id="ContasReceberPendentesAtual"></span></h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -75,7 +75,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <p class="text-muted">Mês</p>
-                                    <h2 id="receberVencidos" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->contasReceber->vencidasAtual ?? 0) }}</h2>
+                                    <h2 id="receberVencidos" class="font-weight-bold"><span id="ContasReceberVencidasAtual"></span></h2>
                                 </div>
                                 <div>
                                     <figure class="avatar">
@@ -140,8 +140,51 @@
     <script>
         $(function() {
 
-            function graficoContaReceberMountGraph()
+            const ordemMeses = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+            function ConvertToMoney(data) {
+                const result =  data.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+
+                return result;
+            }
+
+            function fillCadastros(data)
             {
+                $("#CadastroNumeroClientes").html(data.clientes ?? 0);
+                $("#CadastroNumeroProdutos").html(data.produtos ?? 0);
+                $("#CadastroNumeroFornecedores").html(data.fornecedores ?? 0);
+                $("#CadastroNumeroUsuarios").html(data.usuarios ?? 0);
+            }
+
+            function fillBadges(data)  {
+                const pa = ConvertToMoney(data.pagasAtual ?? 0);
+                $("#ContasReceberPagasAtual").html(pa);
+
+                const pda = ConvertToMoney(data.pendentesAtual ?? 0);
+                $("#ContasReceberPendentesAtual").html(pda);
+
+                const pv = ConvertToMoney(data.vencidasAtual ?? 0);
+                $("#ContasReceberVencidasAtual").html(pv);
+            }
+
+            function historicoContasMountGraph(data)
+            {
+                const contasPagar_Receber = [];
+                ordemMeses.forEach(mes => {
+                    if (data.receber.hasOwnProperty(mes)) {
+                        contasPagar_Receber.push(parseFloat(data.receber[mes]));
+                    }
+                });
+
+                const contasPagar_Recebidas = [];
+                ordemMeses.forEach(mes => {
+                    if (data.recebidas.hasOwnProperty(mes)) {
+                        contasPagar_Recebidas.push(parseFloat(data.recebidas[mes]));
+                    }
+                });
                 var options = {
                     chart: {
                         type: 'bar',
@@ -154,38 +197,11 @@
                         }
                     },
                     series: [{
-                        name: 'A Receber',
-                        data: [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->agosto ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->outubro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->receber->dezembro ?? 0) }}
-                        ]
-                    },
-                    {
-                        name: 'Recebidos',
-                        data: [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->agosto ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->outubro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->contasReceber->recebidas->dezembro ?? 0) }}
-                        ]
+                        name: 'À Receber',
+                        data: contasPagar_Receber
+                    }, {
+                        name: 'Recebidas',
+                        data: contasPagar_Recebidas
                     }],
                     colors: [colors.secondary, colors.info],
                     plotOptions: {
@@ -222,7 +238,18 @@
                 chart.render();
             }
 
-            graficoContaReceberMountGraph();
+            function Run()
+            {
+                let payload = JSON.parse('{!! json_encode($payload)  !!}');
+                console.log(payload);
+
+                fillCadastros(payload.cadastros);
+                fillBadges(payload.contasReceber);
+
+                historicoContasMountGraph(payload.contasReceber)
+            }
+
+            Run();
 
 
         });
