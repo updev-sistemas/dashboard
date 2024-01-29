@@ -22,12 +22,12 @@ class DemonstrativeController extends Controller
 
     private function securityApi(Demostrative $demonstrative)
     {
-        if (!Auth()->user()->isAdministratorUser() || ($demonstrative->enterprise->user->id != Auth::id()))
+        if (!Auth()->user()->isAdministratorUser() && ($demonstrative->enterprise->user->id != Auth::id()))
         {
-            Auth::logout();
+            # Auth::logout();
 
             // Disparar email avisando administrador
-            return redirect()->to('login');
+            # return redirect()->to('login');
         }
     }
 

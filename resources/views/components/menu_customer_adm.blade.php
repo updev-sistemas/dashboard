@@ -24,7 +24,7 @@
             </div>
             <div>
                 <h6>Clientes</h6>
-                <h4 id="numeroClientes" class="mb-0 font-weight-bold">{{ $payload->cadastros->clientes ?? 0 }}</h4>
+                <h4 id="numeroClientes" class="mb-0 font-weight-bold"><span id="CadastroNumeroClientes">0</span></h4>
             </div>
         </a>
     </li>
@@ -37,7 +37,7 @@
             </div>
             <div>
                 <h6>Produtos</h6>
-                <h4 id="numeroProdutos" class="mb-0">{{ $payload->cadastros->produtos ?? 0 }}</h4>
+                <h4 id="numeroProdutos" class="mb-0"><span id="CadastroNumeroProdutos">0</span></h4>
             </div>
         </a>
     </li>
@@ -50,7 +50,7 @@
             </div>
             <div>
                 <h6>Fornecedores</h6>
-                <h4 id="numeroFornecedores" class="mb-0">{{ $payload->cadastros->fornecedores ?? 0 }}</h4>
+                <h4 id="numeroFornecedores" class="mb-0"><span id="CadastroNumeroFornecedores">0</span></h4>
             </div>
         </a>
     </li>
@@ -63,7 +63,7 @@
             </div>
             <div>
                 <h6>Usuários</h6>
-                <h4 id="numeroUsuarios" class="mb-0">{{ $payload->cadastros->usuarios ?? 0 }}</h4>
+                <h4 id="numeroUsuarios" class="mb-0"><span id="CadastroNumeroUsuarios">0</span></h4>
             </div>
         </a>
     </li>
