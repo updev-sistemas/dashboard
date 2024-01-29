@@ -249,7 +249,8 @@
                 fillCadastros(payload.cadastros);
                 fillBadges(payload.contasPagar);
 
-                historicoContasMountGraph(payload.contasPagar)
+                historicoContasMountGraph(payload.contasPagar);
+                fillCadastros(payload.cadastros);
             }
 
             Run();

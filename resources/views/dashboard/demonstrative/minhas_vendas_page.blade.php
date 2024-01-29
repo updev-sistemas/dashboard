@@ -278,6 +278,14 @@
 
         $(function() {
 
+            function fillCadastros(data)
+            {
+                $("#CadastroNumeroClientes").html(data.clientes ?? 0);
+                $("#CadastroNumeroProdutos").html(data.produtos ?? 0);
+                $("#CadastroNumeroFornecedores").html(data.fornecedores ?? 0);
+                $("#CadastroNumeroUsuarios").html(data.usuarios ?? 0);
+            }
+
             function graficoLucrosMountGraph(data)
             {
                 const lucrosPresumidos_ganhos = [];
@@ -434,6 +442,7 @@
                 console.log(payload);
 
                 graficoLucrosMountGraph(payload.lucrosPresumidos);
+                fillCadastros(payload.cadastros);
             }
 
             Run();

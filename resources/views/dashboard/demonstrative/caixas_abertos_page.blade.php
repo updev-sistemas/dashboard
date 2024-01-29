@@ -129,5 +129,25 @@
 @endsection
 
 @section('script')
+<script>
+    $(function(){
 
+        function fillCadastros(data)
+        {
+            $("#CadastroNumeroClientes").html(data.clientes ?? 0);
+            $("#CadastroNumeroProdutos").html(data.produtos ?? 0);
+            $("#CadastroNumeroFornecedores").html(data.fornecedores ?? 0);
+            $("#CadastroNumeroUsuarios").html(data.usuarios ?? 0);
+        }
+
+        function Run() {
+            let payload = JSON.parse('{!! json_encode($payload)  !!}');
+            console.log(payload);
+
+            fillCadastros(payload.cadastros);
+        }
+
+        Run();
+    });
+</script>
 @endsection
