@@ -545,7 +545,6 @@
                 return result;
             }
 
-
             function montaGraficoPizza(telem, tlabel, tseries)
             {
                 const options = {
@@ -1090,12 +1089,6 @@
                 fillVendendor(payload.vendedor);
 
                 fillGrupoProdutos(payload.grupoProdutos);
-
-
-                // gerenciarGraficosPizzasPagamentos(payload.pagamentos);
-
-                // gerenciarGraficosPizzasGrupoProdutos(payload.grupoProdutos);
-
             }
 
             Run();
