@@ -21,6 +21,28 @@ class DemonstrativeApiController extends Controller
         parent::__construct();
     }
 
+    public function getPayload($storeId, Request $request)
+    {
+        try
+        {
+            $id = decrypt($storeId);
+            $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->first();
+
+            if ($demonstrative == null) {
+                throw new \Exception("Demonstrativos da Empresa {$id} não foi localizado.");
+            }
+
+            $sanitize = $demonstrative->sanitize();
+
+            return response(json_encode($sanitize), 200);
+        }
+        catch (\Exception $e)
+        {
+            return response(['status' => 'error', 'message' => $e->getMessage()], 400);
+        }
+    }
+
+
     public function registerAlt(Request $request)
     {
 
@@ -87,7 +109,6 @@ class DemonstrativeApiController extends Controller
             $data = $request->all();
             $ph = new PayloadHandler();
             $objectMounted = $ph->handler($data);
-
             if ($objectMounted == null) {
                 return response([
                     'status' => 'Error',

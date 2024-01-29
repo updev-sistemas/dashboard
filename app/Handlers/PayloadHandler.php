@@ -499,7 +499,11 @@ class PayloadHandler
                 return null;
             }
             else {
-                return Cadastros::create(0,0,0,0);
+                return Cadastros::create(
+                    $cadastros['produtos'],
+                    $cadastros['clientes'],
+                    $cadastros['usuarios'],
+                    $cadastros['fornecedores']);
             }
         }
         catch (\Exception $e)

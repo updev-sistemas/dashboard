@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <div class="page-header">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -22,72 +23,70 @@
         </nav>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-lg-4 col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted">Vendas Hoje</p>
-                                    <h2  id="totalVendas2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.$payload->lucrosPresumidos->relatorioVendas->concluidas->valorVendas ?? 0)) }}</h2>
-                                </div>
-                                <div>
-                                    <figure class="avatar">
-                                        <img src="{{ url('assets/media/image/user/money_bag.png') }}" alt="Uma imagem impressionante">
-                                    </figure>
-                                </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-muted">Vendas Hoje</p>
+                                <h2  id="totalVendas2" class="font-weight-bold"><span id="lucrosPresumidosValorVendas">0</span></h2>
                             </div>
-                            <div class="d-inline-flex align-items-center">
-                                <span class="text-success d-inline-flex align-items-center mr-2">
+                            <div>
+                                <figure class="avatar">
+                                    <img src="{{ url('assets/media/image/user/money_bag.png') }}" alt="Valor de Vendas">
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="d-inline-flex align-items-center">
+                            <span class="text-success d-inline-flex align-items-center mr-2">
                                 <p  id="mesAno" class="text-muted">Mês atual</p>
-                                </span>
-                            </div>
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted">Qtd de vendas Hoje</p>
-                                    <h2 id="quantidadeVendas2" class="font-weight-bold">{{ $payload->lucrosPresumidos->relatorioVendas->concluidas->quantidadeVendas ?? 0 }}</h2>
-                                </div>
-                                <div>
-                                    <figure class="avatar">
-                                        <img src="{{ url('assets/media/image/user/quanVendas.png') }}">
-                                    </figure>
-                                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-muted">Qtd de vendas Hoje</p>
+                                <h2 id="quantidadeVendas2" class="font-weight-bold"><span id="lucrosPresumidosQuantidadeVendas">0</span></h2>
                             </div>
-                            <div class="d-inline-flex align-items-center">
-                                <span class="text-danger d-inline-flex align-items-center mr-2">
+                            <div>
+                                <figure class="avatar">
+                                    <img src="{{ url('assets/media/image/user/quanVendas.png') }}">
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="d-inline-flex align-items-center">
+                            <span class="text-danger d-inline-flex align-items-center mr-2">
                                 <p  id="mesAnoQuantidadeVendas" class="text-muted">Mês atual</p>
-                                </span>
-                            </div>
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between mb-3">
-                                <div>
-                                    <p class="text-muted">Ticket Médio</p>
-                                    <h2 id="meusLucros2" class="font-weight-bold">{{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.$payload->lucrosPresumidos->relatorioVendas->concluidas->totalLucros ?? 0)) }}</h2>
-                                </div>
-                                <div>
-                                    <figure class="avatar">
-                                        <img src="{{ url('assets/media/image/user/lucros.png') }}">
-                                    </figure>
-                                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <p class="text-muted">Ticket Médio</p>
+                                <h2 id="meusLucros2" class="font-weight-bold"><span id="lucrosPresumidosTotalLucros">0</span></h2>
                             </div>
-                            <div class="d-inline-flex align-items-center">
-                                <span class="text-success d-inline-flex align-items-center mr-2">
+                            <div>
+                                <figure class="avatar">
+                                    <img src="{{ url('assets/media/image/user/lucros.png') }}">
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="d-inline-flex align-items-center">
+                            <span class="text-success d-inline-flex align-items-center mr-2">
                                 <p id="lucrosUpdate"  class="text-muted"></p>
-                                </span>
-                            </div>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -95,394 +94,415 @@
         </div>
     </div>
 
-
-    <div class="row">
-
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title">Formas de pagamento Hoje</h6>
-                        <div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-title">Fluxo do caixa Anual</h6>
                         </div>
-                    </div>
-                    @if ((isset($payload->f_pagamentosDia) && count($payload->f_pagamentosDia) > 0)
-                      || (isset($payload->f_pagamentosSemana) && count($payload->f_pagamentosSemana) > 0)
-                      || (isset($payload->f_pagamentosMes) && count($payload->f_pagamentosMes) > 0))
-                    <div class="grhpag" id="graficoFormasPagament1o"></div>
-                    <div>
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            @php $isFPagamentoDia = true; @endphp
-                            @if (isset($payload->f_pagamentosDia) && count($payload->f_pagamentosDia) > 0)
-                            <li class="nav-item" id="tabDia" role="presentation">
-                                <button class="nav-link {{ $isFPagamentoDia ? 'active' : '' }}" id="pills-dia-tab" data-toggle="pill" data-target="#f_pagamentosDia" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dia</button>
-                                @php $isFPagamentoDia = false; @endphp
-                            </li>
-                            @endif
-                            @if (isset($payload->f_pagamentosSemana) && count($payload->f_pagamentosSemana) > 0)
-                            <li class="nav-item" id="tabSemana" role="presentation">
-                                <button class="nav-link {{ $isFPagamentoDia ? 'active' : '' }}" id="pills-semana-tab" data-toggle="pill" data-target="#f_pagamentosSemana" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Semana</button>
-                                @php $isFPagamentoDia = false; @endphp
-                            </li>
-                            @endif
-                            @if (isset($payload->f_pagamentosMes) && count($payload->f_pagamentosMes) > 0)
-                            <li class="nav-item" id="tabMes" role="presentation">
-                                <button class="nav-link {{ $isFPagamentoDia ? 'active' : '' }}" id="pills-mes-tab" data-toggle="pill" data-target="#f_pagamentosMes" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Mês</button>
-                                @php $isFPagamentoDia = false; @endphp
-                            </li>
-                            @endif
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                            @php $isFPagamentoDiaDiv = true; @endphp
-                            @if (isset($payload->f_pagamentosDia))
-                            <div class="tab-pane fade {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosDia" role="tabpanel" aria-labelledby="pills-dia-tab">
-                                <ul class="list-group list-group-flush">
-                                    @foreach ($payload->f_pagamentosDia as $key => $obj)
-                                    <li class="list-group-item pl-0 pr-0">
-                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-                                    </li>
-                                    @endforeach
-                                    <li>
-                                        <p style="margin-top:20px;" class="text-center">
-                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_pagamentosDia)->sum('valor'))) }}
-                                        </p>
-                                    </li>
-                                </ul>
+                        <p id="saldosUpdate" class="text-muted"></p>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-circle text-primary mr-2"></i>
+                                    <div>
+                                        <h4 id="entradacaixaAtual" class="font-weight-bold line-height-18"><span id="caixaEntradaAtual"></span></h4>
+                                        <div class="text-muted">Entradas</div>
+                                    </div>
+                                </div>
                             </div>
-                            @php $isFPagamentoDiaDiv = false; @endphp
-                            @endif
-                            @if (isset($payload->f_pagamentosSemana))
-                            <div class="tab-pane fade  {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosSemana" role="tabpanel" aria-labelledby="pills-semana-tab">
-                                <ul class="list-group list-group-flush">
-                                    @foreach ($payload->f_pagamentosSemana as $key => $obj)
-                                    <li class="list-group-item pl-0 pr-0">
-                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-                                    </li>
-                                    @endforeach
-                                    <li>
-                                        <p style="margin-top:20px;" class="text-center">
-                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_pagamentosSemana)->sum('valor'))) }}
-                                        </p>
-                                    </li>
-                                </ul>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-circle text-secondary mr-2"></i>
+                                    <div>
+                                        <h4 id="saidacaixaAtual"  class="font-weight-bold line-height-18"><span id="caixaSaidaAtual"></span></h4>
+                                        <div class="text-muted">Saídas</div>
+                                    </div>
+                                </div>
                             </div>
-                            @php $isFPagamentoDiaDiv = false; @endphp
-                            @endif
-                            @if (isset($payload->f_pagamentosMes))
-                            <div class="tab-pane fade  {{ $isFPagamentoDiaDiv ? 'show active' : '' }}" id="f_pagamentosMes" role="tabpanel" aria-labelledby="pills-mes-tab">
-                                <ul class="list-group list-group-flush">
-                                    @foreach ($payload->f_pagamentosMes as $key => $obj)
-                                    <li class="list-group-item pl-0 pr-0">
-                                        <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-                                    </li>
-                                    @endforeach
-                                    <li>
-                                        <p style="margin-top:20px;" class="text-center">
-                                            <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_pagamentosMes)->sum('valor'))) }}
-                                        </p>
-                                    </li>
-                                </ul>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-circle text-success mr-2"></i>
+                                    <div>
+                                        <h4 id="saldocaixaAtual" class="font-weight-bold line-height-18"><span id="caixaSaldoAtual"></span></h4>
+                                        <div class="text-muted">Saldo</div>
+                                    </div>
+                                </div>
                             </div>
-                            @php $isFPagamentoDiaDiv = false; @endphp
-                            @endif
                         </div>
+                        <div id="graficoCaixa"></div>
                     </div>
-                    @else
-                        <h4>Aguardando <dados class=""></dados></h4>
-                    @endif
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title">Resumo vendas por vendedor</h6>
-                        <div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex mb-2 mb-sm-0 justify-content-between">
+                            <h6 class="card-title">Pagamentos</h6>
                         </div>
-                    </div>
-                    @if ((isset($payload->f_vendedorDia) && count($payload->f_vendedorDia) > 0)
-                      || (isset($payload->f_vendedorSemana) && count($payload->f_vendedorSemana) > 0)
-                      || (isset($payload->f_vendedorMes) && count($payload->f_vendedorMes) > 0))
-                    <div class="grhpag"  id="graficoVendedo1r"></div>
-                    <div>
-                        @php $isFvendedorDia = true; @endphp
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            @if (isset($payload->f_vendedorDia))
-                                <li class="nav-item" id="tabVendedorDia" role="presentation">
-                                    <button class="nav-link {{ $isFvendedorDia ? 'active' : '' }}" id="vendedor-dia-tab" data-toggle="pill" data-target="#f_vendedorDia" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Dia</button>
-                                </li>
-                                @php $isFvendedorDia = false; @endphp
-                            @endif
-                            @if (isset($payload->f_vendedorSemana))
-                                <li class="nav-item" id="tabVendedorSemana" role="presentation">
-                                    <button class="nav-link {{ $isFvendedorDia ? 'active' : '' }}" id="vendedor-semana-tab" data-toggle="pill" data-target="#f_vendedorSemana" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Semana</button>
-                                </li>
-                                    @php $isFvendedorDia = false; @endphp
-                            @endif
-                            @if (isset($payload->f_vendedorMes))
-                                <li class="nav-item" id="tabVendedorMes" role="presentation">
-                                    <button class="nav-link {{ $isFvendedorDia ? 'active' : '' }}" id="vendedor-mes-tab" data-toggle="pill" data-target="#f_vendedorMes" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Mês</button>
-                                </li>
-                                    @php $isFvendedorDia = false; @endphp
-                            @endif
+                        <ul class="nav nav-tabs" id="pagamentos" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="pagamentos-dia-tab" data-toggle="tab" data-target="#pagamentoDiaDiv" type="button" role="tab" aria-controls="pagamentoDiaDiv" aria-selected="true">Dia</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pagamentos-semana-tab" data-toggle="tab" data-target="#pagamentoSemanaDiv" type="button" role="tab" aria-controls="pagamentoSemanaDiv" aria-selected="false">Semana</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pagamentos-mes-tab" data-toggle="tab" data-target="#pagamentoMesDiv" type="button" role="tab" aria-controls="pagamentoMesDiv" aria-selected="false">Mes</button>
+                            </li>
                         </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                            @php $isFvendedorDiaDiv = true; @endphp
-                            @if (isset($payload->f_vendedorDia))
-                                <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorDia" role="tabpanel" aria-labelledby="vendedor-dia-tab">
-                                    <ul class="list-group list-group-flush">
-                                        @foreach ($payload->f_vendedorDia as $key => $obj)
-                                            <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-                                            </li>
-                                        @endforeach
-                                        <li>
-                                            <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_vendedorDia)->sum('valor'))) }}
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                @php $isFvendedorDiaDiv = false; @endphp
-                            @endif
-                            @if (isset($payload->f_vendedorSemana))
-                                <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorSemana" role="tabpanel" aria-labelledby="vendedor-semana-tab">
-                                    <ul class="list-group list-group-flush">
-                                        @foreach ($payload->f_vendedorSemana as $key => $obj)
-                                            <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-                                            </li>
-                                        @endforeach
-                                        <li>
-                                            <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_vendedorSemana)->sum('valor'))) }}
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                @php $isFvendedorDiaDiv = false; @endphp
-                            @endif
-                            @if (isset($payload->f_vendedorMes))
-                                <div class="tab-pane fade {{ $isFvendedorDiaDiv ? 'show active' : '' }}" id="f_vendedorMes" role="tabpanel" aria-labelledby="vendedor-mes-tab">
-                                    <ul class="list-group list-group-flush">
-                                        @foreach ($payload->f_vendedorMes as $key => $obj)
-                                            <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-                                            </li>
-                                        @endforeach
-                                        <li>
-                                            <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_vendedorMes)->sum('valor'))) }}
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                @php $isFvendedorDiaDiv = false; @endphp
-                            @endif
-                        </div>
-                    </div>
-                    @else
-                        <h4>Aguardando dados.</h4>
-                    @endif
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title">Grupos de produtos</h6>
-                        <div>
-                        </div>
-                    </div>
-                    @if ((isset($payload->f_grupoProdutosDia) && count($payload->f_grupoProdutosDia) > 0)
-                      || (isset($payload->f_grupoProdutosSemana) && count($payload->f_grupoProdutosSemana) > 0)
-                      || (isset($payload->f_grupoProdutosMes) && count($payload->f_grupoProdutosMes) > 0))
-                    <div class="grhpag"  id="graficoProduto1s"></div>
-                    <div>
-                        @php $isFgrupoProdutosDia = true; @endphp
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            @if (isset($payload->f_grupoProdutosDia) && (count($payload->f_grupoProdutosDia) > 0))
-                                <li class="nav-item" id="tabProdutosDia" role="presentation">
-                                    <button class="nav-link {{ $isFgrupoProdutosDia ? 'active' : '' }}" id="produtos-dia-tab" data-toggle="pill" data-target="#f_grupoProdutosDia" type="button" role="tab" aria-controls="produtos-dia-tab" aria-selected="true">Dia</button>
-                                    @php $isFgrupoProdutosDia = false; @endphp
-                                </li>
-                            @endif
-                            @if (isset($payload->f_grupoProdutosSemana) && (count($payload->f_grupoProdutosSemana) > 0))
-                                <li class="nav-item" id="tabProdutosSemana" role="presentation">
-                                    <button class="nav-link active" id="produtos-semana-tab" data-toggle="pill" data-target="#f_grupoProdutosSemana" type="button" role="tab" aria-controls="produtos-semana-tab" aria-selected="false">Semana</button>
-                                    @php $isFgrupoProdutosDia = false; @endphp
-                                </li>
-                            @endif
-                            @if (isset($payload->f_grupoProdutosMes) && (count($payload->f_grupoProdutosMes) > 0))
-                                <li class="nav-item" id="tabProdutosMes" role="presentation">
-                                    <button class="nav-link  {{ $isFgrupoProdutosDia ? 'active' : '' }}" id="produtos-mes-tab" data-toggle="pill" data-target="#f_grupoProdutosMes" type="button" role="tab" aria-controls="produtos-mes-tab" aria-selected="false">Mês</button>
-                                    @php $isFgrupoProdutosDia = false; @endphp
-                                </li>
-                            @endif
-                        </ul>
-                        <div class="tab-content" id="pills-tabContent">
-                            @php $isFgrupoProdutosDiv = true; @endphp
-                            @if (isset($payload->f_grupoProdutosDia) && (count($payload->f_grupoProdutosDia) > 0))
-                                <div class="tab-pane fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosDia" role="tabpanel" aria-labelledby="produtos-dia-tab">
-                                    <ul class="list-group list-group-flush">
-                                        @foreach ($payload->f_grupoProdutosDia as $key => $obj)
-                                            <li class="list-group-item pl-0 pr-0">
-                                                <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-                                            </li>
-                                        @endforeach
-                                        <li>
-                                            <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_grupoProdutosDia)->sum('valor'))) }}
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                @php $isFgrupoProdutosDiv = false; @endphp
-                            @endif
-                            @if (isset($payload->f_grupoProdutosSemana) && (count($payload->f_grupoProdutosSemana) > 0))
-                                <div class="tab-pane  fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosSemana" role="tabpanel" aria-labelledby="produtos-semana-tab">
-                                    <ul class="list-group list-group-flush">
-                                            @foreach ($payload->f_grupoProdutosSemana as $key => $obj)
-                                                <li class="list-group-item pl-0 pr-0">
-                                                    <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
-
-                                                    @php $total5 += App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor);  @endphp
+                        <div class="tab-content" id="myTabPagamento">
+                            <div class="tab-pane fade show active" id="pagamentoDiaDiv" role="tabpanel" aria-labelledby="pagamentos-dia-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="pagamentoDiaTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="pagamentoDiaTableBody"></tbody>
+                                            </table>
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="pagamentoDiaTableTotal">0</span>
+                                                    </p>
                                                 </li>
-                                            @endforeach
-                                        <li>
-                                            <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_grupoProdutosSemana)->sum('valor'))) }}
-                                            </p>
-                                        </li>
-                                    </ul>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                @php $isFgrupoProdutosDiv = false; @endphp
-                            @endif
-                            @if (isset($payload->f_grupoProdutosMes) && count($payload->f_grupoProdutosMes) > 0)
-                                <div class="tab-pane  fade {{ $isFgrupoProdutosDiv ? 'show active' : '' }}" id="f_grupoProdutosMes" role="tabpanel" aria-labelledby="produtos-mes-tab">
-                                    <ul class="list-group list-group-flush">
-                                            @foreach ($payload->f_grupoProdutosMes as $key => $obj)
-                                                <li class="list-group-item pl-0 pr-0">
-                                                    <i class="fa fa-circle mr-1 text-warning"></i> {{ $obj->descricao }} ({{ App\Utils\Commons\FormatDataUtil::FormatMoney($obj->valor) }})
+                            </div>
+                            <div class="tab-pane fade" id="pagamentoSemanaDiv" role="tabpanel" aria-labelledby="pagamentos-semana-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="pagamentoSemanaTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="pagamentoSemanaTableBody"></tbody>
+                                            </table>
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="pagamentoSemanaTableTotal">0</span>
+                                                    </p>
                                                 </li>
-                                            @endforeach
-                                        <li>
-                                            <p style="margin-top:20px;" class="text-center">
-                                                <strong>Total</strong>: {{ App\Utils\Commons\FormatDataUtil::FormatMoney(str_replace(',','.', ''.collect($payload->f_grupoProdutosMes)->sum('valor'))) }}
-                                            </p>
-                                        </li>
-                                    </ul>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                @php $isFgrupoProdutosDiv = false; @endphp
-                            @endif
+                            </div>
+                            <div class="tab-pane fade" id="pagamentoMesDiv" role="tabpanel" aria-labelledby="pagamentos-mes-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="pagamentoMesTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="pagamentoMesTableBody"></tbody>
+                                            </table>
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="pagamentoMesTableTotal">0</span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    @else
-                    <h4>Aguardando dados.</h4>
-                    @endif
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex mb-2 mb-sm-0 justify-content-between">
+                            <h6 class="card-title">Funcionarios</h6>
+                        </div>
+                        <ul class="nav nav-tabs" id="vendedor" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="vendedor-dia-tab" data-toggle="tab" data-target="#vendedorDiaDiv" type="button" role="tab" aria-controls="vendedorDiaDiv" aria-selected="true">Dia</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="vendedor-semana-tab" data-toggle="tab" data-target="#vendedorSemanaDiv" type="button" role="tab" aria-controls="vendedorSemanaDiv" aria-selected="false">Semana</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="vendedor-mes-tab" data-toggle="tab" data-target="#vendedorMesDiv" type="button" role="tab" aria-controls="vendedorMesDiv" aria-selected="false">Mes</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabVendedor">
+                            <div class="tab-pane fade show active" id="vendedorDiaDiv" role="tabpanel" aria-labelledby="vendedor-dia-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="vendedorDiaTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="vendedorDiaTableBody"></tbody>
+                                            </table>
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="vendedorDiaTableTotal">0</span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="vendedorSemanaDiv" role="tabpanel" aria-labelledby="vendedor-semana-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="vendedorSemanaTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table id="vendedorSemanaTable" class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="vendedorSemanaTableBody"></tbody>
+                                            </table>
+
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="vendedorSemanaTableTotal">0</span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="vendedorMesDiv" role="tabpanel" aria-labelledby="vendedor-mes-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="vendedorMesTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table id="vendedorMesTable" class="table table-striped mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Descrição</th>
+                                                        <th>Valor</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="vendedorMesTableBody"></tbody>
+                                            </table>
+
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="vendedorMesTableTotal">0</span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex mb-2 mb-sm-0 justify-content-between">
+                            <h6 class="card-title">Grupos de Produtos</h6>
+                        </div>
+                        <ul class="nav nav-tabs" id="grupoProdutos" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="grupoProdutos-dia-tab" data-toggle="tab" data-target="#grupoProdutosDiaDiv" type="button" role="tab" aria-controls="grupoProdutosDiaDiv" aria-selected="true">Dia</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="grupoProdutos-semana-tab" data-toggle="tab" data-target="#grupoProdutosSemanaDiv" type="button" role="tab" aria-controls="grupoProdutosSemanaDiv" aria-selected="false">Semana</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="grupoProdutos-mes-tab" data-toggle="tab" data-target="#grupoProdutosMesDiv" type="button" role="tab" aria-controls="grupoProdutosMesDiv" aria-selected="false">Mes</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabGrupoProdutos">
+                            <div class="tab-pane fade show active" id="grupoProdutosDiaDiv" role="tabpanel" aria-labelledby="grupoProdutos-dia-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="grupoProdutosDiaTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table id="grupoProdutosDiaTable" class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="grupoProdutosDiaTableBody"></tbody>
+                                            </table>
+
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="grupoProdutosDiaTableTotal">0</span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="grupoProdutosSemanaDiv" role="tabpanel" aria-labelledby="grupoProdutos-semana-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="grupoProdutosSemanaTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table id="grupoProdutosSemanaTable" class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="grupoProdutosSemanaTableBody"></tbody>
+                                            </table>
+
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="grupoProdutosSemanaTableTotal">0</span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="grupoProdutosMesDiv" role="tabpanel" aria-labelledby="grupoProdutos-mes-tab">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div id="grupoProdutosMesTableGrafico"></div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table id="grupoProdutosMesTable" class="table table-striped mb-0">
+                                                <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Valor</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="grupoProdutosMesTableBody"></tbody>
+                                            </table>
+
+                                            <ul class="list-group list-group-flush">
+                                                <li>
+                                                    <p style="margin-top:20px;" class="text-center">
+                                                        <strong>Total</strong>: <span id="grupoProdutosMesTableTotal">0</span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
 
-        <div class="col-lg-12 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title">Fluxo do caixa Anual</h6>
-                    </div>
-                    <p  id="saldosUpdate" class="text-muted"></p>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="fa fa-circle text-primary mr-2"></i>
-                                <div>
-                                    <h4 id="entradacaixaAtual" class="font-weight-bold line-height-18">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->caixa->EntradaAtual ?? 0) }}</h4>
-                                    <div class="text-muted">Entradas</div>
-                                </div>
-                            </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-md-flex mb-2 mb-sm-0 justify-content-between">
+                            <h6 class="card-title">Notas Fiscais Emitidas</h6>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="fa fa-circle text-secondary mr-2"></i>
-                                <div>
-                                    <h4 id="saidacaixaAtual"  class="font-weight-bold line-height-18">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->caixa->SaidaAtual ?? 0) }}</h4>
-                                    <div class="text-muted">Saídas</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12">
-                            <div class="d-flex align-items-start">
-                                <i class="fa fa-circle text-success mr-2"></i>
-                                <div>
-                                    <h4 id="saldocaixaAtual" class="font-weight-bold line-height-18">{{ App\Utils\Commons\FormatDataUtil::FormatMoney($payload->caixa->saldoAtual ?? 0) }}</h4>
-                                    <div class="text-muted">Saldo</div>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="graficoNotasFiscais"></div>
                     </div>
-                    <div id="graficoCaixa"></div>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <div class="col-lg-6 col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-md-flex mb-2 mb-sm-0 justify-content-between">
-                        <h6 class="card-title">Notas Fiscais Emitidas</h6>
-                    </div>
-                    <div id="graficoNotasFiscais"></div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6 col-md-12">
-            <div class="card">
-                <div class="card-body pb-0">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h6 class="card-title mb-0">Top Produtos mais vendidos Hoje</h6>
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-body pb-0">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h6 class="card-title mb-0">Top Produtos mais vendidos Hoje</h6>
+                        </div>
                     </div>
-                </div>
-                <div class="table-responsive">
-                    <table id="tabelaTopProdutos" class="table table-striped mb-0">
+                    <div class="table-responsive">
+                        <table id="tabelaTopProdutos" class="table table-striped mb-0">
 
-                        <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Total vendidos</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if (isset($payload->topProdutos) && count($payload->topProdutos) > 0)
-                            @foreach($payload->topProdutos as $key=>$value)
+                            <thead>
                             <tr>
-                                <td>
-                                    <a><?= $value->produto; ?></a>
-                                </td>
-                                <td><?= $value->quantidade; ?></td>
+                                <th>Produto</th>
+                                <th>Total vendidos</th>
                             </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="2"><h3>Aguardando dados</h3></td>
-                            </tr>
-                        @endif
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody id="produtosMaisVendidosTableBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -514,250 +534,73 @@
     <script>
         $(function() {
 
-            /*  Vendas  */
-            @if (isset($payload->f_pagamentosDia))
-                var seriePagamentosDia = [
-                @foreach ($payload->f_pagamentosDia as $obj)
-                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-                ];
+            const ordemMeses = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
-                var labelPagamentosDia = [
-                @foreach ($payload->f_pagamentosDia as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-                ];
-            @else
-                var seriePagamentosDia = [];
-                var labelPagamentosDia = [];
-            @endif
+            function ConvertToMoney(data) {
+                const result =  data.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
 
-            @if (isset($payload->f_pagamentosSemana))
-                var seriePagamentosSemana = [
-                @foreach ($payload->f_pagamentosSemana as $obj)
-                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-                ];
-
-                var labelPagamentosSemana = [
-                @foreach ($payload->f_pagamentosSemana as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-                ];
-            @else
-                var seriePagamentosSemana = [];
-                var labelPagamentosSemana = [];
-            @endif
-
-            @if (isset($payload->f_pagamentosMes))
-                var seriePagamentosMes = [
-                @foreach ($payload->f_pagamentosMes as $obj)
-                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-                ];
-
-                var labelPagamentosMes = [
-                @foreach ($payload->f_pagamentosMes as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-                ];
-            @else
-                var seriePagamentosMes = [];
-                var labelPagamentosMes = [];
-            @endif
-
-            /*  Final Vendas  */
-
-            /*  Vendedores  */
-
-            @if (isset($payload->f_vendedorDia))
-            var serieVendedorDia = [
-                @foreach ($payload->f_vendedorDia as $obj)
-                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-            ];
-
-            var labelVendedorDia = [
-                @foreach ($payload->f_vendedorDia as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-            ];
-            @else
-            var serieVendedorDia = [];
-            var labelVendedorDia = [];
-            @endif
-
-            @if (isset($payload->f_vendedorSemana))
-            var serieVendedorSemana = [
-                @foreach ($payload->f_vendedorSemana as $obj)
-                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-            ];
-
-            var labelVendedorSemana = [
-                @foreach ($payload->f_vendedorSemana as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-            ];
-            @else
-            var serieVendedorSemana = [];
-            var labelVendedorSemana = [];
-            @endif
-
-            @if (isset($payload->f_vendedorMes))
-            var serieVendedorMes = [
-                @foreach ($payload->f_vendedorMes as $obj)
-                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-            ];
-
-            var labelVendedorMes = [
-                @foreach ($payload->f_vendedorMes as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-            ];
-            @else
-            var serieVendedorMes = [];
-            var labelVendedorMes = [];
-            @endif
-
-            /*  Final Vendedores  */
+                return result;
+            }
 
 
-            /*  Produtos  */
-            @if (isset($payload->f_grupoProdutosDia))
-            var serieProdutosDia = [
-                @foreach ($payload->f_grupoProdutosDia as $obj)
-                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-            ];
-
-            var labelProdutosDia = [
-                @foreach ($payload->f_grupoProdutosDia as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-            ];
-            @else
-            var serieProdutosDia = [];
-            var labelProdutosDia = [];
-            @endif
-
-            @if (isset($payload->f_grupoProdutosSemana))
-            var serieProdutosSemana = [
-                @foreach ($payload->f_grupoProdutosSemana as $obj)
-                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-            ];
-
-            var labelProdutosSemana = [
-                @foreach ($payload->f_grupoProdutosSemana as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-            ];
-            @else
-            var serieProdutosSemana = [];
-            var labelProdutosSemana = [];
-            @endif
-
-            @if (isset($payload->f_grupoProdutosMes))
-            var serieProdutosMes = [
-                @foreach ($payload->f_grupoProdutosMes as $obj)
-                    {{ App\Utils\Commons\FormatDataUtil::FormatNumber($obj->valor ?? 0) }},
-                @endforeach
-            ];
-
-            var labelProdutosMes = [
-                @foreach ($payload->f_grupoProdutosMes as $obj)
-                    '{{ $obj->descricao }}',
-                @endforeach
-            ];
-            @else
-            var serieProdutosMes = [];
-            var labelProdutosMes = [];
-            @endif
-
-            /*  final Produtos  */
-
-            function graficoFormasPagamentoMountGraph(elem, label, series)
+            function montaGraficoPizza(telem, tlabel, tseries)
             {
-                var options = {
-                    series: series,
+                const options = {
+                    series: tseries,
                     chart: {
-                        type: 'donut',
-                        fontFamily: "Inter",
-                        offsetY: 30,
-                        height: 250,
+                        type: 'donut'
                     },
-                    labels: label,
                     dataLabels: {
-                        enabled: false,
-
+                        enabled: false
                     },
-                    stroke: {
-                        colors: $('body').hasClass('dark') ? "#313852" : "#ffffff",
-                    },
+                    labels: tlabel,
                     legend: {
                         show: false
                     }
                 };
 
-                var chart = new ApexCharts(document.querySelector(elem), options);
+                var chart = new ApexCharts(document.querySelector(telem), options);
                 chart.render();
             }
 
-            function graficoCaixaMountGraph()
+            function graficoCaixaMountGraph(data)
             {
+                const mesesOrdenadosEntrada = [];
+                ordemMeses.forEach(mes => {
+                    if (data.entradas.hasOwnProperty(mes)) {
+                        mesesOrdenadosEntrada.push(parseFloat(data.entradas[mes]));
+                    }
+                });
+
+                const mesesOrdenadosSaida = [];
+                ordemMeses.forEach(mes => {
+                    if (data.saidas.hasOwnProperty(mes)) {
+                        mesesOrdenadosSaida.push(parseFloat(data.saidas[mes]));
+                    }
+                });
+
+                const mesesOrdenadosSaldos = [];
+                ordemMeses.forEach(mes => {
+                    if (data.entradas.hasOwnProperty(mes)) {
+                        mesesOrdenadosSaldos.push(parseFloat(data.saldo[mes]));
+                    }
+                });
+
                 var data = [
                     {
                         name: "Entradas R$",
-                        data: [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->agosto ?? 0 )}},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->outubro ?? 0 )}},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->entradas->dezembro ?? 0 )}}
-                        ]
+                        data: mesesOrdenadosEntrada
                     },
                     {
                         name: "Saidas R$",
-                        data:  [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->agosto ?? 0 )}},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->outubro ?? 0 )}},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saidas->dezembro ?? 0 )}}
-                        ]
+                        data:  mesesOrdenadosSaida
                     },
                     {
                         name: "Saldo R$",
-                        data: [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->agosto ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->outubro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->caixa->saldo->dezembro ?? 0) }}
-                        ]
+                        data: mesesOrdenadosSaldos
                     }
                 ];
 
@@ -769,15 +612,9 @@
                         offsetX: -18,
                         width: '103%',
                         stacked: true,
-                        events: {
-                            selection: function (chart, e) {
-
-                            }
-                        },
                         toolbar: {
-                            show: false,
+                            show: false
                         }
-
                     },
                     colors: [colors.primary, colors.secondary, colors.success],
                     dataLabels: {
@@ -824,8 +661,29 @@
                 chart.render();
             }
 
-            function graficoNotasFiscaisMountGraph()
+            function graficoNotasFiscaisMountGraph(data)
             {
+                const notasFiscaisTotalEnviadas = [];
+                ordemMeses.forEach(mes => {
+                    if (data.totalEnviadas.hasOwnProperty(mes)) {
+                        notasFiscaisTotalEnviadas.push(parseFloat(data.totalEnviadas[mes]));
+                    }
+                });
+
+                const notasFiscaisTotalCanceladas = [];
+                ordemMeses.forEach(mes => {
+                    if (data.totalCanceladas.hasOwnProperty(mes)) {
+                        notasFiscaisTotalCanceladas.push(parseFloat(data.totalCanceladas[mes]));
+                    }
+                });
+
+                const notasFiscaisTotalContigencia = [];
+                ordemMeses.forEach(mes => {
+                    if (data.totalContigencia.hasOwnProperty(mes)) {
+                        notasFiscaisTotalContigencia.push(parseFloat(data.totalContigencia[mes]));
+                    }
+                });
+
                 var options = {
                     chart: {
                         type: 'bar',
@@ -839,53 +697,14 @@
                     },
                     series: [{
                         name: 'Enviadas',
-                        data: [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->agosto ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->outubro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalEnviadas->dezembro ?? 0) }}
-                        ]
-                        }, {
+                        data: notasFiscaisTotalEnviadas
+                    }, {
                         name: 'Canceladas',
-                        data: [
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->janeiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->feveiro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->marco ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->abril ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->maio ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->junho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->julho ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->agosto ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->setembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->outubro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->novembro ?? 0) }},
-                            {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalCanceladas->dezembro ?? 0) }}
-                        ]
+                        data: notasFiscaisTotalCanceladas
                     },
                         {
                             name: 'Contigencia',
-                            data: [
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->janeiro ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->feveiro ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->marco ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->abril ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->maio ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->junho ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->julho ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->agosto ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->setembro ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->outubro ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->novembro ?? 0) }},
-                                {{ App\Utils\Commons\FormatDataUtil::FormatNumber($payload->notasFiscais->TotalContigencia->dezembro ?? 0) }}
-                            ]
+                            data: notasFiscaisTotalContigencia
                         }]
                     ,
                     colors: [colors.secondary, colors.info, colors.warning],
@@ -923,70 +742,363 @@
                 chart.render();
             }
 
-            // Vendas
-            $('#pills-dia-tab').click(function(){
-                console.log('#pills-dia-tab', labelPagamentosDia, seriePagamentosDia);
-                graficoFormasPagamentoMountGraph('#graficoFormasPagamento', labelPagamentosDia, seriePagamentosDia);
-            });
+            function gerenciarGraficosPizzasPagamentos(payload)
+            {
+                const diaLabel = payload.pagamentosDia.map(objeto => objeto.descricao);
+                const diaSeries = payload.pagamentosDia.map(objeto => parseInt(objeto.value));
+                montaGraficoPizza('#areaGraficoPagamentoDia', diaLabel, diaSeries);
 
-            $('#pills-semana-tab').click(function(){
-                console.log('#pills-semana-tab', labelPagamentosSemana, seriePagamentosSemana);
-                graficoFormasPagamentoMountGraph('#graficoFormasPagamento', labelPagamentosSemana, seriePagamentosSemana);
-            });
+                const semanaLabel = payload.pagamentosSemana.map(objeto => objeto.descricao);
+                const semanaSeries = payload.pagamentosSemana.map(objeto => parseInt(objeto.value));
+                montaGraficoPizza('#areaGraficoPagamentoSemana', semanaLabel, semanaSeries);
 
-            $('#pills-mes-tab').click(function(){
-                console.log('#pills-mes-tab', labelPagamentosMes, seriePagamentosMes);
-                graficoFormasPagamentoMountGraph('#graficoFormasPagamento', labelPagamentosMes, seriePagamentosMes);
-            });
-            // Final Vendas
+                const mesLabel = payload.pagamentosMes.map(objeto => objeto.descricao);
+                const mesSeries = payload.pagamentosMes.map(objeto => parseInt(objeto.value));
+                montaGraficoPizza('#areaGraficoPagamentoMes', mesLabel, mesSeries);
+            }
 
-            // Vendedores
-            $('#vendedor-dia-tab').click(function(){
-                console.log('#vendedor-dia-tab', labelVendedorDia, serieVendedorDia);
-                graficoFormasPagamentoMountGraph('#graficoVendedor', labelVendedorDia, serieVendedorDia);
-            });
+            function gerenciarGraficosPizzasGrupoProdutos(payload)
+            {
+                const diaLabel = payload.grupoProdutosDia.map(objeto => objeto.descricao);
+                const diaSeries = payload.grupoProdutosDia.map(objeto => parseInt(objeto.total));
+                montaGraficoPizza('#areaGraficoGrupoProdutosDia', diaLabel, diaSeries);
 
-            $('#vendedor-semana-tab').click(function(){
-                console.log('#vendedor-semana-tab', labelVendedorSemana, serieVendedorSemana);
-                graficoFormasPagamentoMountGraph('#graficoVendedor', labelVendedorSemana, serieVendedorSemana);
-            });
+                const semanaLabel = payload.grupoProdutosSemana.map(objeto => objeto.descricao);
+                const semanaSeries = payload.grupoProdutosSemana.map(objeto => parseInt(objeto.total));
+                montaGraficoPizza('#areaGrupoProdutosSemana', semanaLabel, semanaSeries);
 
-            $('#vendedor-mes-tab').click(function(){
-                console.log('#vendedor-mes-tab', labelVendedorMes, serieVendedorMes);
-                graficoFormasPagamentoMountGraph('#graficoVendedor', labelVendedorMes, serieVendedorMes);
-            });
-            // Final Vendedores
+                const mesLabel = payload.grupoProdutosMes.map(objeto => objeto.descricao);
+                const mesSeries = payload.grupoProdutosMes.map(objeto => parseInt(objeto.total));
+                montaGraficoPizza('#areaGrupoProdutosMes', mesLabel, mesSeries);
+            }
+
+            function fillBadges(data)
+            {
+                const valorVendas = ConvertToMoney(data.valorVendas ?? 0);
+                $("#lucrosPresumidosValorVendas").html(valorVendas);
+
+                const totalLucros = (data.totalLucros ?? 0).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                });
+                $("#lucrosPresumidosTotalLucros").html(totalLucros);
+
+                const quantidadeVendas = (data.quantidadeVendas ?? 0);
+                $("#lucrosPresumidosQuantidadeVendas").html(quantidadeVendas);
+            }
+
+            function fillCadastros(data)
+            {
+                $("#CadastroNumeroClientes").html(data.clientes ?? 0);
+                $("#CadastroNumeroProdutos").html(data.produtos ?? 0);
+                $("#CadastroNumeroFornecedores").html(data.fornecedores ?? 0);
+                $("#CadastroNumeroUsuarios").html(data.usuarios ?? 0);
+            }
+
+            function fillGraphFluxoCaixas(data)
+            {
+                const entradaAtual = ConvertToMoney(data.entradaAtual ?? 0);
+                $("#caixaEntradaAtual").html(entradaAtual);
+
+                const saldoAtual = ConvertToMoney(data.saldoAtual ?? 0);
+                $("#caixaSaldoAtual").html(saldoAtual);
+
+                const saidaAtual = ConvertToMoney(data.saidaAtual ?? 0);
+                $("#caixaSaidaAtual").html(saidaAtual);
 
 
-            // Produtos
-            $('#produtos-dia-tab').click(function(){
-                console.log('#pills-dia-tab', labelProdutosDia, serieProdutosDia);
-                graficoFormasPagamentoMountGraph('#graficoProdutos', labelProdutosDia, serieProdutosDia);
-            });
+                graficoCaixaMountGraph(data);
+            }
 
-            $('#produtos-semana-tab').click(function(){
-                console.log('#pills-semana-tab', labelProdutosSemana, serieProdutosSemana);
-                graficoFormasPagamentoMountGraph('#graficoProdutos', labelProdutosSemana, serieProdutosSemana);
-            });
+            function fillProdutosMaisVendidos(data)
+            {
+                const tableBody = document.querySelector('#produtosMaisVendidosTableBody');
 
-            $('#produtos-mes-tab').click(function(){
-                console.log('#pills-mes-tab', labelProdutosMes, serieProdutosMes);
-                graficoFormasPagamentoMountGraph('#graficoProdutos', labelProdutosMes, serieProdutosMes);
-            });
-            // Final Produtos
+                if (data.length > 0) {
+                    data.forEach(produto => {
+                        const linha = tableBody.insertRow();
+                        linha.innerHTML = `<td>${produto.descricao}</td><td>${ConvertToMoney(produto.quantidade ?? 0)}</td>`;
+                    });
+                } else {
+                    const linha = tableBody.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                }
+            }
 
-            // graficoFormasPagamentoMountGraph('#graficoFormasPagamento', labelPagamentosDia, seriePagamentosDia);
-            // $('#graficoFormasPagamento').show();
+            function fillPagamento(data)
+            {
+                const pagamentoDiaTable = document.querySelector('#pagamentoDiaTableBody');
+                if (data.pagamentosDia.length > 0) {
+                    let total = 0;
 
-            // graficoFormasPagamentoMountGraph('#graficoVendedor', labelVendedorDia, serieVendedorDia);
-            // $('#graficoVendedor').show();
+                    data.pagamentosDia.forEach(row => {
+                        const linha = pagamentoDiaTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.value ?? 0)}</td>`;
+                        total += row.value;
+                    });
 
-            //  graficoFormasPagamentoMountGraph('#graficoProdutos', labelProdutosDia, serieProdutosDia);
-            // $('#graficoProdutos').show();
+                    const result =  (total ?? 0).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+
+                    $("#pagamentoDiaTableTotal").html(result);
+
+                    const diaLabel = data.pagamentosDia.map(objeto => objeto.descricao);
+                    const diaSeries = data.pagamentosDia.map(objeto => parseInt(objeto.value));
+                    montaGraficoPizza('#pagamentoDiaTableGrafico', diaLabel, diaSeries);
+
+                } else {
+                    const linha = pagamentoDiaTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  '0'.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                    $("#pagamentoDiaTableTotal").html(result);
+                }
+
+                const pagamentoSemanaTable = document.querySelector('#pagamentoSemanaTableBody');
+                if (data.pagamentosSemana.length > 0) {
+                    let total = 0;
+
+                    data.pagamentosSemana.forEach(row => {
+                        const linha = pagamentoSemanaTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.value ?? 0)}</td>`;
+                        total += row.value;
+                    });
+
+                    const result =  (total ?? 0).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                    $("#pagamentoSemanaTableTotal").html(result);
 
 
-            graficoCaixaMountGraph();
-            graficoNotasFiscaisMountGraph();
+                    const diaLabel = data.pagamentosSemana.map(objeto => objeto.descricao);
+                    const diaSeries = data.pagamentosSemana.map(objeto => parseInt(objeto.value));
+                    montaGraficoPizza('#pagamentoSemanaTableGrafico', diaLabel, diaSeries);
+                } else {
+                    const linha = vendedorSemanaTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  '0'.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                    $("#pagamentoSemanaTableTotal").html(result);
+                }
+
+                const pagamentoMesTable = document.querySelector('#pagamentoMesTableBody');
+                if (data.pagamentosMes.length > 0) {
+                    let total = 0;
+
+                    data.pagamentosMes.forEach(row => {
+                        const linha = pagamentoMesTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.value ?? 0)}</td>`;
+                        total += row.value;
+                    });
+
+                    const result =  (total ?? 0).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                    $("#pagamentoMesTableTotal").html(result);
+
+                    const diaLabel = data.pagamentosMes.map(objeto => objeto.descricao);
+                    const diaSeries = data.pagamentosMes.map(objeto => parseInt(objeto.value));
+                    montaGraficoPizza('#pagamentoMesTableGrafico', diaLabel, diaSeries);
+                } else {
+                    const linha = vendedorMesTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  '0'.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                    $("#pagamentoMesTableTotal").html(result);
+                }
+            }
+
+            function fillVendendor(data)
+            {
+                const vendedorDiaTable = document.querySelector('#vendedorDiaTableBody');
+                if (data.vendedorDia.length > 0) {
+                    let total = 0;
+
+                    data.vendedorDia.forEach(row => {
+                        const linha = vendedorDiaTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.value ?? 0)}</td>`;
+                        total += row.value;
+                    });
+
+                    const result =  ConvertToMoney(total ?? 0);
+
+                    $("#vendedorDiaTableTotal").html(result);
+
+                    const diaLabel = data.vendedorDia.map(objeto => objeto.descricao);
+                    const diaSeries = data.vendedorDia.map(objeto => parseInt(objeto.value));
+                    montaGraficoPizza('#vendedorDiaTableGrafico', diaLabel, diaSeries);
+
+                } else {
+                    const linha = vendedorDiaTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  ConvertToMoney('0');
+                    $("#vendedorDiaTableTotal").html(result);
+                }
+
+                const vendedorSemanaTable = document.querySelector('#vendedorSemanaTableBody');
+                if (data.vendedorSemana.length > 0) {
+                    let total = 0;
+
+                    data.vendedorSemana.forEach(row => {
+                        const linha = vendedorSemanaTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.value ?? 0)}</td>`;
+                        total += row.value;
+                    });
+
+                    const result =  ConvertToMoney(total ?? 0);
+                    $("#vendedorSemanaTableTotal").html(result);
+
+
+                    const diaLabel = data.vendedorSemana.map(objeto => objeto.descricao);
+                    const diaSeries = data.vendedorSemana.map(objeto => parseInt(objeto.value));
+                    montaGraficoPizza('#vendedorSemanaTableGrafico', diaLabel, diaSeries);
+                } else {
+                    const linha = vendedorSemanaTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  ConvertToMoney(0);
+                    $("#vendedorSemanaTableTotal").html(result);
+                }
+
+                const vendedorMesTable = document.querySelector('#vendedorMesTableBody');
+                if (data.vendedorMes.length > 0) {
+                    let total = 0;
+
+                    data.vendedorMes.forEach(row => {
+                        const linha = vendedorMesTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.value ?? 0)}</td>`;
+                        total += row.value;
+                    });
+
+                    const result =  ConvertToMoney(total ?? 0);
+                    $("#vendedorMesTableTotal").html(result);
+
+                    const diaLabel = data.vendedorMes.map(objeto => objeto.descricao);
+                    const diaSeries = data.vendedorMes.map(objeto => parseInt(objeto.value));
+                    montaGraficoPizza('#vendedorMesTableGrafico', diaLabel, diaSeries);
+                } else {
+                    const linha = vendedorMesTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  ConvertToMoney(0);
+                    $("#vendedorMesTableTotal").html(result);
+                }
+            }
+
+
+            function fillGrupoProdutos(data)
+            {
+                const grupoProdutosDiaTable = document.querySelector('#grupoProdutosDiaTableBody');
+                if (data.grupoProdutosDia.length > 0) {
+                    let total = 0;
+
+                    data.grupoProdutosDia.forEach(row => {
+                        const linha = grupoProdutosDiaTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.total ?? 0)}</td>`;
+                        total += row.value;
+                    });
+
+                    const result =  ConvertToMoney(total ?? 0);
+
+                    $("#grupoProdutosrDiaTableTotal").html(result);
+
+                    const diaLabel = data.grupoProdutosDia.map(objeto => objeto.descricao);
+                    const diaSeries = data.grupoProdutosDia.map(objeto => parseInt(objeto.total));
+                    montaGraficoPizza('#grupoProdutosDiaTableGrafico', diaLabel, diaSeries);
+
+                } else {
+                    const linha = grupoProdutosDiaTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  ConvertToMoney('0');
+                    $("#grupoProdutosDiaTableTotal").html(result);
+                }
+
+                const grupoProdutosSemanaTable = document.querySelector('#grupoProdutosSemanaTableBody');
+                if (data.grupoProdutosSemana.length > 0) {
+                    let total = 0;
+
+                    data.grupoProdutosSemana.forEach(row => {
+                        const linha = grupoProdutosSemanaTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.total ?? 0)}</td>`;
+                        total += row.value;
+                    });
+
+                    const result =  ConvertToMoney(total ?? 0);
+                    $("#grupoProdutosSemanaTableTotal").html(result);
+
+
+                    const diaLabel = data.grupoProdutosSemana.map(objeto => objeto.descricao);
+                    const diaSeries = data.grupoProdutosSemana.map(objeto => parseInt(objeto.total));
+                    montaGraficoPizza('#grupoProdutosSemanaTableGrafico', diaLabel, diaSeries);
+                } else {
+                    const linha = grupoProdutosSemanaTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  ConvertToMoney(0);
+                    $("#grupoProdutosSemanaTableTotal").html(result);
+                }
+
+                const grupoProdutosMesTable = document.querySelector('#grupoProdutosMesTableBody');
+                if (data.grupoProdutosMes.length > 0) {
+                    let total = 0;
+
+                    data.grupoProdutosMes.forEach(row => {
+                        const linha = grupoProdutosMesTable.insertRow();
+                        linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.total ?? 0)}</td>`;
+                        total += row.value;
+                    });
+
+                    const result =  ConvertToMoney(total ?? 0);
+                    $("#grupoProdutosMesTableTotal").html(result);
+
+                    const diaLabel = data.grupoProdutosMes.map(objeto => objeto.descricao);
+                    const diaSeries = data.grupoProdutosMes.map(objeto => parseInt(objeto.total));
+
+                    montaGraficoPizza('#grupoProdutosMesTableGrafico', diaLabel, diaSeries);
+                } else {
+                    const linha = grupoProdutosMesTable.insertRow();
+                    linha.innerHTML = `<td colspan=2 class="text-center"><h4>Aguardando Dados</h4></td>`;
+                    const result =  ConvertToMoney(0);
+                    $("#vendedorMesTableTotal").html(result);
+                }
+            }
+
+            function Run()
+            {
+                let payload = JSON.parse('{!! json_encode($payload)  !!}');
+                console.log(payload);
+
+                fillCadastros(payload.cadastros);
+
+                fillBadges(payload.lucrosPresumidos.relatorioVendas.concluidas);
+
+                fillGraphFluxoCaixas(payload.caixa);
+
+                graficoNotasFiscaisMountGraph(payload.notasFiscais);
+
+                fillProdutosMaisVendidos(payload.produtosMaisVendidos)
+
+                fillPagamento(payload.pagamentos);
+
+                fillVendendor(payload.vendedor);
+
+                fillGrupoProdutos(payload.grupoProdutos);
+
+
+                // gerenciarGraficosPizzasPagamentos(payload.pagamentos);
+
+                // gerenciarGraficosPizzasGrupoProdutos(payload.grupoProdutos);
+
+            }
+
+            Run();
         });
     </script>
 @endsection

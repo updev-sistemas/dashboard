@@ -23,13 +23,13 @@ class DemonstrativeController extends Controller
     public function showDashboardView($id, Request $request)
     {
         $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
-
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
-            return redirect()->route("env_ctm");
+            return redirect()->route("env_adm");
         }
 
         $sanitize = $demonstrative->sanitize();
+        #dd($sanitize, $demonstrative);
 
         return view('dashboard.demonstrative.dashboard_page')
             ->with('show', true)
@@ -44,7 +44,7 @@ class DemonstrativeController extends Controller
 
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
-            return redirect()->route("env_ctm");
+            return redirect()->route("env_adm");
         }
 
         $sanitize = $demonstrative->sanitize();
@@ -61,7 +61,7 @@ class DemonstrativeController extends Controller
         $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
-            return redirect()->route("env_ctm");
+            return redirect()->route("env_adm");
         }
 
         $sanitize = $demonstrative->sanitize();
@@ -79,7 +79,7 @@ class DemonstrativeController extends Controller
 
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
-            return redirect()->route("env_ctm");
+            return redirect()->route("env_adm");
         }
 
         $sanitize = $demonstrative->sanitize();
@@ -97,7 +97,7 @@ class DemonstrativeController extends Controller
 
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
-            return redirect()->route("env_ctm");
+            return redirect()->route("env_adm");
         }
 
         $sanitize = $demonstrative->sanitize();
@@ -115,10 +115,11 @@ class DemonstrativeController extends Controller
 
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
-            return redirect()->route("env_ctm");
+            return redirect()->route("env_adm");
         }
 
         $sanitize = $demonstrative->sanitize();
+
 
         return view('dashboard.demonstrative.vendedores_page')
             ->with('show', true)

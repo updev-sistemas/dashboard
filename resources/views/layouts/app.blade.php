@@ -132,10 +132,6 @@
 
                 <ul class="navbar-nav">
 
-                    <li class="nav-item">
-                        <button type="button" id="updater" class="btn btn-outline-success">Atualizar informações</button>
-                    </li>
-
                     <!-- begin::header fullscreen -->
                     <li  class="nav-item dropdown">
                         <a href="#" class="nav-link" title="Fullscreen" data-toggle="fullscreen">
@@ -265,13 +261,12 @@
 <!-- Plugin scripts -->
 <script src="{{ url('vendors/bundle.js') }}"></script>
 
-
-@yield('script')
-
 <!-- App scripts -->
 <script src="{{ url('assets/js/app.min.js') }}"></script>
 <script src="{{ url('assets/js/functions.js') }}"></script>
 <script src="{{ url('assets/js/moment.min.js') }}"></script>
+
+@yield('script')
 
 </body>
 </html>
