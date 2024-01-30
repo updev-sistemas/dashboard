@@ -96,55 +96,6 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="card-title">Fluxo do caixa Anual</h6>
-                        </div>
-                        <p id="saldosUpdate" class="text-muted"></p>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="d-flex align-items-start">
-                                    <i class="fa fa-circle text-primary mr-2"></i>
-                                    <div>
-                                        <h4 id="entradacaixaAtual" class="font-weight-bold line-height-18"><span id="caixaEntradaAtual"></span></h4>
-                                        <div class="text-muted">Entradas</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="d-flex align-items-start">
-                                    <i class="fa fa-circle text-secondary mr-2"></i>
-                                    <div>
-                                        <h4 id="saidacaixaAtual"  class="font-weight-bold line-height-18"><span id="caixaSaidaAtual"></span></h4>
-                                        <div class="text-muted">Saídas</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <div class="d-flex align-items-start">
-                                    <i class="fa fa-circle text-success mr-2"></i>
-                                    <div>
-                                        <h4 id="saldocaixaAtual" class="font-weight-bold line-height-18"><span id="caixaSaldoAtual"></span></h4>
-                                        <div class="text-muted">Saldo</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="graficoCaixa"></div>
-                    </div>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row">
             <div class="col-lg-4 col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -255,7 +206,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-md-flex mb-2 mb-sm-0 justify-content-between">
-                            <h6 class="card-title">Funcionarios</h6>
+                            <h6 class="card-title">Vendedores</h6>
                         </div>
                         <ul class="nav nav-tabs" id="vendedor" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -507,6 +458,58 @@
             </div>
         </div>
     </div>
+    
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-title">Fluxo do caixa Anual</h6>
+                        </div>
+                        <p id="saldosUpdate" class="text-muted"></p>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-circle text-primary mr-2"></i>
+                                    <div>
+                                        <h4 id="entradacaixaAtual" class="font-weight-bold line-height-18"><span id="caixaEntradaAtual"></span></h4>
+                                        <div class="text-muted">Entradas</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-circle text-secondary mr-2"></i>
+                                    <div>
+                                        <h4 id="saidacaixaAtual"  class="font-weight-bold line-height-18"><span id="caixaSaidaAtual"></span></h4>
+                                        <div class="text-muted">Saídas</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12">
+                                <div class="d-flex align-items-start">
+                                    <i class="fa fa-circle text-success mr-2"></i>
+                                    <div>
+                                        <h4 id="saldocaixaAtual" class="font-weight-bold line-height-18"><span id="caixaSaldoAtual"></span></h4>
+                                        <div class="text-muted">Saldo</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="graficoCaixa"></div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
 @endsection
@@ -1002,12 +1005,12 @@
                     data.grupoProdutosDia.forEach(row => {
                         const linha = grupoProdutosDiaTable.insertRow();
                         linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.total ?? 0)}</td>`;
-                        total += row.value;
+                        total += row.total;
                     });
 
                     const result =  ConvertToMoney(total ?? 0);
 
-                    $("#grupoProdutosrDiaTableTotal").html(result);
+                    $("#grupoProdutosDiaTableTotal").html(result);
 
                     const diaLabel = data.grupoProdutosDia.map(objeto => objeto.descricao);
                     const diaSeries = data.grupoProdutosDia.map(objeto => parseInt(objeto.total));
@@ -1027,7 +1030,7 @@
                     data.grupoProdutosSemana.forEach(row => {
                         const linha = grupoProdutosSemanaTable.insertRow();
                         linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.total ?? 0)}</td>`;
-                        total += row.value;
+                        total += row.total;
                     });
 
                     const result =  ConvertToMoney(total ?? 0);
@@ -1051,7 +1054,7 @@
                     data.grupoProdutosMes.forEach(row => {
                         const linha = grupoProdutosMesTable.insertRow();
                         linha.innerHTML = `<td><i class="fa fa-circle mr-1 text-warning"></i> ${row.descricao}</td><td>${ConvertToMoney(row.total ?? 0)}</td>`;
-                        total += row.value;
+                        total += row.total;
                     });
 
                     const result =  ConvertToMoney(total ?? 0);
