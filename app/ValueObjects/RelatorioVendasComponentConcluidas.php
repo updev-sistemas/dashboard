@@ -13,6 +13,15 @@ class RelatorioVendasComponentConcluidas implements JsonSerializable
     private float $ticketMedio;
     private float $tempoMedioAtendimento;
     private float $quantidadeProdutosVendidos;
+    private float $totaldescontosdia;
+    private float $totalvendames;
+    private float $qtdvendames;
+    private float $tikectmediomes;
+    private float $qtddeprodutosvendidos;
+    private float $qtdmediadeitensporcupom;
+    private float $valordevendascanceladas;
+    private float $qtddevendascanceladas;
+    private float $totaldescontomes;
 
     /**
      * @param float $valorVendas
@@ -22,16 +31,34 @@ class RelatorioVendasComponentConcluidas implements JsonSerializable
      * @param float $ticketMedio
      * @param float $tempoMedioAtendimento
      * @param float $quantidadeProdutosVendidos
+     * @param float $totaldescontosdia
+     * @param float $totalvendames
+     * @param float $qtdvendames
+     * @param float $tikectmediomes
+     * @param float $qtddeprodutosvendidos
+     * @param float $qtdmediadeitensporcupom
+     * @param float $valordevendascanceladas
+     * @param float $qtddevendascanceladas
+     * @param float $totaldescontomes
      */
-    protected function __construct(float $valorVendas, float $quantidadeVendas, float $totalDescontos, float $totalLucros, float $ticketMedio, float $tempoMedioAtendimento, float $quantidadeProdutosVendidos)
+    public function __construct(float $valorVendas, float $quantidadeVendas, float $totalDescontos, float $totalLucros, float $ticketMedio, float $tempoMedioAtendimento, float $quantidadeProdutosVendidos, float $totaldescontosdia, float $totalvendames, float $qtdvendames, float $tikectmediomes, float $qtddeprodutosvendidos, float $qtdmediadeitensporcupom, float $valordevendascanceladas, float $qtddevendascanceladas, float $totaldescontomes)
     {
-        $this->valorVendas = $valorVendas ?? 0;
-        $this->quantidadeVendas = $quantidadeVendas ?? 0;
-        $this->totalDescontos = $totalDescontos ?? 0;
-        $this->totalLucros = $totalLucros ?? 0;
-        $this->ticketMedio = $ticketMedio ?? 0;
-        $this->tempoMedioAtendimento = $tempoMedioAtendimento ?? 0;
-        $this->quantidadeProdutosVendidos = $quantidadeProdutosVendidos ?? 0;
+        $this->valorVendas = $valorVendas;
+        $this->quantidadeVendas = $quantidadeVendas;
+        $this->totalDescontos = $totalDescontos;
+        $this->totalLucros = $totalLucros;
+        $this->ticketMedio = $ticketMedio;
+        $this->tempoMedioAtendimento = $tempoMedioAtendimento;
+        $this->quantidadeProdutosVendidos = $quantidadeProdutosVendidos;
+        $this->totaldescontosdia = $totaldescontosdia;
+        $this->totalvendames = $totalvendames;
+        $this->qtdvendames = $qtdvendames;
+        $this->tikectmediomes = $tikectmediomes;
+        $this->qtddeprodutosvendidos = $qtddeprodutosvendidos;
+        $this->qtdmediadeitensporcupom = $qtdmediadeitensporcupom;
+        $this->valordevendascanceladas = $valordevendascanceladas;
+        $this->qtddevendascanceladas = $qtddevendascanceladas;
+        $this->totaldescontomes = $totaldescontomes;
     }
 
     public function getValorVendas(): float
@@ -69,21 +96,75 @@ class RelatorioVendasComponentConcluidas implements JsonSerializable
         return $this->quantidadeProdutosVendidos;
     }
 
-    public static function create(float $valorVendas, float $quantidadeVendas, float $totalDescontos, float $totalLucros, float $ticketMedio, float $tempoMedioAtendimento, float $quantidadeProdutosVendidos) : RelatorioVendasComponentConcluidas
+    public function getTotaldescontosdia(): float
     {
-        return new RelatorioVendasComponentConcluidas($valorVendas, $quantidadeVendas, $totalDescontos, $totalLucros, $ticketMedio, $tempoMedioAtendimento, $quantidadeProdutosVendidos);
+        return $this->totaldescontosdia;
+    }
+
+    public function getTotalvendames(): float
+    {
+        return $this->totalvendames;
+    }
+
+    public function getQtdvendames(): float
+    {
+        return $this->qtdvendames;
+    }
+
+    public function getTikectmediomes(): float
+    {
+        return $this->tikectmediomes;
+    }
+
+    public function getQtddeprodutosvendidos(): float
+    {
+        return $this->qtddeprodutosvendidos;
+    }
+
+    public function getQtdmediadeitensporcupom(): float
+    {
+        return $this->qtdmediadeitensporcupom;
+    }
+
+    public function getValordevendascanceladas(): float
+    {
+        return $this->valordevendascanceladas;
+    }
+
+    public function getQtddevendascanceladas(): float
+    {
+        return $this->qtddevendascanceladas;
+    }
+
+    public function getTotaldescontomes(): float
+    {
+        return $this->totaldescontomes;
+    }
+
+    public static function create(float $valorVendas, float $quantidadeVendas, float $totalDescontos, float $totalLucros, float $ticketMedio, float $tempoMedioAtendimento, float $quantidadeProdutosVendidos, float $totaldescontosdia, float $totalvendames, float $qtdvendames, float $tikectmediomes, float $qtddeprodutosvendidos, float $qtdmediadeitensporcupom, float $valordevendascanceladas, float $qtddevendascanceladas, float $totaldescontomes) : RelatorioVendasComponentConcluidas
+    {
+        return new RelatorioVendasComponentConcluidas($valorVendas, $quantidadeVendas, $totalDescontos, $totalLucros, $ticketMedio, $tempoMedioAtendimento, $quantidadeProdutosVendidos, $totaldescontosdia, $totalvendames, $qtdvendames, $tikectmediomes, $qtddeprodutosvendidos, $qtdmediadeitensporcupom, $valordevendascanceladas, $qtddevendascanceladas, $totaldescontomes);
     }
 
     public function jsonSerialize()
     {
         return [
-            "valorVendas" => $this->valorVendas,
-            "quantidadeVendas" => $this->quantidadeVendas,
-            "totalDescontos" => $this->totalDescontos ,
-            "totalLucros" => $this->totalLucros,
-            "ticketMedio" => $this->ticketMedio,
-            "tempoMedioAtendimento" => $this->tempoMedioAtendimento,
-            "quantidadeProdutosVendidos" => $this->quantidadeProdutosVendidos
+            'valorVendas' => $this->valorVendas,
+            'quantidadeVendas' => $this->quantidadeVendas,
+            'totalDescontos' => $this->totalDescontos,
+            'totalLucros' => $this->totalLucros,
+            'ticketMedio' => $this->ticketMedio,
+            'tempoMedioAtendimento' => $this->tempoMedioAtendimento,
+            'quantidadeProdutosVendidos' => $this->quantidadeProdutosVendidos,
+            'totaldescontosdia' => $this->totaldescontosdia,
+            'totalvendames' => $this->totalvendames,
+            'qtdvendames' => $this->qtdvendames,
+            'tikectmediomes' => $this->tikectmediomes,
+            'qtddeprodutosvendidos' => $this->qtddeprodutosvendidos,
+            'qtdmediadeitensporcupom' => $this->qtdmediadeitensporcupom,
+            'valordevendascanceladas' => $this->valordevendascanceladas,
+            'qtddevendascanceladas' => $this->qtddevendascanceladas,
+            'totaldescontomes' => $this->totaldescontomes,
         ];
     }
 }

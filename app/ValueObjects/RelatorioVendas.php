@@ -17,7 +17,7 @@ class RelatorioVendas implements JsonSerializable
      */
     public function __construct(RelatorioVendasComponentConcluidas $concluidas, RelatorioVendasComponentCanceladas $canceladas, array $vendasUsuarios)
     {
-        $this->concluidas = $concluidas ?? RelatorioVendasComponentConcluidas::create(0,0,0,0,0,0,0);
+        $this->concluidas = $concluidas ?? RelatorioVendasComponentConcluidas::create(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
         $this->canceladas = $canceladas ?? RelatorioVendasComponentCanceladas::create(0, 0, 0, 0);
         $this->vendasUsuarios = $vendasUsuarios ?? [];
     }

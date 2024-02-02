@@ -109,6 +109,7 @@ class DemonstrativeApiController extends Controller
             $data = $request->all();
             $ph = new PayloadHandler();
             $objectMounted = $ph->handler($data);
+
             if ($objectMounted == null) {
                 return response([
                     'status' => 'Error',
