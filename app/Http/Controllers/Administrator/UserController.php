@@ -133,6 +133,10 @@ class UserController extends Controller
 
             $customer->name = $request->get('name', $customer->name);
             $customer->email = $request->get('email', $customer->email);
+            $status = $request->get('id_status', null);
+            if ($status != null && $status != '') {
+                $customer->id_status = $status;
+            }
 
             $customer->update();
 

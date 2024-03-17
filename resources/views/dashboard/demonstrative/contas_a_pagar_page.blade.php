@@ -19,15 +19,13 @@
                         <a href="{{ route('env_ctm') }}">Inicio</a>
                     @endif
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Contas a Pagars</li>
+                <li class="breadcrumb-item active" aria-current="page">Contas a Pagar</li>
             </ol>
         </nav>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <meta name="_token" content="{{ csrf_token() }}">
-
             <div class="row">
                 <div class="col-lg-4 col-md-12">
                     <div class="card">
@@ -241,11 +239,8 @@
                 chart.render();
             }
 
-            function Run()
+            function Run(payload)
             {
-                let payload = JSON.parse('{!! json_encode($payload)  !!}');
-                console.log(payload);
-
                 fillCadastros(payload.cadastros);
                 fillBadges(payload.contasPagar);
 
@@ -253,7 +248,23 @@
                 fillCadastros(payload.cadastros);
             }
 
-            Run();
+            function GetPayload()
+            {
+                return new Promise(function(action, err) {
+                    $.ajax({
+                        url : '{{ route('api.demonstrative.getDemonstrative', ['key' => encrypt($demonstrative->id)]) }}',
+                        contentType: 'application/json',
+                        type: 'get',
+                        success: (res) => action(JSON.parse(res)),
+                        error: (res) => err(res)
+                    });
+                });
+            }
+
+            GetPayload()
+                .then((res) => Run(res))
+                .catch((res) => console.log(res));
+
         });
     </script>
 @endsection

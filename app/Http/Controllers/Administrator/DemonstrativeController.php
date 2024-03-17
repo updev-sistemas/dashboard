@@ -29,7 +29,7 @@ class DemonstrativeController extends Controller
         }
 
         $sanitize = $demonstrative->sanitize();
-        #dd($sanitize, $demonstrative);
+        // dd($sanitize, $demonstrative);
 
         return view('dashboard.demonstrative.dashboard_page')
             ->with('show', true)

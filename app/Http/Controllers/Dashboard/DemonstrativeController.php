@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Demostrative;
+use App\Enterprise;
 use App\Handlers\PayloadHandler;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,64 +21,71 @@ class DemonstrativeController extends Controller
         parent::__construct();
     }
 
-    private function securityApi(Demostrative $demonstrative)
-    {
-        if (!Auth()->user()->isAdministratorUser() && ($demonstrative->enterprise->user->id != Auth::id()))
-        {
-            # Auth::logout();
-
-            // Disparar email avisando administrador
-            # return redirect()->to('login');
-        }
-    }
-
     public function showDashboardView($id, Request $request)
     {
-        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
-
-        if ($demonstrative == null) {
-            session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
+        $enterprise = Enterprise::query()->where([['id', '=', $id], ['user_id', '=', Auth::id()]])->first();
+        if ($enterprise == null) {
+            session()->flash('WARN',"Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
+        }
+
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $enterprise->id)->first();
+        if ($demonstrative == null) {
+            $demonstrative = new Demostrative();
+            $demonstrative->payload = json_encode("{}");
+            $demonstrative->enterprise_id = $id;
+            $demonstrative->save();
         }
 
         $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.dashboard_page')
-            ->with('show', true)
-            ->with('enterprise', $demonstrative->enterprise)
             ->with('demonstrative', $demonstrative)
-            ->with('payload', $sanitize);
+            ->with('show', true)
+            ->with('payload', $sanitize)
+            ->with('enterprise', $enterprise);
     }
 
     public function showContasPagarView($id, Request $request)
     {
-        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+        $enterprise = Enterprise::query()->where([['id', '=', $id], ['user_id', '=', Auth::id()]])->first();
 
-        if ($demonstrative == null) {
-            session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
+        if ($enterprise == null) {
+            session()->flash('WARN',"Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
         }
 
-        $this->securityApi($demonstrative);
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $enterprise->id)->first();
+        if ($demonstrative == null) {
+            $demonstrative = new Demostrative();
+            $demonstrative->payload = json_encode("{}");
+            $demonstrative->enterprise_id = $id;
+            $demonstrative->save();
+        }
 
         $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.contas_a_pagar_page')
             ->with('show', true)
-            ->with('enterprise', $demonstrative->enterprise)
             ->with('demonstrative', $demonstrative)
+            ->with('enterprise', $enterprise)
             ->with('payload', $sanitize);
     }
 
     public function showContasReceberView($id, Request $request)
     {
-        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+        $enterprise = Enterprise::query()->where([['id', '=', $id], ['user_id', '=', Auth::id()]])->first();
+
+        if ($enterprise == null) {
+            session()->flash('WARN',"Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $enterprise->id)->first();
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
         }
-
-        $this->securityApi($demonstrative);
 
         $sanitize = $demonstrative->sanitize();
 
@@ -90,14 +98,18 @@ class DemonstrativeController extends Controller
 
     public function showCaixasAbertosView($id, Request $request)
     {
-        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+        $enterprise = Enterprise::query()->where([['id', '=', $id], ['user_id', '=', Auth::id()]])->first();
 
+        if ($enterprise == null) {
+            session()->flash('WARN',"Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $enterprise->id)->first();
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
         }
-
-        $this->securityApi($demonstrative);
 
         $sanitize = $demonstrative->sanitize();
 
@@ -110,34 +122,42 @@ class DemonstrativeController extends Controller
 
     public function showMinhasVendasView($id, Request $request)
     {
-        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+        $enterprise = Enterprise::query()->where([['id', '=', $id], ['user_id', '=', Auth::id()]])->first();
 
+        if ($enterprise == null) {
+            session()->flash('WARN',"Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $enterprise->id)->first();
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
         }
-
-        $this->securityApi($demonstrative);
 
         $sanitize = $demonstrative->sanitize();
 
         return view('dashboard.demonstrative.minhas_vendas_page')
             ->with('show', true)
-            ->with('enterprise', $demonstrative->enterprise)
             ->with('demonstrative', $demonstrative)
+            ->with('enterprise', $enterprise)
             ->with('payload', $sanitize);
     }
 
     public function showVendedoresView($id, Request $request)
     {
-        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $id)->orderByDesc('updated_at')->first();
+        $enterprise = Enterprise::query()->where([['id', '=', $id], ['user_id', '=', Auth::id()]])->first();
 
+        if ($enterprise == null) {
+            session()->flash('WARN',"Empresa {$id} não foi localizado.");
+            return redirect()->route("env_ctm");
+        }
+
+        $demonstrative = Demostrative::query()->where('enterprise_id', '=', $enterprise->id)->first();
         if ($demonstrative == null) {
             session()->flash('WARN',"Demonstrativos da Empresa {$id} não foi localizado.");
             return redirect()->route("env_ctm");
         }
-
-        $this->securityApi($demonstrative);
 
         $sanitize = $demonstrative->sanitize();
 

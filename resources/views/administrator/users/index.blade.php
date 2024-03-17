@@ -43,8 +43,11 @@
                     </thead>
                     <tbody>
                         @foreach ($collection as $key => $obj)
-                        <tr>
-                            <td>{{ $obj->name }}</td>
+                        <tr title="Cliente {{ \App\Utils\Enumerables\UserStatusEnum::getStatus($obj->id_status) }}">
+                            <td>
+                                <i class="fa fa-circle text-{{ \App\Utils\Enumerables\UserStatusEnum::getStatusLabel($obj->id_status) }}"></i>
+                                {{ $obj->name }}
+                            </td>
                             <td class="text-center">{{ $obj->enterprises()->count() }}</td>
                             <td>{{ $obj->email }}</td>
                             <td>

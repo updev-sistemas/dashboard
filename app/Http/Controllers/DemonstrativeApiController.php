@@ -21,6 +21,26 @@ class DemonstrativeApiController extends Controller
         parent::__construct();
     }
 
+    public function getDemonstrative($key, Request $request)
+    {
+        try
+        {
+            $demonstrativeId = decrypt($key);
+            $demonstrative = Demostrative::query()->where('id', '=', $demonstrativeId)->first();
+
+            if($demonstrative == null) {
+                throw new \Exception("Demostrativo não foi localizado.");
+            }
+
+            return response()->json($demonstrative->payload, 200);
+        }
+        catch (\Exception $e)
+        {
+            logger($e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
+    }
+
     public function getPayload($storeId, Request $request)
     {
         try

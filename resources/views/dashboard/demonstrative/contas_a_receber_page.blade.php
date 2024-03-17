@@ -246,11 +246,8 @@
                 $("#CadastroNumeroUsuarios").html(data.usuarios ?? 0);
             }
 
-            function Run()
+            function Run(payload)
             {
-                let payload = JSON.parse('{!! json_encode($payload)  !!}');
-                console.log(payload);
-
                 fillCadastros(payload.cadastros);
                 fillBadges(payload.contasReceber);
 
@@ -258,7 +255,22 @@
                 fillCadastros(payload.cadastros);
             }
 
-            Run();
+            function GetPayload()
+            {
+                return new Promise(function(action, err) {
+                    $.ajax({
+                        url : '{{ route('api.demonstrative.getDemonstrative', ['key' => encrypt($demonstrative->id)]) }}',
+                        contentType: 'application/json',
+                        type: 'get',
+                        success: (res) => action(JSON.parse(res)),
+                        error: (res) => err(res)
+                    });
+                });
+            }
+
+            GetPayload()
+                .then((res) => Run(res))
+                .catch((res) => console.log(res));
 
 
         });

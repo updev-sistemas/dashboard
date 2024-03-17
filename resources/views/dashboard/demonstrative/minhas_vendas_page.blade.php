@@ -19,7 +19,7 @@
                         <a href="{{ route('env_ctm') }}">Inicio</a>
                     @endif
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Informações diárias</li>
+                <li class="breadcrumb-item active" aria-current="page">Minhas Vendas</li>
             </ol>
         </nav>
     </div>
@@ -342,8 +342,7 @@
 
             const ordemMeses = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
-            function Run() {
-                let payload = JSON.parse('{!! json_encode($payload)  !!}');
+            function Run(payload) {
 
                 fillCards(payload.lucrosPresumidos.relatorioVendas.concluidas);
 
@@ -351,7 +350,22 @@
                 fillCadastros(payload.cadastros);
             }
 
-            Run();
+            function GetPayload()
+            {
+                return new Promise(function(action, err) {
+                    $.ajax({
+                        url : '{{ route('api.demonstrative.getDemonstrative', ['key' => encrypt($demonstrative->id)]) }}',
+                        contentType: 'application/json',
+                        type: 'get',
+                        success: (res) => action(JSON.parse(res)),
+                        error: (res) => err(res)
+                    });
+                });
+            }
+
+            GetPayload()
+                .then((res) => Run(res))
+                .catch((res) => console.log(res));
         });
     </script>
 @endsection
