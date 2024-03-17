@@ -542,6 +542,24 @@
             </div>
 
         </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-title">Extrato Diário - Comparativo dos Meses <span id="extratoDiarioMesAtualCmp"></span> e  <span id="extratoDiarioMesAnteriorTmp"></span></h6>
+                        </div>
+                        <p id="saldosUpdate" class="text-muted"></p>
+                        <div id="graficoExtratoDiarioCmp"></div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
     </div>
 
 @endsection
@@ -818,6 +836,66 @@
 
                 var chart2 = new ApexCharts(document.querySelector("#graficoExtratoDiarioMesAnterior"), options2);
                 chart2.render();
+
+                const mesAtualGeral    = preencherComZeros(mesAtualvalues, 31);
+                const mesAnteriorGeral = preencherComZeros(mesAnteriorvalues, 31);
+                const range = up_range(1, 31);
+
+                var options3 = {
+                    series: [
+                        {
+                            name: mesAnteriorLabel,
+                            data: mesAtualGeral
+                        },
+
+                        {
+                            name: mesAnteriorLabel,
+                            data: mesAnteriorGeral
+                        }
+                    ],
+                    chart: {
+                        type: 'bar',
+                        height: 350
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '55%',
+                            endingShape: 'rounded'
+                        },
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories:range,
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'R$ (reais)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                const _val_ = ConvertToMoney(val);
+                                return `${_val_} Reais`;
+                            }
+                        }
+                    }
+                };
+
+                var chart3 = new ApexCharts(document.querySelector("#graficoExtratoDiarioCmp"), options3);
+                chart3.render();
+
             }
 
 
@@ -1238,8 +1316,8 @@
                 const mesAnteriorLabel = mesAnterior.charAt(0).toUpperCase() + mesAnterior.slice(1);
                 const mesAtualLabel = mesAtual.charAt(0).toUpperCase() + mesAtual.slice(1);
 
-                $('#extratoDiarioMesAnterior').html(mesAnteriorLabel);
-                $('#extratoDiarioMesAtual').html(mesAtualLabel);
+                $('#extratoDiarioMesAnterior, #extratoDiarioMesAnteriorTmp').html(mesAnteriorLabel);
+                $('#extratoDiarioMesAtual, #extratoDiarioMesAtualCmp').html(mesAtualLabel);
 
                 graficoExtratoMensalMountGraph(data, mesAnteriorLabel, mesAtualLabel);
             }
