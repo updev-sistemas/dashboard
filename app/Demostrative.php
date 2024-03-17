@@ -35,7 +35,6 @@ class Demostrative extends Model
 
     public function sanitize()
     {
-        $ph = new PayloadHandler();
         return json_decode($this->payload);
     }
 }

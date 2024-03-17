@@ -53,7 +53,6 @@ class DemonstrativeApiController extends Controller
             }
 
             $sanitize = $demonstrative->sanitize();
-
             return response(json_encode($sanitize), 200);
         }
         catch (\Exception $e)
