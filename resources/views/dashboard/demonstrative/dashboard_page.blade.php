@@ -509,14 +509,30 @@
 
     <div class="container-fluid" id="extratoDiario">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-6 col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h6 class="card-title">Extrato Diário</h6>
+                            <h6 class="card-title">Extrato Diário - Mês <span id="extratoDiarioMesAtual"></span></h6>
                         </div>
                         <p id="saldosUpdate" class="text-muted"></p>
                         <div id="graficoExtratoDiarioMesAtual"></div>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="card-title">Extrato Diário - Mês <span id="extratoDiarioMesAnterior"></span></h6>
+                        </div>
+                        <p id="saldosUpdate" class="text-muted"></p>
+                        <div id="graficoExtratoDiarioMesAnterior"></div>
                     </div>
                     <br>
                     <br>
@@ -697,18 +713,64 @@
 
             function graficoExtratoMensalMountGraph(data, mesAnteriorLabel, mesAtualLabel)
             {
-                const mesAtualvaluesTmp = data.resumoDiarioMesAtual.map(x => parseFloat(x.totalAcumulado ?? 0));
-                const mesAtualvalues = preencherComZeros(mesAtualvaluesTmp, 31);
+                const mesAtuallabel = data.resumoDiarioMesAtual.map(x => x.dia);
+                const mesAtualvalues = data.resumoDiarioMesAtual.map(x => parseFloat(x.totalAcumulado ?? 0));
 
-                const mesAnteriorvaluesTmp = data.resumoDiarioMesAnterior.map(x => parseFloat(x.totalAcumulado ?? 0));
-                const mesAnteriorvalues = preencherComZeros(mesAnteriorvaluesTmp, 31);
+                const mesAnteriorlabel = data.resumoDiarioMesAnterior.map(x => x.dia);
+                const mesAnteriorvalues = data.resumoDiarioMesAnterior.map(x => parseFloat(x.totalAcumulado ?? 0));
 
-                var options = {
+                var options1 = {
                     series: [
                         {
                             name: mesAtualLabel,
                             data: mesAtualvalues
+                        }
+                    ],
+                    chart: {
+                        type: 'bar',
+                        height: 350
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '55%',
+                            endingShape: 'rounded'
                         },
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: mesAtuallabel,
+                    },
+                    yaxis: {
+                        title: {
+                            text: 'R$ (reais)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                const _val_ = ConvertToMoney(val);
+                                return `${_val_} Reais`;
+                            }
+                        }
+                    }
+                };
+
+                var chart1 = new ApexCharts(document.querySelector("#graficoExtratoDiarioMesAtual"), options1);
+                chart1.render();
+
+                var options2 = {
+                    series: [
                         {
                             name: mesAnteriorLabel,
                             data: mesAnteriorvalues
@@ -734,7 +796,7 @@
                         colors: ['transparent']
                     },
                     xaxis: {
-                        categories: up_range(1,31),
+                        categories:mesAnteriorlabel,
                     },
                     yaxis: {
                         title: {
@@ -754,8 +816,8 @@
                     }
                 };
 
-                var chart = new ApexCharts(document.querySelector("#graficoExtratoDiarioMesAtual"), options);
-                chart.render();
+                var chart2 = new ApexCharts(document.querySelector("#graficoExtratoDiarioMesAnterior"), options2);
+                chart2.render();
             }
 
 
