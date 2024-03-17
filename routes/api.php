@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/ajax/demostrative/view/store/{key}','DemonstrativeApiController@getDemonstrative')->name('api.demonstrative.getDemonstrative');
+
 Route::get('/loja/view/data/{id}','DemonstrativeApiController@getPayload')->name('api.demonstrative.getPayload');
 
 Route::post('/loja/{id}', 'DemonstrativeApiController@registerWithValidation')->name('api.demonstrative.register');

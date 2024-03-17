@@ -132,22 +132,21 @@
 <script>
     $(function(){
 
-        function fillCadastros(data)
+        function fillCadastros()
         {
-            $("#CadastroNumeroClientes").html(data.clientes ?? 0);
-            $("#CadastroNumeroProdutos").html(data.produtos ?? 0);
-            $("#CadastroNumeroFornecedores").html(data.fornecedores ?? 0);
-            $("#CadastroNumeroUsuarios").html(data.usuarios ?? 0);
+            const clientes = '{!! $payload->cadastros->clientes ?? 0 !!}';
+            const produtos = '{!! $payload->cadastros->produtos ?? 0 !!}';
+            const fornecedores = '{!! $payload->cadastros->fornecedores ?? 0 !!}';
+            const usuarios = '{!! $payload->cadastros->usuarios ?? 0 !!}';
+
+
+            $("#CadastroNumeroClientes").html(clientes);
+            $("#CadastroNumeroProdutos").html(produtos);
+            $("#CadastroNumeroFornecedores").html(fornecedores);
+            $("#CadastroNumeroUsuarios").html(usuarios);
         }
 
-        function Run() {
-            let payload = JSON.parse('{!! json_encode($payload)  !!}');
-            console.log(payload);
-
-            fillCadastros(payload.cadastros);
-        }
-
-        Run();
+        fillCadastros();
     });
 </script>
 @endsection

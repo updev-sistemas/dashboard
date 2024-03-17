@@ -33,6 +33,21 @@
                                 <small class="form-text text-danger">{{ $errors->first('email') }}</small>
                             @endif
                         </div>
+                        <div class="form-group">
+                            <label for="email">Habilitado</label>
+                            <select name="id_status" class="form-control">
+                                <optgroup label="Atual">
+                                    <option value="{{ $customer->id_status }}">{{ \App\Utils\Enumerables\UserStatusEnum::getStatus($customer->id_status) }}</option>
+                                </optgroup>
+                                <optgroup label="Opções">
+                                    <option value="1000">Habilitado</option>
+                                    <option value="0">Desabilitado</option>
+                                </optgroup>
+                            </select>
+                            @if ($errors->has('email'))
+                                <small class="form-text text-danger">{{ $errors->first('email') }}</small>
+                            @endif
+                        </div>
                         <button type="submit" class="btn btn-primary">Atualizar</button>
                     </form>
                 </div>

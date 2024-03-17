@@ -18,7 +18,7 @@
                         <a href="{{ route('env_ctm') }}">Inicio</a>
                     @endif
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Caixas Abertos</li>
+                <li class="breadcrumb-item active" aria-current="page">Visão Geral</li>
             </ol>
         </nav>
     </div>
@@ -779,7 +779,7 @@
                 const valorVendas = ConvertToMoney(data.valorVendas ?? 0);
                 $("#lucrosPresumidosValorVendas").html(valorVendas);
 
-                const totalLucros = (data.totalLucros ?? 0).toLocaleString('pt-BR', {
+                const totalLucros = (data.ticketMedio ?? 0).toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL'
                 });
@@ -1072,11 +1072,21 @@
                 }
             }
 
-            function Run()
+            function GetPayload()
             {
-                let payload = JSON.parse('{!! json_encode($payload)  !!}');
-                console.log(payload);
+                return new Promise(function(action, err) {
+                   $.ajax({
+                       url : '{{ route('api.demonstrative.getDemonstrative', ['key' => encrypt($demonstrative->id)]) }}',
+                       contentType: 'application/json',
+                       type: 'get',
+                       success: (res) => action(JSON.parse(res)),
+                       error: (res) => err(res)
+                   });
+                });
+            }
 
+            function Run(payload)
+            {
                 fillCadastros(payload.cadastros);
 
                 fillBadges(payload.lucrosPresumidos.relatorioVendas.concluidas);
@@ -1094,7 +1104,9 @@
                 fillGrupoProdutos(payload.grupoProdutos);
             }
 
-            Run();
+            GetPayload()
+                .then((res) => Run(res))
+                .catch((res) => console.log(res));
         });
     </script>
 @endsection
