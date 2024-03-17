@@ -18,6 +18,7 @@ class Payload implements JsonSerializable
     private CaixasAbertos $caixasAbertos;
     private TopProdutos $topProdutos;
     private LucrosPresumidos $lucrosPresumidos;
+    private Extrato $extrato;
 
     /**
      * @param NotasFiscais $notasFiscais
@@ -33,7 +34,7 @@ class Payload implements JsonSerializable
      * @param TopProdutos $topProdutos
      * @param LucrosPresumidos $lucrosPresumidos
      */
-    protected function __construct(NotasFiscais $notasFiscais, Vendas $vendas, GrupoPagamentos $grupoPagamentos, GrupoVendedor $grupoVendedor, GrupoProduto $grupoProduto, Caixa $caixa, Cadastros $cadastros, ContasPagar $contasPagar, ContasReceber $contasReceber, CaixasAbertos $caixasAbertos, TopProdutos $topProdutos, LucrosPresumidos $lucrosPresumidos)
+    protected function __construct(NotasFiscais $notasFiscais, Vendas $vendas, GrupoPagamentos $grupoPagamentos, GrupoVendedor $grupoVendedor, GrupoProduto $grupoProduto, Caixa $caixa, Cadastros $cadastros, ContasPagar $contasPagar, ContasReceber $contasReceber, CaixasAbertos $caixasAbertos, TopProdutos $topProdutos, LucrosPresumidos $lucrosPresumidos, Extrato $extrato)
     {
         $this->notasFiscais = $notasFiscais;
         $this->vendas = $vendas;
@@ -47,6 +48,12 @@ class Payload implements JsonSerializable
         $this->caixasAbertos = $caixasAbertos;
         $this->topProdutos = $topProdutos;
         $this->lucrosPresumidos = $lucrosPresumidos;
+        $this->extrato = $extrato;
+    }
+
+    public function getExtrato(): Extrato
+    {
+        return $this->extrato;
     }
 
     public function getNotasFiscais(): NotasFiscais
@@ -109,9 +116,9 @@ class Payload implements JsonSerializable
         return $this->lucrosPresumidos;
     }
 
-    public static function create(NotasFiscais $notasFiscais, Vendas $vendas, GrupoPagamentos $grupoPagamentos, GrupoVendedor $grupoVendedor, GrupoProduto $grupoProduto, Caixa $caixa, Cadastros $cadastros, ContasPagar $contasPagar, ContasReceber $contasReceber, CaixasAbertos $caixasAbertos, TopProdutos $topProdutos, LucrosPresumidos $lucrosPresumidos)
+    public static function create(NotasFiscais $notasFiscais, Vendas $vendas, GrupoPagamentos $grupoPagamentos, GrupoVendedor $grupoVendedor, GrupoProduto $grupoProduto, Caixa $caixa, Cadastros $cadastros, ContasPagar $contasPagar, ContasReceber $contasReceber, CaixasAbertos $caixasAbertos, TopProdutos $topProdutos, LucrosPresumidos $lucrosPresumidos, Extrato $extrato)
     {
-        return new Payload($notasFiscais, $vendas, $grupoPagamentos, $grupoVendedor, $grupoProduto, $caixa, $cadastros, $contasPagar, $contasReceber, $caixasAbertos, $topProdutos, $lucrosPresumidos);
+        return new Payload($notasFiscais, $vendas, $grupoPagamentos, $grupoVendedor, $grupoProduto, $caixa, $cadastros, $contasPagar, $contasReceber, $caixasAbertos, $topProdutos, $lucrosPresumidos, $extrato);
     }
 
     public function jsonSerialize()
@@ -128,7 +135,8 @@ class Payload implements JsonSerializable
             "pagamentos" => $this->grupoPagamentos,
             "produtosMaisVendidos" => $this->topProdutos,
             "vendas" => $this->vendas,
-            "vendedor" => $this->grupoVendedor
+            "vendedor" => $this->grupoVendedor,
+            "extrato" => $this->extrato
         ];
     }
 }

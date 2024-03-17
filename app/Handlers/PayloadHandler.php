@@ -17,6 +17,8 @@ use App\ValueObjects\CaixasAbertosComponent;
 use App\ValueObjects\Calendario;
 use App\ValueObjects\ContasPagar;
 use App\ValueObjects\ContasReceber;
+use App\ValueObjects\Extrato;
+use App\ValueObjects\ExtratoDiario;
 use App\ValueObjects\GrupoPagamentos;
 use App\ValueObjects\GrupoProduto;
 use App\ValueObjects\GrupoVendedor;
@@ -61,6 +63,7 @@ class PayloadHandler
         $caixasAbertos = $this->tryRecoveryCaixasAbertos($payload);
         $topProdutos = $this->tryRecoveryTopProdutos($payload);
         $lucrosPresumidos = $this->tryRecoveryLucrosPresumidos($payload);
+        $extrato = $this->tryRecoveryExtratoDiario($payload);
 
         if (count($this->errors) == 0) {
             return Payload::create(
@@ -75,11 +78,40 @@ class PayloadHandler
                 $contasReceber,
                 $caixasAbertos,
                 $topProdutos,
-                $lucrosPresumidos);
+                $lucrosPresumidos,
+                $extrato);
         }
         else {
             return null;
         }
+    }
+
+    private function tryRecoveryExtratoDiario(array $payload) : ?Extrato
+    {
+        $mesAnterior = isset($payload['extratoMensalVendas']['resumoDiarioMesAnterior']) ? $payload['extratoMensalVendas']['resumoDiarioMesAnterior'] : [];
+        $mesAtual    = isset($payload['extratoMensalVendas']['resumoDiarioMesAtual']) ? $payload['extratoMensalVendas']['resumoDiarioMesAtual'] : [];
+
+        $mesAtualToSave = [];
+        foreach ($mesAtual as $key => $obj) {
+            $dia = intval($obj['dia']);
+            $mes = $obj['mes'];
+            $valor = floatval($obj['totalAcumulado']);
+            $target = ExtratoDiario::create($dia, $mes, $valor);
+
+            array_push($mesAtualToSave, $target);
+        }
+
+        $mesAnteriorToSave = [];
+        foreach ($mesAnterior as $key => $obj) {
+            $dia = intval($obj['dia']);
+            $mes = $obj['mes'];
+            $valor = floatval($obj['totalAcumulado']);
+            $target = ExtratoDiario::create($dia, $mes, $valor);
+
+            array_push($mesAnteriorToSave, $target);
+        }
+
+        return Extrato::create($mesAnteriorToSave, $mesAtualToSave);
     }
 
     private function tryRecoveryNotasFiscais(array $payload): ?NotasFiscais
