@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class VendasValueObject
+class VendasValueObject
 {
     public CanceladasValueObject $canceladas;
 

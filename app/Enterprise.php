@@ -17,7 +17,9 @@ class Enterprise extends Model
         'fantasia',
         'email',
         'uuid',
-        'user_id'
+        'user_id',
+        'accumulate_day',
+        'accumulate_monther'
     ];
 
     protected $casts = [

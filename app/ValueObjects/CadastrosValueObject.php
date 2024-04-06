@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class CadastrosValueObject
+class CadastrosValueObject
 {
     public string $produtos;
 

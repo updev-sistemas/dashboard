@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class SaldoValueObject
+class SaldoValueObject
 {
     public int $janeiro;
 

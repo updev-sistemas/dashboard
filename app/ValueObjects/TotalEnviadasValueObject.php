@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class TotalEnviadasValueObject
+class TotalEnviadasValueObject
 {
     public int $janeiro;
 

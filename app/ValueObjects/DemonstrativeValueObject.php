@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class DemonstrativeValueObject
+class DemonstrativeValueObject
 {
     public NotasFiscaisValueObject $notasFiscais;
 

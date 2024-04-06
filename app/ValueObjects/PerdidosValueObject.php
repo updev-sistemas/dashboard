@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class PerdidosValueObject
+class PerdidosValueObject
 {
     public int $janeiro;
 
