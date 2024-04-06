@@ -137,7 +137,6 @@ class DemonstrativeApiController extends Controller
                 ], 400);
             }
             else {
-
                 $payloadStr = json_encode($objectMounted);
 
                 $demostrative = Demostrative::query()->where('enterprise_id', '=', $enterprise->id)->first();
@@ -154,6 +153,21 @@ class DemonstrativeApiController extends Controller
                     $demostrative->updated_at = Carbon::now();
                     $demostrative->update();
                 }
+
+                $resumoDiariosMesAtual = $objectMounted->getExtrato();
+                dd($resumoDiariosMesAtual);
+                $total = 0;
+                foreach ($resumoDiariosMesAtual as $item) {
+                    $total += $item->totalAcumulado ?? 0;
+                }
+                $enterprise->accumulate_monther = $total;
+                $enterprise->accumulate_day = $objectMounted
+                    ->getLucrosPresumidos()
+                    ->getRelatorioVendas()
+                    ->getConcluidas()
+                    ->getValorVendas() ?? 0;
+
+                $enterprise->update();
 
                 return response(['status' => 'Atualizado', 'return' => 200], 200);
             }

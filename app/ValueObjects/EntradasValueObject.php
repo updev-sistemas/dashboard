@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class EntradasValueObject
+class EntradasValueObject
 {
     public int $janeiro;
 

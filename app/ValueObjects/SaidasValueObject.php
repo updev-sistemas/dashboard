@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class SaidasValueObject
+class SaidasValueObject
 {
     public int $janeiro;
 

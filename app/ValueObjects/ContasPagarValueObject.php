@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class ContasPagarValueObject
+class ContasPagarValueObject
 {
     public PagasValueObject $pagas;
 

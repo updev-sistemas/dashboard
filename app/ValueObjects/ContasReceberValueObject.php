@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-final class ContasReceberValueObject
+class ContasReceberValueObject
 {
     public ReceberValueObject $receber;
 

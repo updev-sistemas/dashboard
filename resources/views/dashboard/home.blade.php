@@ -30,7 +30,11 @@
                         <div class="media-body">
                             <h5 class="mt-0">{{ $enterprise->fantasia }}</h5>
                             <p>
-                                {{ $enterprise->razao_social }} / {{ $enterprise->cnpj }}
+                                <strong>CNPJ</strong>: {{ $enterprise->cnpj }}
+                                <br />
+                                <strong>Acumlado Dia</strong>: R$ {{ number_format(0, 2, ',', '.') }}
+                                <br />
+                                <strong>Acumlado Mês</strong>: R$ {{ number_format(0, 2, ',', '.') }}
                                 <br />
                                 <a class="btn btn-sm btn-link" href="{{ route('view_enterprise',['id' => $enterprise->id]) }}"><i class="fa fa-link"></i> &nbsp; Acessar Financeiro</a>
                             </p>
