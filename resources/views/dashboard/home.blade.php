@@ -32,9 +32,9 @@
                             <p>
                                 <strong>CNPJ</strong>: {{ $enterprise->cnpj }}
                                 <br />
-                                <strong>Acumlado Dia</strong>: R$ {{ number_format(0, 2, ',', '.') }}
+                                <strong>Acumulado Dia</strong>: R$ {{ number_format($enterprise->accumulate_day, 2, ',', '.') }}
                                 <br />
-                                <strong>Acumlado Mês</strong>: R$ {{ number_format(0, 2, ',', '.') }}
+                                <strong>Acumulado Mês</strong>: R$ {{ number_format($enterprise->accumulate_monther, 2, ',', '.') }}
                                 <br />
                                 <a class="btn btn-sm btn-link" href="{{ route('view_enterprise',['id' => $enterprise->id]) }}"><i class="fa fa-link"></i> &nbsp; Acessar Financeiro</a>
                             </p>

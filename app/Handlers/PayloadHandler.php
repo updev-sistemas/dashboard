@@ -41,7 +41,6 @@ class PayloadHandler
     public function __construct()
     {
         $this->errors = [];
-        $this->payload = null;
     }
 
     public function getErrors(): array

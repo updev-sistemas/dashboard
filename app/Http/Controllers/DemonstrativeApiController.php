@@ -154,11 +154,10 @@ class DemonstrativeApiController extends Controller
                     $demostrative->update();
                 }
 
-                $resumoDiariosMesAtual = $objectMounted->getExtrato();
-                dd($resumoDiariosMesAtual);
+                $resumoDiariosMesAtual = $objectMounted->getExtrato()->getResumoDiarioMesAtual();
                 $total = 0;
                 foreach ($resumoDiariosMesAtual as $item) {
-                    $total += $item->totalAcumulado ?? 0;
+                    $total += $item->getTotalAcumulado() ?? 0;
                 }
                 $enterprise->accumulate_monther = $total;
                 $enterprise->accumulate_day = $objectMounted
