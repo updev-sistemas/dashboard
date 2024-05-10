@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-class TotalContigenciaValueObject
+final class TotalContigenciaValueObject
 {
     public int $janeiro;
 

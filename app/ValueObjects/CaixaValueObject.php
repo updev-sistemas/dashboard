@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-class CaixaValueObject
+final class CaixaValueObject
 {
     public SaldoValueObject $saldo;
 

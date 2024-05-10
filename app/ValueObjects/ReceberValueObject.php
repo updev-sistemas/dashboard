@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-class ReceberValueObject
+final class ReceberValueObject
 {
     public int $janeiro;
 

@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-class PendendentesValueObject
+final class PendendentesValueObject
 {
     public int $janeiro;
 

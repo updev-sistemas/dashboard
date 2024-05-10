@@ -844,7 +844,7 @@
                 var options3 = {
                     series: [
                         {
-                            name: mesAnteriorLabel,
+                            name: mesAtualLabel,
                             data: mesAtualGeral
                         },
 

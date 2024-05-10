@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-class LucrosPresumidosValueObject
+final class LucrosPresumidosValueObject
 {
     public GanhosValueObject $ganhos;
 

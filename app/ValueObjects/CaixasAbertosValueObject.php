@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-class CaixasAbertosValueObject
+final class CaixasAbertosValueObject
 {
     public string $usuario;
 

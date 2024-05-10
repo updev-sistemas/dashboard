@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-class TotalCanceladasValueObject
+final class TotalCanceladasValueObject
 {
     public int $janeiro;
 

@@ -2,7 +2,7 @@
 
 namespace App\ValueObjects;
 
-class NotasFiscaisValueObject
+final class NotasFiscaisValueObject
 {
 	public TotalEnviadasValueObject $totalEnviadas;
 
