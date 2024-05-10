@@ -1320,6 +1320,7 @@
                 $('#extratoDiarioMesAnterior, #extratoDiarioMesAnteriorTmp').html(mesAnteriorLabel);
                 $('#extratoDiarioMesAtual, #extratoDiarioMesAtualCmp').html(mesAtualLabel);
 
+                console.log(data, mesAnteriorLabel, mesAtualLabel);
                 graficoExtratoMensalMountGraph(data, mesAnteriorLabel, mesAtualLabel);
             }
 
@@ -1357,8 +1358,8 @@
 
                 if (payload.hasOwnProperty("extrato")) {
                     if (payload.extrato.hasOwnProperty("resumoDiarioMesAtual") && payload.extrato.hasOwnProperty("resumoDiarioMesAnterior")) {
-
                         if (payload.extrato.resumoDiarioMesAtual.length == 0 && payload.extrato.resumoDiarioMesAnterior.length == 0) {
+                            console.log(payload);
                             $('#extratoDiario').hide();
                         } else {
                             $('#extratoDiario').show();

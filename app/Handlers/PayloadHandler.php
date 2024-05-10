@@ -2,6 +2,7 @@
 
 namespace App\Handlers;
 
+use App\Utils\Commons\FormatDataUtil;
 use App\Validators\CadastrosValidator;
 use App\Validators\CaixasAbertosValidator;
 use App\Validators\CalendarioValidator;
@@ -88,14 +89,14 @@ class PayloadHandler
 
     private function tryRecoveryExtratoDiario(array $payload) : ?Extrato
     {
-        $mesAnterior = isset($payload['extratoMensalVendas']['resumoDiarioMesAnterior']) ? $payload['extratoMensalVendas']['resumoDiarioMesAnterior'] : [];
-        $mesAtual    = isset($payload['extratoMensalVendas']['resumoDiarioMesAtual']) ? $payload['extratoMensalVendas']['resumoDiarioMesAtual'] : [];
+        $mesAnterior = isset($payload['extrato']['resumoDiarioMesAnterior']) ? $payload['extrato']['resumoDiarioMesAnterior'] : [];
+        $mesAtual    = isset($payload['extrato']['resumoDiarioMesAtual']) ? $payload['extrato']['resumoDiarioMesAtual'] : [];
 
         $mesAtualToSave = [];
         foreach ($mesAtual as $key => $obj) {
             $dia = intval($obj['dia']);
             $mes = $obj['mes'];
-            $valor = floatval($obj['totalAcumulado']);
+            $valor = FormatDataUtil::FormatNumber($obj['totalAcumulado']);
             $target = ExtratoDiario::create($dia, $mes, $valor);
 
             array_push($mesAtualToSave, $target);
@@ -105,7 +106,7 @@ class PayloadHandler
         foreach ($mesAnterior as $key => $obj) {
             $dia = intval($obj['dia']);
             $mes = $obj['mes'];
-            $valor = floatval($obj['totalAcumulado']);
+            $valor = FormatDataUtil::FormatNumber($obj['totalAcumulado']);
             $target = ExtratoDiario::create($dia, $mes, $valor);
 
             array_push($mesAnteriorToSave, $target);
