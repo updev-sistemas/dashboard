@@ -2,15 +2,17 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
+
 final class ConcluidasValueObject
 {
-    public int $valorVendas;
+    public float $valorVendas;
 
-    public int $quantidadeVendas;
+    public float $quantidadeVendas;
 
-    public int $totalDescontos;
+    public float $totalDescontos;
 
-    public int $totalLucros;
+    public float $totalLucros;
 
     public float $ticketMedio;
 
@@ -19,40 +21,40 @@ final class ConcluidasValueObject
     public int $quantidadeProdutosVendidos;
 
     public function __construct(
-        int    $valorVendas,
-        int    $quantidadeVendas,
-        int    $totalDescontos,
-        int    $totalLucros,
+        float    $valorVendas,
+        float    $quantidadeVendas,
+        float    $totalDescontos,
+        float    $totalLucros,
         float  $ticketMedio,
         string $tempoMedioAtendimento,
         int    $quantidadeProdutosVendidos
     )
     {
-        $this->valorVendas = $valorVendas;
-        $this->quantidadeVendas = $quantidadeVendas;
-        $this->totalDescontos = $totalDescontos;
-        $this->totalLucros = $totalLucros;
-        $this->ticketMedio = $ticketMedio;
+        $this->valorVendas = FormatDataUtil::FormatNumber($valorVendas);
+        $this->quantidadeVendas = FormatDataUtil::FormatNumber($quantidadeVendas);
+        $this->totalDescontos = FormatDataUtil::FormatNumber($totalDescontos);
+        $this->totalLucros = FormatDataUtil::FormatNumber($totalLucros);
+        $this->ticketMedio = FormatDataUtil::FormatNumber($ticketMedio);
         $this->tempoMedioAtendimento = $tempoMedioAtendimento;
         $this->quantidadeProdutosVendidos = $quantidadeProdutosVendidos;
     }
 
-    public function getValorVendas(): int
+    public function getValorVendas(): float
     {
         return $this->valorVendas;
     }
 
-    public function getQuantidadeVendas(): int
+    public function getQuantidadeVendas(): float
     {
         return $this->quantidadeVendas;
     }
 
-    public function getTotalDescontos(): int
+    public function getTotalDescontos(): float
     {
         return $this->totalDescontos;
     }
 
-    public function getTotalLucros(): int
+    public function getTotalLucros(): float
     {
         return $this->totalLucros;
     }

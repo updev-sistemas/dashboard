@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class Caixa  implements JsonSerializable{
@@ -17,9 +18,9 @@ class Caixa  implements JsonSerializable{
         $this->entradas = $entradas ?? Calendario::default();
         $this->saida = $saida ?? Calendario::default();
         $this->saldo = $saldo ?? Calendario::default();
-        $this->entradaAtual = $entradaAtual ?? $this->getEntradaAtual() ?? 0;
-        $this->saidaAtual = $saidaAtual ?? $this->getSaidaAtual() ??0;
-        $this->saldoAtual = $saldoAtual ?? $this->getSaldoAtual() ?? 0;
+        $this->entradaAtual = FormatDataUtil::FormatNumber($entradaAtual ?? $this->getEntradaAtual() ?? 0);
+        $this->saidaAtual =  FormatDataUtil::FormatNumber($saidaAtual ?? $this->getSaidaAtual() ?? 0);
+        $this->saldoAtual =  FormatDataUtil::FormatNumber($saldoAtual ?? $this->getSaldoAtual() ?? 0);
     }
 
     public function getEntradaAtual(): float

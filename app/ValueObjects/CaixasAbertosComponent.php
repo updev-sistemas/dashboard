@@ -2,78 +2,79 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class CaixasAbertosComponent implements JsonSerializable
 {
-    private int $cartao;
-    private int $cashback;
-    private int $cheque;
-    private int $credito;
+    private float $cartao;
+    private float $cashback;
+    private float $cheque;
+    private float $credito;
     private string $dataabertura;
-    private int $digital;
-    private int $dinheiro;
-    private int $dinheiro1;
-    private int $fechamento;
+    private float $digital;
+    private float $dinheiro;
+    private float $dinheiro1;
+    private float $fechamento;
     private string $horaabertura;
     private int $id;
-    private int $pix;
-    private int $saldoatual;
-    private int $saldoinicial;
+    private float $pix;
+    private float $saldoatual;
+    private float $saldoinicial;
     private string $usuario;
 
     /**
-     * @param int $cartao
-     * @param int $cashback
-     * @param int $cheque
-     * @param int $credito
+     * @param float $cartao
+     * @param float $cashback
+     * @param float $cheque
+     * @param float $credito
      * @param string $dataabertura
-     * @param int $digital
-     * @param int $dinheiro
-     * @param int $dinheiro1
-     * @param int $fechamento
+     * @param float $digital
+     * @param float $dinheiro
+     * @param float $dinheiro1
+     * @param float $fechamento
      * @param string $horaabertura
      * @param int $id
-     * @param int $pix
-     * @param int $saldoatual
-     * @param int $saldoinicial
+     * @param float $pix
+     * @param float $saldoatual
+     * @param float $saldoinicial
      * @param string $usuario
      */
     protected function __construct(int $cartao, int $cashback, int $cheque, int $credito, string $dataabertura, int $digital, int $dinheiro, int $dinheiro1, int $fechamento, string $horaabertura, int $id, int $pix, int $saldoatual, int $saldoinicial, string $usuario)
     {
-        $this->cartao = $cartao;
-        $this->cashback = $cashback;
-        $this->cheque = $cheque;
-        $this->credito = $credito;
-        $this->dataabertura = $dataabertura;
-        $this->digital = $digital;
-        $this->dinheiro = $dinheiro;
-        $this->dinheiro1 = $dinheiro1;
-        $this->fechamento = $fechamento;
+        $this->cartao =  FormatDataUtil::FormatNumber($cartao);
+        $this->cashback =  FormatDataUtil::FormatNumber($cashback);
+        $this->cheque =  FormatDataUtil::FormatNumber($cheque);
+        $this->credito =  FormatDataUtil::FormatNumber($credito);
+        $this->dataabertura =  FormatDataUtil::FormatNumber($dataabertura);
+        $this->digital =  FormatDataUtil::FormatNumber($digital);
+        $this->dinheiro =  FormatDataUtil::FormatNumber($dinheiro);
+        $this->dinheiro1 =  FormatDataUtil::FormatNumber($dinheiro1);
+        $this->fechamento =  FormatDataUtil::FormatNumber($fechamento);
         $this->horaabertura = $horaabertura;
         $this->id = $id;
-        $this->pix = $pix;
-        $this->saldoatual = $saldoatual;
-        $this->saldoinicial = $saldoinicial;
+        $this->pix =  FormatDataUtil::FormatNumber($pix);
+        $this->saldoatual =  FormatDataUtil::FormatNumber($saldoatual);
+        $this->saldoinicial =  FormatDataUtil::FormatNumber($saldoinicial);
         $this->usuario = $usuario;
     }
 
-    public function getCartao(): int
+    public function getCartao(): float
     {
         return $this->cartao;
     }
 
-    public function getCashback(): int
+    public function getCashback(): float
     {
         return $this->cashback;
     }
 
-    public function getCheque(): int
+    public function getCheque(): float
     {
         return $this->cheque;
     }
 
-    public function getCredito(): int
+    public function getCredito(): float
     {
         return $this->credito;
     }
@@ -83,22 +84,22 @@ class CaixasAbertosComponent implements JsonSerializable
         return $this->dataabertura;
     }
 
-    public function getDigital(): int
+    public function getDigital(): float
     {
         return $this->digital;
     }
 
-    public function getDinheiro(): int
+    public function getDinheiro(): float
     {
         return $this->dinheiro;
     }
 
-    public function getDinheiro1(): int
+    public function getDinheiro1(): float
     {
         return $this->dinheiro1;
     }
 
-    public function getFechamento(): int
+    public function getFechamento(): float
     {
         return $this->fechamento;
     }
@@ -113,17 +114,17 @@ class CaixasAbertosComponent implements JsonSerializable
         return $this->id;
     }
 
-    public function getPix(): int
+    public function getPix(): float
     {
         return $this->pix;
     }
 
-    public function getSaldoatual(): int
+    public function getSaldoatual(): float
     {
         return $this->saldoatual;
     }
 
-    public function getSaldoinicial(): int
+    public function getSaldoinicial(): float
     {
         return $this->saldoinicial;
     }
@@ -133,7 +134,7 @@ class CaixasAbertosComponent implements JsonSerializable
         return $this->usuario;
     }
 
-    public static function create(int $cartao, int $cashback, int $cheque, int $credito, string $dataabertura, int $digital, int $dinheiro, int $dinheiro1, int $fechamento, string $horaabertura, int $id, int $pix, int $saldoatual, int $saldoinicial, string $usuario): CaixasAbertosComponent
+    public static function create(float $cartao, float $cashback, float $cheque, float $credito, string $dataabertura, float $digital, float $dinheiro, float $dinheiro1, float $fechamento, string $horaabertura, int $id, float $pix, float $saldoatual, float $saldoinicial, string $usuario): CaixasAbertosComponent
     {
         return new CaixasAbertosComponent( $cartao,  $cashback, $cheque, $credito, $dataabertura, $digital, $dinheiro, $dinheiro1, $fechamento, $horaabertura, $id, $pix, $saldoatual, $saldoinicial, $usuario);
     }

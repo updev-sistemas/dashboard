@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class Calendario  implements JsonSerializable
@@ -35,18 +36,18 @@ class Calendario  implements JsonSerializable
      */
     protected function __construct(float $janeiro, float $fevereiro, float $marco, float $abril, float $maio, float $junho, float $julho, float $agosto, float $setembro, float $outubro, float $novembro, float $dezembro)
     {
-        $this->janeiro    = $janeiro ?? 0;
-        $this->fevereiro  = $fevereiro ?? 0;
-        $this->marco      = $marco ?? 0;
-        $this->abril      = $abril ?? 0;
-        $this->maio       = $maio ?? 0;
-        $this->junho      = $junho ?? 0;
-        $this->julho      = $julho ?? 0;
-        $this->agosto     = $agosto ?? 0;
-        $this->setembro   = $setembro ?? 0;
-        $this->outubro    = $outubro ?? 0;
-        $this->novembro   = $novembro ?? 0;
-        $this->dezembro   = $dezembro ?? 0;
+        $this->janeiro    = FormatDataUtil::FormatNumber($janeiro ?? 0, 2);
+        $this->fevereiro  = FormatDataUtil::FormatNumber($fevereiro ?? 0, 2);
+        $this->marco      = FormatDataUtil::FormatNumber($marco ?? 0, 2);
+        $this->abril      = FormatDataUtil::FormatNumber($abril ?? 0, 2);
+        $this->maio       = FormatDataUtil::FormatNumber($maio ?? 0, 2);
+        $this->junho      = FormatDataUtil::FormatNumber($junho ?? 0, 2);
+        $this->julho      = FormatDataUtil::FormatNumber($julho ?? 0, 2);
+        $this->agosto     = FormatDataUtil::FormatNumber($agosto ?? 0, 2);
+        $this->setembro   = FormatDataUtil::FormatNumber($setembro ?? 0, 2);
+        $this->outubro    = FormatDataUtil::FormatNumber($outubro ?? 0, 2);
+        $this->novembro   = FormatDataUtil::FormatNumber($novembro ?? 0, 2);
+        $this->dezembro   = FormatDataUtil::FormatNumber($dezembro ?? 0, 2);
     }
 
     public function total() : float

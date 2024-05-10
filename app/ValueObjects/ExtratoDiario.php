@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class ExtratoDiario implements JsonSerializable
@@ -19,7 +20,7 @@ class ExtratoDiario implements JsonSerializable
     {
         $this->dia = $dia;
         $this->mes = $mes;
-        $this->totalAcumulado = $totalAcumulado;
+        $this->totalAcumulado = FormatDataUtil::FormatNumber($totalAcumulado);
     }
 
     public function getDia(): int

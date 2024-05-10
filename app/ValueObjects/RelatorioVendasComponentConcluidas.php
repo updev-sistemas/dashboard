@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class RelatorioVendasComponentConcluidas implements JsonSerializable
@@ -43,22 +44,22 @@ class RelatorioVendasComponentConcluidas implements JsonSerializable
      */
     public function __construct(float $valorVendas, float $quantidadeVendas, float $totalDescontos, float $totalLucros, float $ticketMedio, float $tempoMedioAtendimento, float $quantidadeProdutosVendidos, float $totaldescontosdia, float $totalvendames, float $qtdvendames, float $tikectmediomes, float $qtddeprodutosvendidos, float $qtdmediadeitensporcupom, float $valordevendascanceladas, float $qtddevendascanceladas, float $totaldescontomes)
     {
-        $this->valorVendas = $valorVendas;
-        $this->quantidadeVendas = $quantidadeVendas;
-        $this->totalDescontos = $totalDescontos;
-        $this->totalLucros = $totalLucros;
-        $this->ticketMedio = $ticketMedio;
-        $this->tempoMedioAtendimento = $tempoMedioAtendimento;
-        $this->quantidadeProdutosVendidos = $quantidadeProdutosVendidos;
-        $this->totaldescontosdia = $totaldescontosdia;
-        $this->totalvendames = $totalvendames;
-        $this->qtdvendames = $qtdvendames;
-        $this->tikectmediomes = $tikectmediomes;
-        $this->qtddeprodutosvendidos = $qtddeprodutosvendidos;
-        $this->qtdmediadeitensporcupom = $qtdmediadeitensporcupom;
-        $this->valordevendascanceladas = $valordevendascanceladas;
-        $this->qtddevendascanceladas = $qtddevendascanceladas;
-        $this->totaldescontomes = $totaldescontomes;
+        $this->valorVendas = FormatDataUtil::FormatNumber($valorVendas ?? 0);
+        $this->quantidadeVendas = FormatDataUtil::FormatNumber($quantidadeVendas ?? 0);
+        $this->totalDescontos = FormatDataUtil::FormatNumber($totalDescontos ?? 0);
+        $this->totalLucros = FormatDataUtil::FormatNumber($totalLucros ?? 0);
+        $this->ticketMedio = FormatDataUtil::FormatNumber($ticketMedio ?? 0);
+        $this->tempoMedioAtendimento = FormatDataUtil::FormatNumber($tempoMedioAtendimento ?? 0);
+        $this->quantidadeProdutosVendidos = FormatDataUtil::FormatNumber($quantidadeProdutosVendidos ?? 0);
+        $this->totaldescontosdia = FormatDataUtil::FormatNumber($totaldescontosdia ?? 0);
+        $this->totalvendames = FormatDataUtil::FormatNumber($totalvendames ?? 0);
+        $this->qtdvendames = FormatDataUtil::FormatNumber($qtdvendames ?? 0);
+        $this->tikectmediomes = FormatDataUtil::FormatNumber($tikectmediomes ?? 0);
+        $this->qtddeprodutosvendidos = FormatDataUtil::FormatNumber($qtddeprodutosvendidos ?? 0);
+        $this->qtdmediadeitensporcupom = FormatDataUtil::FormatNumber($qtdmediadeitensporcupom ?? 0);
+        $this->valordevendascanceladas = FormatDataUtil::FormatNumber($valordevendascanceladas ?? 0);
+        $this->qtddevendascanceladas = FormatDataUtil::FormatNumber($qtddevendascanceladas ?? 0);
+        $this->totaldescontomes = FormatDataUtil::FormatNumber($totaldescontomes ?? 0);
     }
 
     public function getValorVendas(): float

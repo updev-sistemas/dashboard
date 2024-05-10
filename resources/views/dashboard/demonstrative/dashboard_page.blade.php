@@ -589,6 +589,7 @@
 
             const ordemMeses = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
+
             function ConvertToMoney(data) {
                 const result =  data.toLocaleString('pt-BR', {
                     style: 'currency',
@@ -623,21 +624,21 @@
                 const mesesOrdenadosEntrada = [];
                 ordemMeses.forEach(mes => {
                     if (data.entradas.hasOwnProperty(mes)) {
-                        mesesOrdenadosEntrada.push(parseFloat(data.entradas[mes]));
+                        mesesOrdenadosEntrada.push(data.entradas[mes]);
                     }
                 });
 
                 const mesesOrdenadosSaida = [];
                 ordemMeses.forEach(mes => {
                     if (data.saidas.hasOwnProperty(mes)) {
-                        mesesOrdenadosSaida.push(parseFloat(data.saidas[mes]));
+                        mesesOrdenadosSaida.push(data.saidas[mes]);
                     }
                 });
 
                 const mesesOrdenadosSaldos = [];
                 ordemMeses.forEach(mes => {
                     if (data.entradas.hasOwnProperty(mes)) {
-                        mesesOrdenadosSaldos.push(parseFloat(data.saldo[mes]));
+                        mesesOrdenadosSaldos.push(data.saldo[mes]);
                     }
                 });
 
@@ -732,10 +733,10 @@
             function graficoExtratoMensalMountGraph(data, mesAnteriorLabel, mesAtualLabel)
             {
                 const mesAtuallabel = data.resumoDiarioMesAtual.map(x => x.dia);
-                const mesAtualvalues = data.resumoDiarioMesAtual.map(x => parseFloat(x.totalAcumulado ?? 0));
+                const mesAtualvalues = data.resumoDiarioMesAtual.map(x => x.totalAcumulado ?? 0);
 
                 const mesAnteriorlabel = data.resumoDiarioMesAnterior.map(x => x.dia);
-                const mesAnteriorvalues = data.resumoDiarioMesAnterior.map(x => parseFloat(x.totalAcumulado ?? 0));
+                const mesAnteriorvalues = data.resumoDiarioMesAnterior.map(x => x.totalAcumulado ?? 0);
 
                 var options1 = {
                     series: [
@@ -904,21 +905,21 @@
                 const notasFiscaisTotalEnviadas = [];
                 ordemMeses.forEach(mes => {
                     if (data.totalEnviadas.hasOwnProperty(mes)) {
-                        notasFiscaisTotalEnviadas.push(parseFloat(data.totalEnviadas[mes]));
+                        notasFiscaisTotalEnviadas.push(data.totalEnviadas[mes]);
                     }
                 });
 
                 const notasFiscaisTotalCanceladas = [];
                 ordemMeses.forEach(mes => {
                     if (data.totalCanceladas.hasOwnProperty(mes)) {
-                        notasFiscaisTotalCanceladas.push(parseFloat(data.totalCanceladas[mes]));
+                        notasFiscaisTotalCanceladas.push(data.totalCanceladas[mes]);
                     }
                 });
 
                 const notasFiscaisTotalContigencia = [];
                 ordemMeses.forEach(mes => {
                     if (data.totalContigencia.hasOwnProperty(mes)) {
-                        notasFiscaisTotalContigencia.push(parseFloat(data.totalContigencia[mes]));
+                        notasFiscaisTotalContigencia.push(data.totalContigencia[mes]);
                     }
                 });
 
@@ -1245,7 +1246,7 @@
                         total += row.total;
                     });
 
-                    const result =  ConvertToMoney(total ?? 0);
+                    const result =  ConvertToMoney(parseFloat(total ?? 0).toFixed(2));
 
                     $("#grupoProdutosDiaTableTotal").html(result);
 
@@ -1270,7 +1271,7 @@
                         total += row.total;
                     });
 
-                    const result =  ConvertToMoney(total ?? 0);
+                    const result =  ConvertToMoney(parseFloat(total ?? 0).toFixed(2));
                     $("#grupoProdutosSemanaTableTotal").html(result);
 
 
@@ -1294,7 +1295,7 @@
                         total += row.total;
                     });
 
-                    const result =  ConvertToMoney(total ?? 0);
+                    const result =  ConvertToMoney(parseFloat(total ?? 0).toFixed(2));
                     $("#grupoProdutosMesTableTotal").html(result);
 
                     const diaLabel = data.grupoProdutosMes.map(objeto => objeto.descricao);

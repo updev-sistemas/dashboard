@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class ContasPagar implements JsonSerializable
@@ -20,9 +21,9 @@ class ContasPagar implements JsonSerializable
     {
         $this->receber = $pagas ?? Calendario::default();
         $this->recebidas = $recebidas ?? Calendario::default();
-        $this->pagasAtual = $pagasAtual ?? $this->getTotalPagas() ?? 0;
-        $this->vencidasAtual = $vencidasAtual ?? $this->getTotalVencidas() ?? 0;
-        $this->pendentesAtual = $pendentesAtual ?? 0;
+        $this->pagasAtual = FormatDataUtil::FormatNumber($pagasAtual ?? $this->getTotalPagas() ?? 0);
+        $this->vencidasAtual = FormatDataUtil::FormatNumber($vencidasAtual ?? $this->getTotalVencidas() ?? 0);
+        $this->pendentesAtual = FormatDataUtil::FormatNumber($pendentesAtual ?? 0);
     }
 
     public function getPagasAtual(): float

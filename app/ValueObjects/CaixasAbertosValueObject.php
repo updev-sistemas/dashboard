@@ -2,6 +2,8 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
+
 final class CaixasAbertosValueObject
 {
     public string $usuario;
@@ -10,59 +12,59 @@ final class CaixasAbertosValueObject
 
     public string $dataAbertura;
 
-    public int $saldoInicial;
+    public float $saldoInicial;
 
-    public int $saldoAtual;
+    public float $saldoAtual;
 
-    public int $entradas;
+    public float $entradas;
 
-    public int $saidas;
+    public float $saidas;
 
-    public int $dinheiro;
+    public float $dinheiro;
 
-    public int $credito;
+    public float $credito;
 
-    public int $debito;
+    public float $debito;
 
-    public int $cheque;
+    public float $cheque;
 
-    public int $convenio;
+    public float $convenio;
 
-    public int $vRefeicao;
+    public float $vRefeicao;
 
-    public int $vCombustivel;
+    public float $vCombustivel;
 
     public function __construct(
         string $usuario,
         string $horaAbertura,
         string $dataAbertura,
-        int    $saldoInicial,
-        int    $saldoAtual,
-        int    $entradas,
-        int    $saidas,
-        int    $dinheiro,
-        int    $credito,
-        int    $debito,
-        int    $cheque,
-        int    $convenio,
-        int    $vRefeicao,
-        int    $vCombustivel
+        float    $saldoInicial,
+        float    $saldoAtual,
+        float    $entradas,
+        float    $saidas,
+        float    $dinheiro,
+        float    $credito,
+        float    $debito,
+        float    $cheque,
+        float    $convenio,
+        float    $vRefeicao,
+        float    $vCombustivel
     )
     {
         $this->usuario = $usuario;
         $this->horaAbertura = $horaAbertura;
         $this->dataAbertura = $dataAbertura;
-        $this->saldoInicial = $saldoInicial;
-        $this->saldoAtual = $saldoAtual;
-        $this->entradas = $entradas;
-        $this->saidas = $saidas;
-        $this->dinheiro = $dinheiro;
-        $this->credito = $credito;
-        $this->debito = $debito;
-        $this->cheque = $cheque;
-        $this->convenio = $convenio;
-        $this->vRefeicao = $vRefeicao;
-        $this->vCombustivel = $vCombustivel;
+        $this->saldoInicial =  FormatDataUtil::FormatNumber($saldoInicial);
+        $this->saldoAtual = FormatDataUtil::FormatNumber($saldoAtual);
+        $this->entradas = FormatDataUtil::FormatNumber($entradas);
+        $this->saidas = FormatDataUtil::FormatNumber($saidas);
+        $this->dinheiro = FormatDataUtil::FormatNumber($dinheiro);
+        $this->credito = FormatDataUtil::FormatNumber($credito);
+        $this->debito = FormatDataUtil::FormatNumber($debito);
+        $this->cheque = FormatDataUtil::FormatNumber($cheque);
+        $this->convenio = FormatDataUtil::FormatNumber($convenio);
+        $this->vRefeicao = FormatDataUtil::FormatNumber($vRefeicao);
+        $this->vCombustivel = FormatDataUtil::FormatNumber($vCombustivel);
     }
 
     public function getUsuario(): string
@@ -80,57 +82,57 @@ final class CaixasAbertosValueObject
         return $this->dataAbertura;
     }
 
-    public function getSaldoInicial(): int
+    public function getSaldoInicial(): float
     {
         return $this->saldoInicial;
     }
 
-    public function getSaldoAtual(): int
+    public function getSaldoAtual(): float
     {
         return $this->saldoAtual;
     }
 
-    public function getEntradas(): int
+    public function getEntradas(): float
     {
         return $this->entradas;
     }
 
-    public function getSaidas(): int
+    public function getSaidas(): float
     {
         return $this->saidas;
     }
 
-    public function getDinheiro(): int
+    public function getDinheiro(): float
     {
         return $this->dinheiro;
     }
 
-    public function getCredito(): int
+    public function getCredito(): float
     {
         return $this->credito;
     }
 
-    public function getDebito(): int
+    public function getDebito(): float
     {
         return $this->debito;
     }
 
-    public function getCheque(): int
+    public function getCheque(): float
     {
         return $this->cheque;
     }
 
-    public function getConvenio(): int
+    public function getConvenio(): float
     {
         return $this->convenio;
     }
 
-    public function getVRefeicao(): int
+    public function getVRefeicao(): float
     {
         return $this->vRefeicao;
     }
 
-    public function getVCombustivel(): int
+    public function getVCombustivel(): float
     {
         return $this->vCombustivel;
     }
@@ -153,67 +155,67 @@ final class CaixasAbertosValueObject
         return $this;
     }
 
-    public function setSaldoInicial(int $saldoInicial): self
+    public function setSaldoInicial(float $saldoInicial): self
     {
         $this->saldoInicial = $saldoInicial;
         return $this;
     }
 
-    public function setSaldoAtual(int $saldoAtual): self
+    public function setSaldoAtual(float $saldoAtual): self
     {
         $this->saldoAtual = $saldoAtual;
         return $this;
     }
 
-    public function setEntradas(int $entradas): self
+    public function setEntradas(float $entradas): self
     {
         $this->entradas = $entradas;
         return $this;
     }
 
-    public function setSaidas(int $saidas): self
+    public function setSaidas(float $saidas): self
     {
         $this->saidas = $saidas;
         return $this;
     }
 
-    public function setDinheiro(int $dinheiro): self
+    public function setDinheiro(float $dinheiro): self
     {
         $this->dinheiro = $dinheiro;
         return $this;
     }
 
-    public function setCredito(int $credito): self
+    public function setCredito(float $credito): self
     {
         $this->credito = $credito;
         return $this;
     }
 
-    public function setDebito(int $debito): self
+    public function setDebito(float $debito): self
     {
         $this->debito = $debito;
         return $this;
     }
 
-    public function setCheque(int $cheque): self
+    public function setCheque(float $cheque): self
     {
         $this->cheque = $cheque;
         return $this;
     }
 
-    public function setConvenio(int $convenio): self
+    public function setConvenio(float $convenio): self
     {
         $this->convenio = $convenio;
         return $this;
     }
 
-    public function setVRefeicao(int $vRefeicao): self
+    public function setVRefeicao(float $vRefeicao): self
     {
         $this->vRefeicao = $vRefeicao;
         return $this;
     }
 
-    public function setVCombustivel(int $vCombustivel): self
+    public function setVCombustivel(float $vCombustivel): self
     {
         $this->vCombustivel = $vCombustivel;
         return $this;

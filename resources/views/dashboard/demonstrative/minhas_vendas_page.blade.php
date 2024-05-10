@@ -263,14 +263,14 @@
                 const lucrosPresumidos_ganhos = [];
                 ordemMeses.forEach(mes => {
                     if (data.ganhos.hasOwnProperty(mes)) {
-                        lucrosPresumidos_ganhos.push(parseFloat(data.ganhos[mes]));
+                        lucrosPresumidos_ganhos.push(data.ganhos[mes]);
                     }
                 });
 
                 const lucrosPresumidos_perdidos = [];
                 ordemMeses.forEach(mes => {
                     if (data.perdidos.hasOwnProperty(mes)) {
-                        lucrosPresumidos_perdidos.push(parseFloat(data.perdidos[mes]));
+                        lucrosPresumidos_perdidos.push(data.perdidos[mes]);
                     }
                 });
                 var options = {

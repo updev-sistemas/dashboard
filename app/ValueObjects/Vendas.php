@@ -12,8 +12,6 @@ class Vendas implements JsonSerializable {
         $this->concluidas = $concluidas;
     }
 
-
-
     public static function create($canceladas, $concluidas) {
         return new Vendas($canceladas, $concluidas);
     }

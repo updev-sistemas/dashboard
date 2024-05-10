@@ -2,31 +2,33 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
+
 final class ContasPagarValueObject
 {
     public PagasValueObject $pagas;
 
     public PendendentesValueObject $pendendentes;
 
-    public int $vencidasAtual;
+    public float $vencidasAtual;
 
-    public int $pendentesAtual;
+    public float $pendentesAtual;
 
-    public int $pagasAtual;
+    public float $pagasAtual;
 
     public function __construct(
         PagasValueObject        $pagas,
         PendendentesValueObject $pendendentes,
-        int                     $vencidasAtual,
-        int                     $pendentesAtual,
-        int                     $pagasAtual
+        float                     $vencidasAtual,
+        float                     $pendentesAtual,
+        float                     $pagasAtual
     )
     {
         $this->pagas = $pagas;
         $this->pendendentes = $pendendentes;
-        $this->vencidasAtual = $vencidasAtual;
-        $this->pendentesAtual = $pendentesAtual;
-        $this->pagasAtual = $pagasAtual;
+        $this->vencidasAtual = FormatDataUtil::FormatNumber($vencidasAtual);
+        $this->pendentesAtual = FormatDataUtil::FormatNumber($pendentesAtual);
+        $this->pagasAtual = FormatDataUtil::FormatNumber($pagasAtual);
     }
 
     public function getPagas(): PagasValueObject
@@ -39,17 +41,17 @@ final class ContasPagarValueObject
         return $this->pendendentes;
     }
 
-    public function getVencidasAtual(): int
+    public function getVencidasAtual(): float
     {
         return $this->vencidasAtual;
     }
 
-    public function getPendentesAtual(): int
+    public function getPendentesAtual(): float
     {
         return $this->pendentesAtual;
     }
 
-    public function getPagasAtual(): int
+    public function getPagasAtual(): float
     {
         return $this->pagasAtual;
     }

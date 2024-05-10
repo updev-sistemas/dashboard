@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class KeyValuePair implements JsonSerializable
@@ -16,7 +17,7 @@ class KeyValuePair implements JsonSerializable
     protected function __construct(string $descricao, float $valor)
     {
         $this->descricao = $descricao ?? "Não Especificado";
-        $this->valor = $valor ?? 0;
+        $this->valor = FormatDataUtil::FormatNumber($valor ?? 0);
     }
 
     public function getDescricao(): string

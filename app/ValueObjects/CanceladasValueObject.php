@@ -2,68 +2,70 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
+
 final class CanceladasValueObject
 {
-    public int $valorVendas;
+    public float $valorVendas;
 
-    public int $lurosPerdidos;
+    public float $lurosPerdidos;
 
-    public int $quantidadeProdutosPerdidos;
+    public float $quantidadeProdutosPerdidos;
 
-    public int $quantidadeVendasPerdidas;
+    public float $quantidadeVendasPerdidas;
 
     public function __construct(
-        int $valorVendas,
-        int $lurosPerdidos,
-        int $quantidadeProdutosPerdidos,
-        int $quantidadeVendasPerdidas
+        float $valorVendas,
+        float $lurosPerdidos,
+        float $quantidadeProdutosPerdidos,
+        float $quantidadeVendasPerdidas
     )
     {
-        $this->valorVendas = $valorVendas;
-        $this->lurosPerdidos = $lurosPerdidos;
-        $this->quantidadeProdutosPerdidos = $quantidadeProdutosPerdidos;
-        $this->quantidadeVendasPerdidas = $quantidadeVendasPerdidas;
+        $this->valorVendas = FormatDataUtil::FormatNumber($valorVendas);
+        $this->lurosPerdidos = FormatDataUtil::FormatNumber($lurosPerdidos);
+        $this->quantidadeProdutosPerdidos = FormatDataUtil::FormatNumber($quantidadeProdutosPerdidos);
+        $this->quantidadeVendasPerdidas = FormatDataUtil::FormatNumber($quantidadeVendasPerdidas);
     }
 
-    public function getValorVendas(): int
+    public function getValorVendas(): float
     {
         return $this->valorVendas;
     }
 
-    public function getLurosPerdidos(): int
+    public function getLurosPerdidos(): float
     {
         return $this->lurosPerdidos;
     }
 
-    public function getQuantidadeProdutosPerdidos(): int
+    public function getQuantidadeProdutosPerdidos(): float
     {
         return $this->quantidadeProdutosPerdidos;
     }
 
-    public function getQuantidadeVendasPerdidas(): int
+    public function getQuantidadeVendasPerdidas(): float
     {
         return $this->quantidadeVendasPerdidas;
     }
 
-    public function setValorVendas(int $valorVendas): self
+    public function setValorVendas(float $valorVendas): self
     {
         $this->valorVendas = $valorVendas;
         return $this;
     }
 
-    public function setLurosPerdidos(int $lurosPerdidos): self
+    public function setLurosPerdidos(float $lurosPerdidos): self
     {
         $this->lurosPerdidos = $lurosPerdidos;
         return $this;
     }
 
-    public function setQuantidadeProdutosPerdidos(int $quantidadeProdutosPerdidos): self
+    public function setQuantidadeProdutosPerdidos(float $quantidadeProdutosPerdidos): self
     {
         $this->quantidadeProdutosPerdidos = $quantidadeProdutosPerdidos;
         return $this;
     }
 
-    public function setQuantidadeVendasPerdidas(int $quantidadeVendasPerdidas): self
+    public function setQuantidadeVendasPerdidas(float $quantidadeVendasPerdidas): self
     {
         $this->quantidadeVendasPerdidas = $quantidadeVendasPerdidas;
         return $this;

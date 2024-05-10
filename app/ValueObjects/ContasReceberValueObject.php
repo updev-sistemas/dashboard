@@ -2,31 +2,33 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
+
 final class ContasReceberValueObject
 {
     public ReceberValueObject $receber;
 
     public RecebidasValueObject $recebidas;
 
-    public int $vencidasAtual;
+    public float $vencidasAtual;
 
-    public int $pendentesAtual;
+    public float $pendentesAtual;
 
-    public int $pagasAtual;
+    public float $pagasAtual;
 
     public function __construct(
         ReceberValueObject   $receber,
         RecebidasValueObject $recebidas,
-        int                  $vencidasAtual,
-        int                  $pendentesAtual,
-        int                  $pagasAtual
+        float                  $vencidasAtual,
+        float                  $pendentesAtual,
+        float                  $pagasAtual
     )
     {
         $this->receber = $receber;
         $this->recebidas = $recebidas;
-        $this->vencidasAtual = $vencidasAtual;
-        $this->pendentesAtual = $pendentesAtual;
-        $this->pagasAtual = $pagasAtual;
+        $this->vencidasAtual = FormatDataUtil::FormatNumber($vencidasAtual);
+        $this->pendentesAtual = FormatDataUtil::FormatNumber($pendentesAtual);
+        $this->pagasAtual = FormatDataUtil::FormatNumber($pagasAtual);
     }
 
     public function getReceber(): ReceberValueObject

@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class TopProdutos implements JsonSerializable
@@ -33,7 +34,7 @@ class TopProdutos implements JsonSerializable
         foreach ($this->getData() as $key => $value) {
             $arr = [
                 'descricao' => $value->getDescricao(),
-                'quantidade' => $value->getValor(),
+                'quantidade' => FormatDataUtil::FormatNumber($value->getValor() ?? 0),
             ];
 
             array_push($data, $arr);

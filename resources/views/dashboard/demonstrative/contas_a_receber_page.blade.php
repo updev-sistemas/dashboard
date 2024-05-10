@@ -142,6 +142,7 @@
 
             const ordemMeses = ['janeiro', 'fevereiro', 'marco', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
 
+
             function ConvertToMoney(data) {
                 const result =  data.toLocaleString('pt-BR', {
                     style: 'currency',
@@ -150,7 +151,6 @@
 
                 return result;
             }
-
             function fillCadastros(data)
             {
                 $("#CadastroNumeroClientes").html(data.clientes ?? 0);
@@ -175,14 +175,14 @@
                 const contasPagar_Receber = [];
                 ordemMeses.forEach(mes => {
                     if (data.receber.hasOwnProperty(mes)) {
-                        contasPagar_Receber.push(parseFloat(data.receber[mes]));
+                        contasPagar_Receber.push(data.receber[mes]);
                     }
                 });
 
                 const contasPagar_Recebidas = [];
                 ordemMeses.forEach(mes => {
                     if (data.recebidas.hasOwnProperty(mes)) {
-                        contasPagar_Recebidas.push(parseFloat(data.recebidas[mes]));
+                        contasPagar_Recebidas.push(data.recebidas[mes]);
                     }
                 });
                 var options = {

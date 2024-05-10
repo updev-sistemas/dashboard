@@ -44,8 +44,7 @@ class FormatDataUtil
             return 0;
         }
     }
-
-    public static function FormatNumber( $value )
+    public static function FormatNumber($value, $decimal_places = 2)
     {
         try
         {
@@ -97,10 +96,13 @@ class FormatDataUtil
              *****************************************************/
 
             // String to float first before formatting
-            return floatval($value);
+            $formatted_value = number_format(floatval($value), $decimal_places, '.', '');
+
+            return $formatted_value;
         }
         catch (\Exception $e) {
             return 0;
         }
     }
+
 }

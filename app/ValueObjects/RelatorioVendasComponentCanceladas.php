@@ -2,6 +2,7 @@
 
 namespace App\ValueObjects;
 
+use App\Utils\Commons\FormatDataUtil;
 use JsonSerializable;
 
 class RelatorioVendasComponentCanceladas implements JsonSerializable
@@ -19,10 +20,10 @@ class RelatorioVendasComponentCanceladas implements JsonSerializable
      */
     protected function __construct(float $valorVendas, float $lurosPerdidos, float $quantidadeProdutosPerdidos, float $quantidadeVendasPerdidas)
     {
-        $this->valorVendas = $valorVendas ?? 0;
-        $this->lurosPerdidos = $lurosPerdidos ?? 0;
-        $this->quantidadeProdutosPerdidos = $quantidadeProdutosPerdidos ?? 0;
-        $this->quantidadeVendasPerdidas = $quantidadeVendasPerdidas ?? 0;
+        $this->valorVendas = FormatDataUtil::FormatNumber($valorVendas ?? 0);
+        $this->lurosPerdidos = FormatDataUtil::FormatNumber($lurosPerdidos ?? 0);
+        $this->quantidadeProdutosPerdidos = FormatDataUtil::FormatNumber($quantidadeProdutosPerdidos ?? 0);
+        $this->quantidadeVendasPerdidas = FormatDataUtil::FormatNumber($quantidadeVendasPerdidas ?? 0);
     }
 
     public function getValorVendas(): float
