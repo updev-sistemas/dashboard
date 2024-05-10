@@ -89,8 +89,8 @@ class PayloadHandler
 
     private function tryRecoveryExtratoDiario(array $payload) : ?Extrato
     {
-        $mesAnterior = isset($payload['extrato']['resumoDiarioMesAnterior']) ? $payload['extrato']['resumoDiarioMesAnterior'] : [];
-        $mesAtual    = isset($payload['extrato']['resumoDiarioMesAtual']) ? $payload['extrato']['resumoDiarioMesAtual'] : [];
+        $mesAnterior = isset($payload['extratoMensalVendas']['resumoDiarioMesAnterior']) ? $payload['extratoMensalVendas']['resumoDiarioMesAnterior'] : [];
+        $mesAtual    = isset($payload['extratoMensalVendas']['resumoDiarioMesAtual']) ? $payload['extratoMensalVendas']['resumoDiarioMesAtual'] : [];
 
         $mesAtualToSave = [];
         foreach ($mesAtual as $key => $obj) {

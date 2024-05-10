@@ -1356,14 +1356,13 @@
 
                 fillGrupoProdutos(payload.grupoProdutos);
 
-                if (payload.hasOwnProperty("extrato")) {
-                    if (payload.extrato.hasOwnProperty("resumoDiarioMesAtual") && payload.extrato.hasOwnProperty("resumoDiarioMesAnterior")) {
-                        if (payload.extrato.resumoDiarioMesAtual.length == 0 && payload.extrato.resumoDiarioMesAnterior.length == 0) {
-                            console.log(payload);
+                if (payload.hasOwnProperty("extratoMensalVendas")) {
+                    if (payload.extratoMensalVendas.hasOwnProperty("resumoDiarioMesAtual") && payload.extratoMensalVendas.hasOwnProperty("resumoDiarioMesAnterior")) {
+                        if (payload.extratoMensalVendas.resumoDiarioMesAtual.length == 0 && payload.extratoMensalVendas.resumoDiarioMesAnterior.length == 0) {
                             $('#extratoDiario').hide();
                         } else {
                             $('#extratoDiario').show();
-                            fillExtrato(payload.extrato);
+                            fillExtrato(payload.extratoMensalVendas);
                         }
                     }
                     else {
